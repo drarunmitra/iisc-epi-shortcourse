@@ -1,0 +1,68 @@
+---
+title: "Step 4 — Epidemiology primers"
+subtitle: "Step 4 of 5"
+---
+
+**Time:** about 45 minutes.
+**Before you start:** a web browser. The R primers help but are not required.
+**When you finish:** you can compute a prevalence, a rate, a risk ratio and an
+odds ratio, and say what each one means.
+
+2 short pages. They cover the arithmetic the lectures assume you already have.
+
+::: {.callout-important}
+## These 2 pages work without the code cells
+Each page downloads about 17 MB to run R in your browser. If that fails, you
+lose nothing: every answer is printed in the text as well. You can follow both
+pages with a pencil and a calculator.
+:::
+
+## The 2 primers
+
+::: {.card-grid}
+
+::: {.card-tile .epi}
+### [6 · Measuring disease](primer-epi-01-frequency.qmd)
+Prevalence, risk, rate and person-time. Which question needs which.
+20 min · ~17 MB
+:::
+
+::: {.card-tile .epi}
+### [7 · Measuring association](primer-epi-02-association.qmd)
+The 2×2 table. Risk ratio, odds ratio, risk difference, NNT.
+25 min · ~17 MB
+:::
+
+:::
+
+Do them in order. Primer 7 builds on Primer 6.
+
+## How to work through a primer
+
+1. Open the page. Wait for the cells to become ready.
+2. Press **Run** on every cell, from the top down.
+3. Do each exercise. Press **Hint** before you press **Solution**.
+4. If a cell will not run, read the printed answer and do the sum on paper.
+
+**You should see:** output under each cell, and a green tick when an exercise
+is correct.
+
+**If it does not work:** the fixes are the same as for the
+[R primers](primers-r.qmd#if-the-cells-never-become-ready). Try a phone
+hotspot, or read the page as ordinary text.
+
+::: {.callout-note}
+## Why this matters
+These 2 pages are mostly reasoning, not code. The R in them is light on
+purpose.
+
+Get the denominators right here and the rest of the week is much easier. Nearly
+every mistake with a risk ratio or an odds ratio is a mistake about what went
+underneath the line.
+:::
+
+## Done?
+
+You have finished the primers.
+
+→ [**Step 5: additional resources**](../resources/index.qmd)

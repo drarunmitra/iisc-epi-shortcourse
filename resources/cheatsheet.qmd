@@ -3,7 +3,8 @@ title: "Cheatsheet"
 subtitle: "Everything the course uses, with no explanation"
 ---
 
-For the explanations, see the [primers](../prelude/primers.qmd) and the
+For the explanations, see the [R primers](../prelude/primers-r.qmd), the
+[epidemiology primers](../prelude/primers-epi.qmd) and the
 [R primer reference](../prelude/r-primer.qmd).
 
 ## Epidemiological measures

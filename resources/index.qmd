@@ -1,10 +1,14 @@
 ---
-title: "Resources"
-subtitle: "Use these during the course and after it"
+title: "Additional resources"
+subtitle: "Step 5 of 5"
 ---
 
-Four reference pages. None of them is a step you have to complete. Open them
-when you need them.
+**Time:** browse. There is nothing to complete here.
+**Before you start:** nothing.
+**When you finish:** you know what is here, so you can come back to it during
+the course.
+
+4 reference pages. Open them when you need them.
 
 ::: {.card-grid}
 

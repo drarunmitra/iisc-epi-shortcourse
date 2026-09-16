@@ -1,13 +1,14 @@
 # check_setup.R ---------------------------------------------------------------
 # Short Course in Epidemiology: Concepts & Methods
-# Isaac Centre for Public Health, IISc Bengaluru, with LSHTM, University of London
+# Isaac Centre for Public Health, IISc Bengaluru, with LSHTM
 # 21-25 September 2026
 #
-# Verifies that a participant's laptop is ready for the course.
+# Checks that your laptop is ready for the course.
 #
-# Usage:  source("setup/check_setup.R")
-# Send the full console output to office.msicph@iisc.ac.in if any line starts
-# with a cross.
+# Usage:  source("https://drarunmitra.github.io/iisc-epi-shortcourse/setup/check_setup.R")
+#
+# Email the whole output to office.msicph@iisc.ac.in if any line starts with a
+# cross.
 # -----------------------------------------------------------------------------
 
 ok   <- function(msg) cat("✔", msg, "\n")
@@ -30,8 +31,8 @@ if (r_ok) {
 }
 
 # 2. Native pipe --------------------------------------------------------------
-# The course uses |> throughout. It arrived in R 4.1.0, so this doubles as a
-# second, behavioural check on the version above.
+# The course uses |> throughout. It arrived in R 4.1.0, so this is a second,
+# behavioural check on the version above.
 pipe_ok <- tryCatch({
   eval(parse(text = "c(1, 2, 3) |> sum()")) == 6
 }, error = function(e) FALSE)
@@ -49,40 +50,11 @@ if (!requireNamespace("rstudioapi", quietly = TRUE)) {
   warn("Not running inside RStudio (fine if you use another editor)")
 }
 
-# 4. Quarto -------------------------------------------------------------------
-# quarto::quarto_version() fails when the quarto R package is missing, even
-# though Quarto itself is installed. Ask the command line before saying so.
-quarto_pkg <- requireNamespace("quarto", quietly = TRUE)
-
-quarto_ver <- if (quarto_pkg) {
-  tryCatch(as.character(quarto::quarto_version()), error = function(e) NA_character_)
-} else {
-  NA_character_
-}
-
-if (is.na(quarto_ver)) {
-  quarto_ver <- tryCatch({
-    v <- suppressWarnings(
-      system("quarto --version", intern = TRUE, ignore.stderr = TRUE)
-    )
-    if (length(v) > 0 && nzchar(v[[1]])) trimws(v[[1]]) else NA_character_
-  }, error = function(e) NA_character_)
-}
-
-if (!is.na(quarto_ver) && quarto_pkg) {
-  ok(paste("Quarto", quarto_ver))
-} else if (!is.na(quarto_ver)) {
-  bad(sprintf("Quarto %s is installed, but the quarto R package is not. Run install.packages('quarto')",
-              quarto_ver))
-} else {
-  bad("Quarto not found. Install from https://quarto.org/docs/get-started/ , then restart your computer, then run install.packages('quarto')")
-}
-
-# 5. Packages -----------------------------------------------------------------
+# 4. Packages -----------------------------------------------------------------
 required <- c(
   "tidyverse", "dplyr", "ggplot2", "readr", "tidyr",
   "here", "janitor", "gtsummary", "gt", "broom",
-  "epitools", "quarto", "knitr", "rmarkdown", "scales"
+  "epitools", "scales"
 )
 installed <- required[required %in% rownames(installed.packages())]
 missing   <- setdiff(required, installed)
@@ -96,7 +68,7 @@ if (length(missing) == 0) {
       paste0('"', missing, '"', collapse = ", "), "))\n", sep = "")
 }
 
-# 6. Can we actually load the core stack? -------------------------------------
+# 5. Do the core packages actually load? --------------------------------------
 load_ok <- suppressWarnings(suppressMessages(
   tryCatch({
     library(dplyr);   library(ggplot2)
@@ -108,13 +80,13 @@ load_ok <- suppressWarnings(suppressMessages(
 if (load_ok) ok("Core packages load cleanly") else
   bad("A core package failed to load - see the error above")
 
-# 7. An epidemiological calculation actually runs -----------------------------
+# 6. Does an epidemiological calculation run? ---------------------------------
 # Installing epitools is not the same as epitools working. Compute a risk ratio
 # from a known 2x2 and check the number, so a broken install fails here rather
 # than in front of the class.
 #
-# epitools expects the table with the unexposed row first and the non-case
-# column first, so the matrix below is
+# epitools wants the unexposed row first and the non-case column first, so the
+# matrix below is
 #         no outcome   outcome
 #   unexposed   85        15
 #   exposed     70        30
@@ -127,48 +99,30 @@ epi_ok <- tryCatch({
 if (isTRUE(epi_ok)) ok("epitools computes a risk ratio correctly") else
   bad("epitools is installed but did not return the expected risk ratio")
 
-# 8. Writable working directory -----------------------------------------------
+# 7. Can R write files here? --------------------------------------------------
 write_ok <- tryCatch({
   tmp <- file.path(getwd(), ".epi_write_test")
   writeLines("test", tmp); file.remove(tmp); TRUE
 }, error = function(e) FALSE)
 if (write_ok) {
-  ok(sprintf("Project directory writable (%s)", basename(getwd())))
+  ok(sprintf("Working folder is writable (%s)", basename(getwd())))
 } else {
-  bad(sprintf("Cannot write to %s - move your project out of a restricted or cloud-synced folder",
+  bad(sprintf("Cannot write to %s - move your work out of a restricted or cloud-synced folder",
               getwd()))
 }
-
-# 9. End-to-end render --------------------------------------------------------
-render_ok <- FALSE
-if (!is.na(quarto_ver) && quarto_pkg) {
-  render_ok <- tryCatch({
-    tmpdir <- tempfile("qtest"); dir.create(tmpdir)
-    qmd <- file.path(tmpdir, "test.qmd")
-    writeLines(c(
-      "---", "title: Render test", "format: html", "---", "",
-      "```{r}", "library(ggplot2)",
-      "ggplot(mtcars, aes(wt, mpg)) + geom_point()", "```"
-    ), qmd)
-    quarto::quarto_render(qmd, quiet = TRUE)
-    file.exists(file.path(tmpdir, "test.html"))
-  }, error = function(e) FALSE)
-}
-if (render_ok) ok("Test render (HTML) succeeded") else
-  bad("Test render failed - Quarto and R are installed but not co-operating")
 
 # Verdict ---------------------------------------------------------------------
 rule()
 all_good <- r_ok && isTRUE(pipe_ok) && length(missing) == 0 &&
-  load_ok && isTRUE(epi_ok) && write_ok && render_ok
+  load_ok && isTRUE(epi_ok) && write_ok
 
 if (all_good) {
   cat("You are ready for 21 September. See you at IISc.\n\n")
 } else {
-  cat("Some checks failed. Send this entire output to office.msicph@iisc.ac.in\n")
-  cat("Include your operating system and version.\n\n")
+  cat("Some checks failed. Email this whole output to office.msicph@iisc.ac.in\n")
+  cat("Include your operating system and its version.\n\n")
 }
 
-cat("Session details for the course team:\n")
+cat("Details for the course team:\n")
 print(sessionInfo()$R.version$version.string)
 cat("Platform:", R.version$platform, "\n")

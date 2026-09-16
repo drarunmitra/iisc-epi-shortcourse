@@ -39,10 +39,13 @@ is the source of the WebR primer machinery and the house writing style.
 - Exercises use quarto-live's native hint and solution buttons, never a
   collapsed `callout-tip` holding a duplicate answer.
 
-## The 9 primers
+## The 7 primers
 
-5 R primers (`primer-r-0*.qmd`) then 4 epidemiology primers
-(`primer-epi-0*.qmd`). Each declares its own `format: live-html:` and its own
+5 R primers (`primer-r-0*.qmd`, Step 3) then 2 epidemiology primers
+(`primer-epi-0*.qmd`, Step 4). Primers 8 and 9, on study designs and on bias
+and confounding, were written and then deleted on 2026-09-16 at the course
+lead's instruction; those topics are taught in the room instead. Numbering
+stays continuous, so the epidemiology pair are Primers 6 and 7. Each declares its own `format: live-html:` and its own
 `webr: packages:` list, so each page downloads only what it needs.
 
 Stated download sizes, rounded **up** from the measured figures in
@@ -57,6 +60,21 @@ Stated download sizes, rounded **up** from the measured figures in
 
 Primer 5 is the only heavy page. Its callout says so and tells learners to open
 it at home.
+
+## The 5 steps
+
+1. Install R and RStudio (`install.qmd`). **No Quarto**, removed 2026-09-16:
+   nothing left on the site needs it, and it was the commonest install failure.
+2. Install the packages (`check-setup.qmd`). 12 packages. Both scripts are
+   `source()`d straight from the published site, so there is nothing to
+   download and no project folder.
+3. R primers (`primers-r.qmd`).
+4. Epidemiology primers (`primers-epi.qmd`).
+5. Additional resources (`resources/index.qmd`).
+
+The old "send us your check result" and "do the reading" steps are gone. If you
+change the count, the digit appears in `index.qmd`, `prelude/index.qmd` and in
+every page subtitle ("Step N of 5").
 
 ## Build
 
@@ -132,7 +150,7 @@ Rules learned the hard way; full version in
    proves only that Quarto parsed the syntax. Serve over HTTP and load at least
    Primer 1, Primer 5 and Primer 9 before the course.
 5. `setup/check_setup.R` is the single definition of the package list.
-   `prelude/check-setup.qmd` mirrors its count (15). If you add a package,
+   `prelude/check-setup.qmd` mirrors its count (12). If you add a package,
    change `check_setup.R` first, then `install_packages.R`, then the digit in
    the page prose.
 6. Applications closed on 25 July 2026 and the site is written for **selected

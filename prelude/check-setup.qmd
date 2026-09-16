@@ -1,21 +1,20 @@
 ---
-title: "Step 2 — Install the packages and run the check"
+title: "Step 2 — Install the packages"
 subtitle: "Step 2 of 5"
 ---
 
 **Time:** 20 minutes, mostly waiting.
 **Before you start:** [Step 1](install.qmd) finished, and RStudio open.
-**When you finish:** 15 packages installed, and a pass or fail report you send
-us in Step 3.
+**When you finish:** 12 packages installed, and a check that says your laptop
+is ready.
 
-You do not need to download or save any files. Both scripts run straight from
-the course website.
+There are no files to download. Both lines below run straight from this site.
 
-## Step 1 of 3 — Install the 15 packages
+## Step 1 of 3 — Install the packages
 
 1. Open RStudio.
 2. Click once inside the **Console** pane, at the bottom left.
-3. Copy the code box below. Paste it into the Console. Press **Enter**.
+3. Copy the line below. Paste it into the Console. Press **Enter**.
 
 ```r
 source("https://drarunmitra.github.io/iisc-epi-shortcourse/setup/install_packages.R")
@@ -24,8 +23,8 @@ source("https://drarunmitra.github.io/iisc-epi-shortcourse/setup/install_package
 4. Leave the computer alone until it finishes.
 
 **You should see:** lines of text scrolling past, naming each package as it
-installs. This takes 10 to 25 minutes the first time, and longer on a slow
-connection. You are finished when the `>` prompt comes back and stops moving.
+installs. This takes 10 to 25 minutes the first time. You are finished when the
+`>` prompt comes back and stops moving.
 
 **If it does not work:** if R asks
 `Do you want to install from sources the package which needs compilation?`,
@@ -33,25 +32,23 @@ type `n` and press **Enter**.
 
 ::: {.callout-warning}
 ## Do not interrupt it
-If you close RStudio part way through, some packages are left half-installed.
-The script installs only what is still missing, so it is safe to run again. Run
-it again and let it finish.
+Close RStudio part way through and some packages are left half-installed. The
+line above installs only what is still missing, so run it again and let it
+finish.
 
-Red text in R is not always an error. Most of it is ordinary progress output
-that R prints on the error stream.
+Red text in R is not always an error. Most of it is ordinary progress output.
 :::
 
 ## Step 2 of 3 — Run the check
 
 1. Click once inside the **Console** pane.
-2. Copy the code box below. Paste it into the Console. Press **Enter**.
+2. Copy the line below. Paste it into the Console. Press **Enter**.
 
 ```r
 source("https://drarunmitra.github.io/iisc-epi-shortcourse/setup/check_setup.R")
 ```
 
-**You should see:** about 10 lines, each starting with a tick (✔), an
-exclamation mark (!) or a cross (✖), then this last line:
+**You should see:** about 8 lines, then this:
 
 ```
 You are ready for 21 September. See you at IISc.
@@ -66,36 +63,33 @@ fix. Then read [Troubleshooting](../resources/troubleshooting.qmd).
 | ! | a warning; usually fine, read the text |
 | ✖ | that check failed; fix this one |
 
-## Step 3 of 3 — Copy the output
+## Step 3 of 3 — Email us if anything failed
 
-1. Select the whole output of the check in the Console.
-2. Copy it.
+Only if you saw a cross.
 
-**You should see:** the text on your clipboard, ready to paste into an email.
+1. Select the whole check output in the Console and copy it.
+2. Email it to
+   [office.msicph@iisc.ac.in](mailto:office.msicph@iisc.ac.in).
+3. Say which operating system you use, and its version.
 
-**If it does not work:** if the output has scrolled away, run the check line
-again.
+**You should see:** the email in your Sent folder.
+
+**If it does not work:** paste the output as text, not as a screenshot. We
+cannot search a picture.
 
 ::: {.callout-note}
 ## Why this matters
-R on its own does very little. The work is done by packages: bundles of
-functions other people wrote. This course uses 15 of them.
+R on its own does very little. Packages do the work. This course uses 12 of
+them.
 
-The check does not ask only whether a package is installed. It tests 9
-behaviours: that R is 4.1.0 or newer; that the native pipe `|>` runs; that
-RStudio can report its version; that Quarto is installed **and** the `quarto` R
-package can see it; that all 15 packages are present; that the core packages
-load rather than only sit on disk; that `epitools` returns the right risk
-ratio from a known table; that your working folder is writable; and that a tiny
-Quarto document renders from end to end.
+The check tests behaviour, not only what sits on disk. It runs `epitools` on a
+2×2 table with a known answer. A broken install fails now, not in front of the
+class.
 
-The last one is the important one. It is the only test that proves R, Quarto and
-your packages work together rather than side by side.
-
-Send us a failing report too. A failure we see on Wednesday is a working laptop
-by Friday. A failure we first see on Monday morning is a lost session.
+Tell us about a failure early. A problem we see on Wednesday is a working
+laptop by Friday.
 :::
 
 ## Done?
 
-→ [**Step 3: send us your check result**](send-result.qmd)
+→ [**Step 3: the R primers**](primers-r.qmd)

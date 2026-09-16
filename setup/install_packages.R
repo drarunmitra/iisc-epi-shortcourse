@@ -3,26 +3,23 @@
 # Isaac Centre for Public Health, IISc Bengaluru, with LSHTM
 # 21-25 September 2026
 #
-# Installs everything the course needs. Run it once, then run
-# setup/check_setup.R to confirm it worked.
+# Installs everything the course needs. Run it once, then run check_setup.R.
 #
-# Usage:  source("setup/install_packages.R")
+# Usage:  source("https://drarunmitra.github.io/iisc-epi-shortcourse/setup/install_packages.R")
 #
 # It installs only what is missing, so it is safe to run again after a failure.
-# Expect 10-25 minutes on a first run, longer on a slow connection.
+# Expect 10 to 25 minutes on a first run, longer on a slow connection.
 # -----------------------------------------------------------------------------
 
 required <- c(
-  # the tidyverse core, plus the bits we use by name
+  # the tidyverse core, plus the parts we use by name
   "tidyverse", "dplyr", "ggplot2", "readr", "tidyr", "stringr", "forcats",
-  # project hygiene and cleaning
+  # cleaning and file paths
   "here", "janitor",
   # tables and model output
   "gtsummary", "gt", "broom", "broom.helpers",
   # epidemiological measures from a 2x2 table
   "epitools",
-  # authoring
-  "quarto", "knitr", "rmarkdown",
   # used in the plotting sessions
   "scales",
   # lets check_setup.R report your RStudio version
@@ -44,8 +41,8 @@ if (length(missing) == 0) {
 still_missing <- setdiff(required, rownames(installed.packages()))
 
 if (length(still_missing) == 0) {
-  message("\nAll packages installed. Now run:  source(\"setup/check_setup.R\")")
+  message("\nAll packages installed. Now run the check_setup.R line from Step 2.")
 } else {
   message("\nStill missing: ", paste(still_missing, collapse = ", "))
-  message("Scroll up for the error, then see the Troubleshooting page on the course site.")
+  message("Scroll up for the error, then see Troubleshooting on the course site.")
 }

@@ -26,19 +26,21 @@ webr:
 {{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
 
 ::: {.callout-important title="If the cells below never become ready"}
-This page runs R inside your browser. It needs about 21 MB on first load (the R
-engine, the machinery that runs and marks your code, and the **tibble** package)
-and a minute or two on a slow connection. If nothing happens after that, your
-network is probably blocking it. Work through [the R primer](r-primer.qmd) in
-RStudio instead.
+This page runs R inside your browser. The first load downloads about 21 MB: R
+itself, the marking machinery, and the **tibble** package.
+
+If nothing happens after 2 or 3 minutes, your network is blocking it. Work
+through [the R primer](r-primer.qmd) in RStudio instead.
 
 There is no Stop button. If you write a loop that never ends, reload the page.
 :::
 
-Primer 1 left you with vectors. Stand several equal-length vectors side by side
-and you have the rectangle you will analyse: **one row per observation**, such as
-a person, a household or a notification, and **one column per variable**. In the
-tidyverse that rectangle is a **tibble**.
+Primer 1 left you with vectors. Stand several of them side by side, all the
+same length, and you have a rectangle.
+
+That rectangle is what you analyse. **One row per observation**: a person, a
+household, a notification. **One column per variable**. In the tidyverse the
+rectangle is called a **tibble**.
 
 ## Building a tibble
 
@@ -59,10 +61,11 @@ participants <- tibble(
 participants
 ```
 
-Read the header it printed. `# A tibble: 5 × 5` is 5 rows by 5 columns, and
-under each column name sits its type: `<chr>` for text, `<dbl>` for a number
-with decimals, `<lgl>` for `TRUE`/`FALSE`. A plain `data.frame` tells you none
-of that until you ask.
+Read the header it printed. `# A tibble: 5 × 5` means 5 rows by 5 columns.
+
+Under each column name sits its type. `<chr>` is text. `<dbl>` is a number with
+decimals. `<lgl>` is `TRUE`/`FALSE`. A plain `data.frame` tells you none of that
+until you ask.
 
 ::: {.callout-note}
 ## Know what one row represents

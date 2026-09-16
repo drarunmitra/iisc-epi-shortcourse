@@ -47,9 +47,10 @@ really mistakes about which cell is which.
 Exposure down the side, outcome across the top. Always.
 
 ::: {.callout-note appearance="simple"}
-In the code below the four cells are called `a`, `b`, `cc` and `d`. The third is
-`cc` rather than `c` because `c()` is one of R's most-used functions, and naming
-a variable over it is a habit that will bite you later.
+In the code below the 4 cells are called `a`, `b`, `cc` and `d`.
+
+The third is `cc`, not `c`. `c()` is a function you use in almost every line.
+Naming a variable over it is a bad habit.
 :::
 
 Our worked example: a cohort of 2,000 adults followed for five years for
@@ -142,9 +143,10 @@ nnt <- 1 / abs(rd)
 round(nnt, 1)
 ```
 
-**16.7.** Because the exposure here is harmful, this is a *number needed to
-harm*: about 17 people would have to smoke for five years for one extra case of
-CHD to appear.
+**16.7.** The exposure here is harmful, so this is a *number needed to harm*.
+
+About 17 people would have to smoke for 5 years for one extra case of CHD to
+appear.
 
 Always round NNT **up** when you report it, and always state the time period.
 "NNT 17 over five years" is a sentence a patient can act on. "NNT 17" is not.
@@ -168,14 +170,14 @@ risk ratio. It always is, when the exposure is harmful.
 
 ::: {.callout-note}
 ## Then why use the odds ratio at all?
-Because in a **case-control study you cannot compute a risk.** You chose how
-many cases and how many controls to recruit, so `a + b` is a number you decided,
-not a number you observed. Any risk you calculate from it is an artefact of your
-own sampling.
+Because in a **case-control study you cannot compute a risk.**
+
+You chose how many cases and how many controls to recruit. So `a + b` is a
+number you decided, not a number you observed. Any risk you compute from it
+measures your sampling plan, not the world.
 
 The odds ratio survives that. It is the same whether you sample on exposure or
-on disease, which is exactly why case-control studies work at all. Primer 8 is
-about this.
+on disease. That is why case-control studies work at all.
 :::
 
 ::: {.callout-warning}
@@ -202,9 +204,9 @@ af_exposed <- (rr - 1) / rr
 round(af_exposed, 3)
 ```
 
-**0.667.** Two-thirds of the CHD occurring in smokers is attributable to their
-smoking — assuming the association is causal and unconfounded, which is the
-assumption Primer 9 takes apart.
+**0.667.** Two-thirds of the CHD in smokers is attributable to their smoking.
+That assumes the association is causal and unconfounded, which is a large
+assumption. We take it apart in the room.
 
 For the whole population you also need how common the exposure is:
 
@@ -238,10 +240,11 @@ tab <- table(exposed, disease)
 tab
 ```
 
-Read the printed table before you trust it. `table()` sorts its levels
-alphabetically, which puts `FALSE` before `TRUE` — so the **first** row is the
-unexposed and the **first** column is the non-diseased. That is upside down and
-back to front compared with the layout above.
+Read the printed table before you trust it.
+
+`table()` sorts its levels alphabetically, so `FALSE` comes before `TRUE`. The
+**first** row is the unexposed. The **first** column is the non-diseased. That
+is upside down and back to front compared with the layout above.
 
 ```{webr}
 exposed <- c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
@@ -426,9 +429,11 @@ contain `a` and `d`, and divide by the product of the other two.
 
 ::: {.callout-important}
 ## Everything on this page assumes the comparison is fair
-Every measure here compares exposed with unexposed as if those two groups
-differed *only* in the exposure. They almost never do. That is Primer 9, and it
-is the one that changes how you read papers.
+Every measure here compares exposed with unexposed as if the two groups
+differed *only* in the exposure. They almost never do. Study design, bias and
+confounding are what the course spends its time on.
 :::
 
-→ [**Primer 8: study designs**](primer-epi-03-designs.qmd)
+## You have finished the primers
+
+→ [**Step 5: additional resources**](../resources/index.qmd)

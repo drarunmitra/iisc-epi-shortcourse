@@ -143,9 +143,11 @@ top.
 
 Read the message under the cell. It names what is wrong.
 
-Common causes: the wrong number of decimal places; a count where a proportion
-was asked for; the right value reached the wrong way when the method was the
-point of the exercise.
+Common causes:
+
+- the wrong number of decimal places
+- a count where a proportion was asked for
+- the right value reached the wrong way, when the method was the point
 
 ### My work disappeared when I moved to the next page
 
@@ -196,6 +198,6 @@ Include 3 things, every time:
 - the exact error message, pasted as text rather than as a screenshot;
 - the output of `sessionInfo()`.
 
-**Paste text, not a picture.** A screenshot of an error cannot be searched,
-cannot be pasted back to you as a fix, and is usually cropped one line above the
-line that mattered.
+**Paste text, not a picture.** We cannot search a screenshot. We cannot paste a
+fix back into it. And it is usually cropped one line above the line that
+mattered.

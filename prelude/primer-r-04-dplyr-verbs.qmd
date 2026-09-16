@@ -114,8 +114,9 @@ cohort |> filter(smoker, age >= 50)
 `smoker` on its own works because it is already `TRUE`/`FALSE`. Writing
 `smoker == TRUE` is the same thing, more typing.
 
-For **or**, use `|`. For "is it one of these", use `%in%`, which is much easier
-to read than three `|`s:
+For **or**, use `|`.
+
+For "is it one of these", use `%in%`. It reads better than 3 `|`s in a row:
 
 ```{webr}
 library(dplyr)
@@ -134,10 +135,11 @@ cohort |> filter(district %in% c("Kolar", "Hassan"))
 
 ::: {.callout-warning}
 ## `filter()` drops `NA` rows without telling you
-If `age` is missing for someone, `age >= 50` is `NA`, not `TRUE`, so that row
-disappears from both `filter(age >= 50)` and `filter(age < 50)`. Your two groups
-then do not add up to your total, and nothing warns you. Count your rows before
-and after every filter.
+If `age` is missing for someone, `age >= 50` is `NA`, not `TRUE`. That row
+disappears from `filter(age >= 50)` **and** from `filter(age < 50)`.
+
+Your 2 groups then do not add up to your total, and nothing warns you. Count
+your rows before and after every filter.
 :::
 
 ## `select()` — keep columns
@@ -227,13 +229,17 @@ cohort |>
   )
 ```
 
-Look at `risk`. Because `event` is `TRUE`/`FALSE`, `sum()` counts the events and
-`mean()` gives the proportion who had one. That proportion is the **risk** in
-each district. That is a stratified analysis, in 4 lines.
+Look at `risk`. `event` is `TRUE`/`FALSE`, so `sum()` counts the events and
+`mean()` gives the proportion who had one.
 
-`n()` counts rows in the group and takes no arguments. Include it in every
-`summarise()` you write: a group mean over 3 people and one over 300 look
-identical on the page unless you print the denominator.
+That proportion is the **risk** in each district. That is a stratified
+analysis, in 4 lines.
+
+`n()` counts rows in the group and takes no arguments. Put it in every
+`summarise()` you write.
+
+A mean over 3 people and a mean over 300 look identical on the page. The
+denominator is the only thing that tells them apart.
 
 ## Putting it together
 
@@ -259,8 +265,8 @@ cohort |>
   )
 ```
 
-Two risks, one for smokers and one for non-smokers, among people aged 40 and
-over. Divide one by the other and you have a risk ratio. That is Primer 7.
+Two risks: one for smokers, one for non-smokers, among people aged 40 and over.
+Divide one by the other and you have a risk ratio. That is Primer 7.
 
 ## Exercises
 
@@ -332,9 +338,11 @@ needs no comparison of its own.
 ::: {.callout-note title="Exercise 2: risk by sex"}
 **Time:** 8 minutes
 
-Produce a table with one row per `sex`, showing three columns: `n` (how many
-people), `events` (how many had the event) and `risk` (the proportion who did,
-rounded to 3 places).
+Produce a table with one row per `sex` and 3 columns:
+
+- `n`, how many people
+- `events`, how many had the event
+- `risk`, the proportion who did, rounded to 3 places
 
 ```{webr}
 #| exercise: ex_group
@@ -374,7 +382,7 @@ if (!is.data.frame(.result)) {
 } else if (!isTRUE(all.equal(sort(as.numeric(.result$risk)), c(0, 0.667)))) {
   list(correct = FALSE, message = "The risks are wrong. Risk is mean(event), the proportion who had the event, rounded to 3 places.")
 } else {
-  list(correct = TRUE, message = "Correct. 0 of 6 women and 4 of 6 men, a risk of 0 and 0.667. Before you believe that difference, ask what else differs between the men and the women here — that question is Primer 9.")
+  list(correct = TRUE, message = "Correct. 0 of 6 women and 4 of 6 men, a risk of 0 and 0.667. Before you believe that difference, ask what else differs between the men and the women here. That question is confounding, and we cover it in the room.")
 }
 ```
 

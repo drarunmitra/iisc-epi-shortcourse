@@ -23,11 +23,12 @@ format:
 {{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
 
 ::: {.callout-important title="If the cells below never become ready"}
-This page runs R inside your browser. It needs about 17 MB on first load (the R
-engine plus the machinery that runs and marks your code) and a minute or two on
-a slow connection. If nothing happens after that, your network is probably
-blocking it. Work through [the R primer](r-primer.qmd) in RStudio instead.
-Everything taught here is taught there too.
+This page runs R inside your browser. The first load downloads about 17 MB: R
+itself, plus the machinery that marks your answers. On a slow connection that
+takes a minute or two.
+
+If nothing happens after that, your network is blocking it. Work through
+[the R primer](r-primer.qmd) in RStudio instead. It teaches the same material.
 
 There is no Stop button. If you write a loop that never ends, reload the page.
 :::
@@ -71,9 +72,9 @@ round(3.14159, 2)
 nchar("epidemiology")
 ```
 
-`round(3.14159, 2)` passed two arguments: the number, and how many decimal
-places. Most confusion about R functions is really confusion about which
-argument is which.
+`round(3.14159, 2)` passed 2 arguments: the number, and how many decimal
+places. Most confusion about R functions is confusion about which argument is
+which.
 
 You can name arguments, and then the order stops mattering:
 
@@ -180,9 +181,10 @@ sbp <- c(128, 142, NA, 136, 151, NA, 119)
 mean(sbp)
 ```
 
-You get `NA`, not an error. R is telling you the answer depends on what those
-two missing values were. To get the mean of the ones you do have, say so
-explicitly:
+You get `NA`, not an error. R is telling you the answer depends on the 2 values
+you do not have.
+
+To average only the ones you do have, say so:
 
 ```{webr}
 sbp <- c(128, 142, NA, 136, 151, NA, 119)
@@ -193,10 +195,12 @@ sum(is.na(sbp))     # how many are missing
 
 ::: {.callout-warning}
 ## `na.rm = TRUE` is a decision, not a fix
-It changes the question from "the mean blood pressure of these seven people" to
-"the mean blood pressure of the five we measured". Sometimes that is fine.
-Sometimes the missing two are missing *because* they were the sickest, and then
-it is not. Always ask why the values are missing before you drop them.
+It changes the question. You asked for the mean of 7 people. You now have the
+mean of the 5 you measured.
+
+Sometimes that is fine. Sometimes the 2 missing people are missing *because*
+they were the sickest. Then it is not fine. Ask why the values are missing
+before you drop them.
 :::
 
 ## Exercises

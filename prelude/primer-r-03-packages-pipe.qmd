@@ -68,10 +68,10 @@ library(dplyr)
 glimpse(mtcars)
 ```
 
-Note also: `install.packages()` goes in your **console**, never in a script.
-A script that reinstalls a package every time it runs is a script that takes
-4 minutes to do 2 seconds of work, and that fails entirely on a machine with no
-internet.
+`install.packages()` goes in your **console**, never in a script.
+
+A script that reinstalls its packages every run takes 4 minutes to do 2 seconds
+of work. On a machine with no internet it fails outright.
 
 ## The pipe
 

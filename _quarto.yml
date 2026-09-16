@@ -43,24 +43,19 @@ website:
         - prelude/index.qmd
         - prelude/install.qmd
         - prelude/check-setup.qmd
-        - prelude/send-result.qmd
-        - section: "Step 4 — the primers"
-          href: prelude/primers.qmd
+        - section: "Step 3 — R primers"
+          href: prelude/primers-r.qmd
           contents:
-            - section: "R primers"
-              contents:
-                - prelude/primer-r-01-objects.qmd
-                - prelude/primer-r-02-tibbles.qmd
-                - prelude/primer-r-03-packages-pipe.qmd
-                - prelude/primer-r-04-dplyr-verbs.qmd
-                - prelude/primer-r-05-first-plot.qmd
-            - section: "Epidemiology primers"
-              contents:
-                - prelude/primer-epi-01-frequency.qmd
-                - prelude/primer-epi-02-association.qmd
-                - prelude/primer-epi-03-designs.qmd
-                - prelude/primer-epi-04-bias.qmd
-        - prelude/pre-reading.qmd
+            - prelude/primer-r-01-objects.qmd
+            - prelude/primer-r-02-tibbles.qmd
+            - prelude/primer-r-03-packages-pipe.qmd
+            - prelude/primer-r-04-dplyr-verbs.qmd
+            - prelude/primer-r-05-first-plot.qmd
+        - section: "Step 4 — Epidemiology primers"
+          href: prelude/primers-epi.qmd
+          contents:
+            - prelude/primer-epi-01-frequency.qmd
+            - prelude/primer-epi-02-association.qmd
         - section: "Reference"
           contents:
             - prelude/r-primer.qmd

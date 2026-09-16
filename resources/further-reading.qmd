@@ -10,7 +10,7 @@ catches you.
 
 | Book | Suits you if |
 |---|---|
-| Bonita R, Beaglehole R, Kjellström T. **Basic Epidemiology**, 2nd ed. WHO, 2006. [Free PDF](https://apps.who.int/iris/handle/10665/43541) | You want one short book that covers the whole of this course. Written for a global audience and free. |
+| Bonita R, Beaglehole R, Kjellström T. **Basic Epidemiology**, 2nd ed. WHO, 2006. [Free PDF](https://apps.who.int/iris/handle/10665/43541) | You want one short book covering everything this course does. Written for a global audience and free. |
 | Webb P, Bain C, Page A. **Essential Epidemiology**, 4th ed. Cambridge, 2019. | You want a full textbook with exercises. The clearest of the standard undergraduate texts. |
 | Rothman KJ. **Epidemiology: An Introduction**, 2nd ed. Oxford, 2012. | You want the reasoning rather than the recipes. Short, and unusually honest about what the methods cannot do. |
 | Rothman KJ, Greenland S, Lash TL. **Modern Epidemiology**, 4th ed. Wolters Kluwer, 2021. | You are going further into methods. This is the reference, not an introduction. |

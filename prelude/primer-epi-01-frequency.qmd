@@ -75,8 +75,10 @@ because a case counted today may have started ten years ago.
 hypertension."
 
 **Period prevalence** is over a stretch: "during 2026, 410 of 2,400 adults had
-hypertension at some point." It includes people who recovered in March and
-people who fell ill in November, so it is always at least as large.
+hypertension at some point."
+
+Period prevalence counts people who recovered in March and people who fell ill
+in November. It is always at least as large as point prevalence.
 
 Say which one you mean. Papers that do not are a common cause of numbers that
 will not reconcile.
@@ -110,9 +112,10 @@ prevalence:
 
 ## Rate — how fast, per unit of time at risk
 
-Risk has a problem. It assumes everyone was followed for the whole period. In
-any real study some people leave, some die of other things, some join late.
-Counting them as if they were followed for two years overstates the denominator.
+Risk has a problem. It assumes everyone was followed for the whole period.
+
+In a real study people leave, die of other things, or join late. Counting them
+as if they were followed for 2 years overstates the denominator.
 
 **Person-time** fixes this. Each person contributes exactly as much time as they
 were actually observed and still at risk.
@@ -188,11 +191,12 @@ round(incidence_rate * duration_years, 3)
 
 About **0.04, or 4%** prevalent.
 
-This explains something that often confuses people. **A treatment that keeps
-patients alive without curing them raises prevalence.** Antiretroviral
-therapy cut HIV incidence and HIV deaths, and the prevalence of people living
-with HIV went up. Nothing went wrong; prevalence was never measuring what
-people assumed.
+That has a consequence people find surprising. **A treatment that keeps
+patients alive without curing them raises prevalence.**
+
+Antiretroviral therapy cut HIV incidence and it cut HIV deaths. The prevalence
+of people living with HIV went up. Nothing went wrong. Prevalence was never
+measuring what people assumed it was.
 
 ::: {.callout-note}
 ## The approximation has conditions

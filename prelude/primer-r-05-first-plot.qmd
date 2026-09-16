@@ -341,5 +341,5 @@ All three mappings go inside the one `aes()`. `labs()` needs at least
 
 ## You have finished the R primers
 
-→ [**Primer 6: measuring disease**](primer-epi-01-frequency.qmd) — the
-epidemiology starts here, and it is lighter than this page.
+→ [**Step 4: the epidemiology primers**](primers-epi.qmd). They are lighter
+than this page.

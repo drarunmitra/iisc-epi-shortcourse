@@ -1,124 +1,104 @@
 ---
-title: "Step 1 — Install R, RStudio and Quarto"
+title: "Step 1 — Install R and RStudio"
 subtitle: "Step 1 of 5"
 ---
 
-**Time:** 30 minutes, plus download time.
+**Time:** 25 minutes, plus download time.
 **Before you start:** the laptop you will bring to IISc, and administrator
 rights on it.
-**When you finish:** R, RStudio and Quarto are installed and working together.
+**When you finish:** R and RStudio are installed and working together.
+
+You are installing 2 programs. **R** does the work. **RStudio** is the window
+you look at it through. Install R first.
 
 ::: {.callout-warning}
 ## Check your administrator rights now
-On an institutional laptop you may not have them. Find out this week, not on
-Sunday night. If you cannot install software yourself, ask your IT department
-now and send them this page.
+You may not have them on an institutional laptop. Find out this week, not on
+Sunday night. If you cannot install software yourself, send this page to your
+IT department today.
 :::
 
-## Step 1 of 7 — Install R
+## Step 1 of 5 — Install R
 
 1. Go to [cran.r-project.org](https://cran.r-project.org).
 2. Click the link for your operating system.
-3. **Windows:** click **base**, then the download link, then run the `.exe` and
-   accept every default.
+3. **Windows:** click **base**, then the download link. Run the `.exe`. Accept
+   every default.
 4. **macOS:** click the `.pkg` for your chip. Apple Silicon (M1, M2, M3, M4)
-   needs the **arm64** build. Older Intel Macs need the plain one. To check,
-   click the Apple menu, then **About This Mac**, and read the **Chip** line.
-5. **Linux:** follow the CRAN instructions for your distribution. Install from
-   the CRAN apt repository, not your distribution's own `r-base`, which is
-   usually several versions behind.
+   needs the **arm64** build. Older Intel Macs need the plain one.
+5. **Linux:** follow the CRAN instructions for your distribution.
 
-**You should see:** an installer that finishes without an error box.
+**You should see:** an installer that finishes with no error box.
 
-**If it does not work:** install into the default location. A folder path
-containing spaces or non-English characters makes package installs fail later,
-in ways that are hard to diagnose.
+**If it does not work:** install into the default location. A folder path with
+spaces or non-English characters in it breaks package installs later.
 
-## Step 2 of 7 — Check that R opens
+::: {.callout-tip}
+## Not sure which Mac you have?
+Click the Apple menu, then **About This Mac**. Read the **Chip** line.
+:::
+
+## Step 2 of 5 — Check that R opens
 
 1. Open R on its own. On Windows, choose **R x64** from the Start menu. On
    macOS, open `R.app`.
 2. Read the first line in the console window.
 
-**You should see:** a version number of **4.1.0 or higher**. Any current R is
-far higher than that.
+**You should see:** a version number of **4.1.0 or higher**.
 
-**If it does not work:** repeat Step 1. Do not go on to RStudio until R itself
-opens.
+**If it does not work:** repeat Step 1. Do not go on until R itself opens.
 
-## Step 3 of 7 — Install RStudio
+## Step 3 of 5 — Install RStudio
 
 1. Go to
    [posit.co/download/rstudio-desktop](https://posit.co/download/rstudio-desktop/).
 2. Download the installer the page offers you.
-3. Run it and accept the defaults.
+3. Run it. Accept the defaults.
 
-**You should see:** RStudio open with 4 panes, and the console at the left
-showing the same R version you read in Step 2.
+**You should see:** RStudio open with 4 panes. The console at the left shows
+the same R version you read in Step 2.
 
-**If it does not work:** if the console says R is missing, close RStudio,
-confirm that R itself opens, then install RStudio again.
+**If it does not work:** if the console says R is missing, close RStudio. Check
+that R itself opens. Then install RStudio again.
 
 ::: {.callout-note}
-## R and RStudio are not the same program
-RStudio is a window onto R. Updating RStudio does not update R. Updating R does
-not update RStudio. When you update, you have 2 things to update, separately.
+## R and RStudio are 2 different programs
+Updating one does not update the other. When you update, you have 2 things to
+update.
 :::
 
-## Step 4 of 7 — Install Quarto
+## Step 4 of 5 — Point RStudio at the right R
 
-1. Go to [quarto.org/docs/get-started](https://quarto.org/docs/get-started/).
-2. Download the installer for your system and run it.
+Skip this step if you have never used R on this laptop.
 
-**You should see:** an installer that finishes without an error box.
+More than one R can be installed at once. Check which one RStudio picked.
 
-## Step 5 of 7 — Restart your computer
-
-Restart the whole computer, not only RStudio.
-
-**You should see:** your normal desktop after the restart.
-
-**If it does not work:** do not skip this step. Quarto adds itself to your
-system PATH. On Windows, programs that were already running cannot see that
-change until they restart.
-
-## Step 6 of 7 — Point RStudio at the right R
-
-Do this only if you have used R on this laptop before. More than one R can be
-installed at once.
-
-1. Open RStudio.
-2. Click **Tools → Global Options → General**.
-3. Read the **R version** line at the top.
+1. In RStudio, click **Tools → Global Options → General**.
+2. Read the **R version** line at the top.
 
 **You should see:** the R you installed in Step 1.
 
 **If it does not work:** click **Change**, choose the right R, then restart
 RStudio.
 
-## Step 7 of 7 — Confirm the native pipe works
+## Step 5 of 5 — Test the pipe
 
 1. Click once inside the **Console** pane, at the bottom left.
 2. Type `c(1, 2, 3) |> sum()` and press **Enter**.
 
 **You should see:** `[1] 6`.
 
-**If it does not work:** an error here means your R is older than 4.1.0. Go back
-to Step 1.
+**If it does not work:** an error here means your R is older than 4.1.0. Go
+back to Step 1.
 
 ::: {.callout-note}
 ## Why this matters
-You are installing 3 separate programs, and the order matters. R is the engine.
-RStudio is the editor you sit in front of. Quarto turns your analysis into a
-document.
+RStudio looks for R when it starts. Install them the other way round and
+RStudio reports that R is missing, even when it is not.
 
-RStudio looks for an existing R when it starts. Installed the other way round,
-it reports that R is missing even when it is not.
-
-We use the native pipe `|>` in every session, so Step 7 is a real test and not a
-formality.
+`|>` is the pipe. We use it in every session, so Step 5 is a real test.
 :::
 
 ## Done?
 
-→ [**Step 2: install the packages and run the check**](check-setup.qmd)
+→ [**Step 2: install the packages**](check-setup.qmd)

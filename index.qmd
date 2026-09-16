@@ -5,11 +5,11 @@ toc: false
 ---
 
 A hands-on short course for researchers, public health professionals and
-students who want to strengthen both the theory and the practice of
-epidemiology. Lectures alternate with hands-on training. You will leave able to
-choose a study design, compute and interpret the measures that design produces,
-tell a real effect from a biased one, and do all of it in R in a way someone
-else can rerun.
+students. Lectures alternate with practical work.
+
+By the end you will be able to choose a study design, compute the measures that
+design gives you, read them correctly, tell a real effect from a biased one,
+and do all of it in R.
 
 ::: {.organisers}
 ::: {.org}
@@ -28,9 +28,10 @@ else can rerun.
 
 ::: {.callout-important}
 ## Before you arrive
-There are 5 things to do before Monday 21 September. They take about 4 hours in
-total. Spread them over several evenings. Installing the software is the only
-one we cannot fix for you on the day.
+There are 5 steps to work through before Monday 21 September. They take about
+3 hours. Spread them over a few evenings.
+
+Installing the software is the only step we cannot fix for you on the day.
 
 → [**Start here: the 5 steps**](prelude/index.qmd)
 :::
@@ -45,51 +46,52 @@ The programme is being finalised and will be circulated separately.
 
 ::: {.card-tile}
 ### Measure disease
-Turn counts into prevalence, risk, rate and person-time, and say out loud
-which one a given question needs.
+Turn counts into prevalence, risk, rate and person-time. Say which one a
+question needs.
 :::
 
 ::: {.card-tile}
 ### Measure association
-Build a 2×2 table and read a risk ratio, an odds ratio, a risk difference and
-a number needed to treat off it without looking anything up.
+Build a 2×2 table. Read a risk ratio, an odds ratio, a risk difference and a
+number needed to treat off it.
 :::
 
 ::: {.card-tile}
 ### Choose a design
-Match a research question to a cohort, case-control, cross-sectional or trial
-design, and know what each one can and cannot tell you.
+Match a question to a cohort, case-control, cross-sectional or trial design.
+Know what each one can and cannot tell you.
 :::
 
 ::: {.card-tile}
 ### Spot bias
-Name the bias you are looking at: selection, information, confounding. Tell
-confounding from interaction, and handle each correctly.
+Name the bias in front of you: selection, information, confounding. Tell
+confounding from interaction.
 :::
 
 ::: {.card-tile}
 ### Analyse in R
-Import, clean, summarise and plot epidemiological data with the tidyverse,
-instead of clicking through a menu you cannot document.
+Import, clean, summarise and plot data with the tidyverse, instead of clicking
+through a menu you cannot document.
 :::
 
 ::: {.card-tile}
 ### Work reproducibly
-Organise an analysis so a colleague, a reviewer, or you in six months can
-rerun every number in your paper from the raw data.
+Organise an analysis so that a colleague, a reviewer, or you in six months can
+rerun every number from the raw data.
 :::
 
 :::
 
 ## Who this is for
 
-Researchers, public health professionals, programme managers and students. No
-prior programming is assumed. If you have used SPSS, Excel or Stata you already
-understand most of the statistical ideas; this course changes the tools and
-sharpens the reasoning.
+Researchers, public health professionals, programme managers and students.
 
-You need a laptop you can install software on, and about 4 hours before the
-course to work through the [prelude](prelude/index.qmd).
+No programming is assumed. If you have used SPSS, Excel or Stata, you already
+know most of the statistical ideas. This course changes the tools and sharpens
+the reasoning.
+
+You need a laptop you can install software on, and about 3 hours before the
+course for the [5 steps](prelude/index.qmd).
 
 ## Faculty
 
@@ -98,16 +100,16 @@ Manikandanesan Sakthivel · Uttara Partap
 
 ## How to use this site
 
-- **[Before you arrive](prelude/index.qmd)**. The 5 steps: install R and the
-  packages, run the check, send it to us, work through the 9 primers, and do
-  the reading. Start here.
+- **[Before you arrive](prelude/index.qmd)**. 5 steps: install R and RStudio,
+  install the packages, work through the R primers, then the epidemiology
+  primers, then browse the resources. Start here.
 - **[Resources](resources/index.qmd)**. Cheatsheet, troubleshooting, glossary
   and further reading. Use these during the course and after it.
 
 All materials stay online after the course. The site is built from a public
-repository; corrections are welcome as issues or pull requests.
+repository, so corrections are welcome as issues or pull requests.
 
-Questions about registration, travel or accommodation go to
+For registration, travel or accommodation, email
 [office.msicph@iisc.ac.in](mailto:office.msicph@iisc.ac.in).
 
 ::: {.callout-note appearance="simple"}

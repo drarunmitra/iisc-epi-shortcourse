@@ -10,7 +10,7 @@ Tropical Medicine, University of London.
 | Path | What |
 |---|---|
 | `index.qmd` | Home page |
-| `prelude/` | The 5 pre-course steps, and the 9 browser primers |
+| `prelude/` | The 5 pre-course steps, and the 7 browser primers |
 | `resources/` | Cheatsheet, troubleshooting, glossary, further reading |
 | `setup/` | `install_packages.R` and `check_setup.R`, run by participants |
 | `_extensions/r-wasm/live/` | quarto-live, pinned to v0.2.0 |
@@ -19,8 +19,8 @@ Tropical Medicine, University of London.
 
 ## The primers
 
-9 pages that run R **inside the reader's browser** through WebR. Nothing to
-install. 5 teach R; 4 teach epidemiological measures and reasoning.
+7 pages that run R **inside the reader's browser** through WebR. Nothing to
+install. 5 teach R (Step 3); 2 teach epidemiological measures (Step 4).
 
 Each page declares its own packages, so each downloads only what it needs: about
 17 MB for a base-R page, 21 MB with tibble, 22 MB with dplyr, 37 MB with

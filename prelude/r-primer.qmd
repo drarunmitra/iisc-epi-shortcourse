@@ -293,8 +293,8 @@ ggplot(survey, aes(x = district, fill = hypertension)) +
   geom_bar(position = "dodge")
 ```
 
-Label every plot. A title that states the finding is worth more than one that
-names the axes.
+Label every plot. A title that states the finding beats one that names the
+axes.
 
 ```r
 ggplot(survey, aes(x = age, y = sbp, colour = residence)) +
