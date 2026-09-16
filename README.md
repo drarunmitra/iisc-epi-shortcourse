@@ -34,9 +34,10 @@ participants to open the primers at home before they travel.
 quarto render
 ```
 
-That is all. There is no R step: every code block is either static ```` ```r ````
-or a ```` ```{webr} ```` cell that runs in the reader's browser. CI installs
-Quarto only.
+You need R with **knitr** and **rmarkdown** installed, plus Quarto. No R on the
+site is ever evaluated, but the primers declare `engine: knitr`, so knitr has to
+process the documents. CI installs exactly that and nothing more; the teaching
+packages live in `setup/install_packages.R` for participants.
 
 Preview locally with `quarto preview`. Do not open a rendered primer via
 `file://` — the WebAssembly worker is blocked.

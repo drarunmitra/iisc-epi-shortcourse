@@ -60,11 +60,15 @@ it at home.
 quarto render
 ```
 
-That is the whole build. **There is no R step**, because every code block on the
-site is either static ```` ```r ```` (displayed, never executed) or ````
-```{webr} ```` (shipped to the reader's browser, never executed at render). CI
-installs Quarto only. If you ever add an executing ```` ```{r} ```` chunk, add
-`r-lib/actions/setup-r` back to `.github/workflows/publish.yml`.
+**CI needs R, and this is not obvious.** No R on this site is ever *evaluated*:
+every block is either static ```` ```r ```` or a ```` ```{webr} ```` cell that
+runs in the reader browser. But the 9 primers declare `engine: knitr`, and
+quarto-live's `_knitr.qmd` include registers a passthrough knitr engine that
+rewrites each `{webr}` block into the page, so knitr must run the document.
+Drop the setup-r step and the render dies at the first primer with
+`Unable to locate an installed version of R`. CI therefore installs R plus
+**knitr and rmarkdown only** - never the teaching packages, which live in
+`setup/install_packages.R` for participants and are never evaluated here.
 
 The quarto-live extension is committed under `_extensions/`. If it goes missing:
 

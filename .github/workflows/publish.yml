@@ -29,12 +29,29 @@ jobs:
         with:
           version: 1.9.36
 
-      # No R step. Every page on this site is either plain Markdown or a
-      # ```{webr} cell, and a webr cell is never executed at render time - it
-      # is shipped to the reader's browser and run there. Nothing in the repo
-      # needs a local R, so installing one would add ~10 minutes to every
-      # build and verify nothing. If you ever add a ```{r} chunk that must
-      # execute, add r-lib/actions/setup-r and its dependencies back here.
+      # R IS required, even though no R code on this site is ever executed.
+      # The 9 primers declare `engine: knitr`, and quarto-live's _knitr.qmd
+      # include registers a passthrough knitr engine that rewrites each {webr}
+      # block into the page. So knitr has to run the document, even though the
+      # R inside a {webr} cell is shipped to the reader's browser and evaluated
+      # there, never here. Dropping this step fails the render at the first
+      # primer with "Unable to locate an installed version of R".
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      # Only the authoring stack. The teaching packages (tidyverse, gtsummary,
+      # epitools and the rest) belong in setup/install_packages.R, which
+      # participants run on their own laptops. Nothing here evaluates them, so
+      # installing them in CI would add many minutes and verify nothing.
+      - name: Install R dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: |
+            any::knitr
+            any::rmarkdown
+
       - name: Render site
         run: quarto render
 
