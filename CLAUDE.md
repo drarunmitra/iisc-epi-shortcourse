@@ -187,17 +187,22 @@ Rules learned the hard way; full version in
    at the course lead's instruction on 2026-09-16; do not recreate it, and do
    not put day-by-day themes back on the home page. The site promises no
    specific day for any topic, so keep new prose free of "on Day 3" claims.
-2. **`site-url` and `repo-url` in `_quarto.yml` are guesses**
-   (`drarunmitra/iisc-epi-shortcourse`). The `source()` URLs in
-   `prelude/check-setup.qmd` and `resources/troubleshooting.qmd` depend on
-   `site-url` being right. Fix all of them together.
+2. **`site-url` and `repo-url` are correct and live**
+   (`drarunmitra/iisc-epi-shortcourse`). The `source()` URL in
+   `prelude/check-setup.qmd` depends on `site-url`; both were fetched and
+   parsed successfully on 2026-09-16. If you ever move the repo, change the two
+   URLs in `_quarto.yml` and the `source()` line together, and re-test the
+   fetch.
 3. **The primers are unverified in a browser.** A successful `quarto render`
    proves only that Quarto parsed the syntax. Serve over HTTP and load at least
    Primer 1, Primer 5 and Primer 7 before the course.
-4. `setup/check_setup.R` is the single definition of the package list.
-   `prelude/check-setup.qmd` mirrors its count (12). If you add a package,
-   change `check_setup.R` first, then `install_packages.R`, then the digit in
-   the page prose.
-5. Applications closed on 25 July 2026 and the site is written for **selected
-   participants**, not applicants. If it is ever reused for a later cohort, the
-   admissions section of `index.qmd` needs rewriting first.
+4. `setup/check_setup.R` and `setup/install_packages.R` must list the **same**
+   16 packages; they drifted once (12 vs 16) and the page quoted the wrong one.
+   `prelude/check-setup.qmd` says "installs 16 of them". Change all three
+   together.
+5. Applications closed on 25 July 2026 and the site addresses **selected
+   participants**. There is no admissions or fees section. Reusing this for a
+   later cohort means writing one.
+6. **Faculty affiliations are only partly known.** Poppy Mallinson is LSHTM;
+   Uttara Partap is Assistant Professor at IISc. The home page lists names
+   without affiliations, so nothing on the site depends on this.
