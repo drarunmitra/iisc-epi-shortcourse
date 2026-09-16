@@ -38,12 +38,12 @@ website:
     - id: prelude
       title: "Before you arrive"
       style: floating
-      collapse-level: 2
+      collapse-level: 1
       contents:
         - prelude/index.qmd
         - prelude/install.qmd
         - prelude/check-setup.qmd
-        - section: "Step 3 — R primers"
+        - section: "Step 3: R primers"
           href: prelude/primers-r.qmd
           contents:
             - prelude/primer-r-01-objects.qmd
@@ -51,7 +51,7 @@ website:
             - prelude/primer-r-03-packages-pipe.qmd
             - prelude/primer-r-04-dplyr-verbs.qmd
             - prelude/primer-r-05-first-plot.qmd
-        - section: "Step 4 — Epidemiology primers"
+        - section: "Step 4: Epidemiology primers"
           href: prelude/primers-epi.qmd
           contents:
             - prelude/primer-epi-01-frequency.qmd
@@ -63,6 +63,7 @@ website:
     - id: resources
       title: "Resources"
       style: floating
+      collapse-level: 1
       contents:
         - resources/index.qmd
         - resources/cheatsheet.qmd

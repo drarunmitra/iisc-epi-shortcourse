@@ -1,5 +1,5 @@
 ---
-title: "Step 3 — R primers"
+title: "Step 3: R primers"
 subtitle: "Step 3 of 5"
 ---
 
@@ -91,6 +91,6 @@ Wait 2 or 3 minutes first. The page has to download R before anything runs.
 There is no Stop button on these pages. If you write a loop that never ends,
 reload the page.
 
-## Done?
+## Step 3 is done
 
-→ [**Step 4: the epidemiology primers**](primers-epi.qmd)
+→ [**Step 4 of 5: the epidemiology primers**](primers-epi.qmd)

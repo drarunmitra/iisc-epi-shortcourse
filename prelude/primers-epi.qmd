@@ -1,5 +1,5 @@
 ---
-title: "Step 4 — Epidemiology primers"
+title: "Step 4: Epidemiology primers"
 subtitle: "Step 4 of 5"
 ---
 
@@ -61,8 +61,8 @@ every mistake with a risk ratio or an odds ratio is a mistake about what went
 underneath the line.
 :::
 
-## Done?
+## Step 4 is done
 
 You have finished the primers.
 
-→ [**Step 5: additional resources**](../resources/index.qmd)
+→ [**Step 5 of 5: additional resources**](../resources/index.qmd)

@@ -74,7 +74,7 @@ cohort
 some people — they had the event, or they were lost. That column is what makes
 this a real cohort rather than a spreadsheet, and Primer 6 is about it.
 
-## `filter()` — keep rows
+## `filter()`: keep rows
 
 The condition goes inside. Note **`==`**, two equals signs, for "is equal to".
 One equals sign is assignment and will not work here.
@@ -142,7 +142,7 @@ Your 2 groups then do not add up to your total, and nothing warns you. Count
 your rows before and after every filter.
 :::
 
-## `select()` — keep columns
+## `select()`: keep columns
 
 ```{webr}
 library(dplyr)
@@ -162,7 +162,7 @@ cohort |> select(id, age, event)
 cohort |> select(-sex, -years_fu)
 ```
 
-## `mutate()` — add a column
+## `mutate()`: add a column
 
 The new column is computed from existing ones, for every row at once.
 
@@ -206,7 +206,7 @@ cohort |>
 Read each line as "if this, then that". The first matching line wins, so order
 matters: a 35-year-old is caught by the first line and never reaches the second.
 
-## `group_by()` and `summarise()` — the pair that does the work
+## `group_by()` and `summarise()`: the pair that does the work
 
 `group_by()` looks like it does nothing. `summarise()` then collapses each group
 to a single row.

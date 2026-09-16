@@ -32,7 +32,18 @@ is the source of the WebR primer machinery and the house writing style.
   step. Run
   `bash .claude/skills/playbook-instructions/check.sh <files>` before committing
   any prose change.
-- The 9 primers are teaching pages, not task pages, so they keep prose plus
+- **Two deliberate departures from `playbook-instructions`, both on the course
+  lead's instruction (2026-09-16). CLAUDE.md wins over the skill here.**
+  1. The skill's heading form is `## Step 3 of 6 - Install the packages`. On
+     this site the prelude already numbers its own 5 steps, so a page titled
+     "Step 1 of 5" whose last heading read "Step 5 of 5" told the reader the
+     whole prelude was finished. Inner headings are therefore plain numbers:
+     `## 1. Install R`. The word "Step" now means one of the 5 prelude steps
+     and nothing else. Each task page says "There are N things to do on this
+     page" near the top and ends with `## Step N is done`.
+  2. No em-dash in any title, subtitle or heading. Use a colon. Prose em-dashes
+     are fine in moderation; headings are not.
+- The 7 primers are teaching pages, not task pages, so they keep prose plus
   exercises rather than the numbered-step shape. The ban list and the digit rule
   still apply to their prose. `check.sh` never scans inside a ```` ```{webr} ````
   fence, by design.

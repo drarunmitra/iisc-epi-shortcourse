@@ -1,5 +1,5 @@
 ---
-title: "Step 2 — Install the packages"
+title: "Step 2: Install the packages"
 subtitle: "Step 2 of 5"
 ---
 
@@ -10,7 +10,9 @@ is ready.
 
 There are no files to download. Both lines below run straight from this site.
 
-## Step 1 of 3 — Install the packages
+There are 3 things to do on this page. Finish them and you have done Step 2.
+
+## 1. Install the packages
 
 1. Open RStudio.
 2. Click once inside the **Console** pane, at the bottom left.
@@ -39,7 +41,7 @@ finish.
 Red text in R is not always an error. Most of it is ordinary progress output.
 :::
 
-## Step 2 of 3 — Run the check
+## 2. Run the check
 
 1. Click once inside the **Console** pane.
 2. Copy the line below. Paste it into the Console. Press **Enter**.
@@ -63,7 +65,7 @@ fix. Then read [Troubleshooting](../resources/troubleshooting.qmd).
 | ! | a warning; usually fine, read the text |
 | ✖ | that check failed; fix this one |
 
-## Step 3 of 3 — Email us if anything failed
+## 3. Email us if anything failed
 
 Only if you saw a cross.
 
@@ -90,6 +92,6 @@ Tell us about a failure early. A problem we see on Wednesday is a working
 laptop by Friday.
 :::
 
-## Done?
+## Step 2 is done
 
-→ [**Step 3: the R primers**](primers-r.qmd)
+→ [**Step 3 of 5: the R primers**](primers-r.qmd)

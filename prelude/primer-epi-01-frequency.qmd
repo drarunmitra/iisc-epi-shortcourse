@@ -1,6 +1,6 @@
 ---
 title: "Primer 6 · Measuring disease"
-subtitle: "Prevalence, risk, rate, person-time — and which one your question needs"
+subtitle: "Prevalence, risk, rate, person-time: and which one your question needs"
 engine: knitr
 format:
   live-html:
@@ -46,7 +46,7 @@ does not answer "how bad is it here", which needs a denominator.
 Every measure below is a count divided by something. Which something you choose
 is the lesson.
 
-## Prevalence — how many have it now
+## Prevalence: how many have it now
 
 $$\text{Prevalence} = \frac{\text{people with the disease at a point in time}}{\text{people in the population at that time}}$$
 
@@ -84,7 +84,7 @@ Say which one you mean. Papers that do not are a common cause of numbers that
 will not reconcile.
 :::
 
-## Risk — what fraction fell ill over a period
+## Risk: what fraction fell ill over a period
 
 Also called **cumulative incidence**. Now the denominator changes: only people
 who *could* get the disease, counted at the *start*.
@@ -110,7 +110,7 @@ prevalence:
 2. **It is meaningless without a time period.** "A 6% risk" says nothing. "A 6%
    risk over two years" says something. Always attach the period.
 
-## Rate — how fast, per unit of time at risk
+## Rate: how fast, per unit of time at risk
 
 Risk has a problem. It assumes everyone was followed for the whole period.
 

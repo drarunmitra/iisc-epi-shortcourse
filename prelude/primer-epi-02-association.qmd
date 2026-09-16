@@ -79,7 +79,7 @@ risk_unexposed
 Risk is **0.09 in smokers** and **0.03 in non-smokers**. Everything below is a
 different way of comparing those two numbers.
 
-## Risk ratio — how many times more likely
+## Risk ratio: how many times more likely
 
 $$\text{RR} = \frac{\text{risk in the exposed}}{\text{risk in the unexposed}}$$
 
@@ -111,7 +111,7 @@ common way health statistics mislead in the press, and it is why the risk
 difference below matters as much as the ratio.
 :::
 
-## Risk difference — how much extra disease
+## Risk difference: how much extra disease
 
 $$\text{RD} = \text{risk}_{\text{exposed}} - \text{risk}_{\text{unexposed}}$$
 
@@ -151,7 +151,7 @@ appear.
 Always round NNT **up** when you report it, and always state the time period.
 "NNT 17 over five years" is a sentence a patient can act on. "NNT 17" is not.
 
-## Odds ratio — the one people get wrong
+## Odds ratio: the one people get wrong
 
 Odds is not risk. Odds compares those with the disease to those **without**,
 rather than to the total.
@@ -191,7 +191,7 @@ RR. At 30% risk the gap would be much wider. **Never describe an odds ratio in
 the words of a risk ratio unless the outcome is genuinely uncommon.**
 :::
 
-## Attributable fraction — how much of the disease is down to this
+## Attributable fraction: how much of the disease is down to this
 
 Among the exposed, what share of their disease is attributable to the exposure?
 

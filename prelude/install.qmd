@@ -1,5 +1,5 @@
 ---
-title: "Step 1 — Install R and RStudio"
+title: "Step 1: Install R and RStudio"
 subtitle: "Step 1 of 5"
 ---
 
@@ -11,6 +11,8 @@ rights on it.
 You are installing 2 programs. **R** does the work. **RStudio** is the window
 you look at it through. Install R first.
 
+There are 5 things to do on this page. Finish all 5 and you have done Step 1.
+
 ::: {.callout-warning}
 ## Check your administrator rights now
 You may not have them on an institutional laptop. Find out this week, not on
@@ -18,7 +20,7 @@ Sunday night. If you cannot install software yourself, send this page to your
 IT department today.
 :::
 
-## Step 1 of 5 — Install R
+## 1. Install R
 
 1. Go to [cran.r-project.org](https://cran.r-project.org).
 2. Click the link for your operating system.
@@ -38,7 +40,7 @@ spaces or non-English characters in it breaks package installs later.
 Click the Apple menu, then **About This Mac**. Read the **Chip** line.
 :::
 
-## Step 2 of 5 — Check that R opens
+## 2. Check that R opens
 
 1. Open R on its own. On Windows, choose **R x64** from the Start menu. On
    macOS, open `R.app`.
@@ -46,9 +48,10 @@ Click the Apple menu, then **About This Mac**. Read the **Chip** line.
 
 **You should see:** a version number of **4.1.0 or higher**.
 
-**If it does not work:** repeat Step 1. Do not go on until R itself opens.
+**If it does not work:** go back to 1 above. Do not go on until R itself
+opens.
 
-## Step 3 of 5 — Install RStudio
+## 3. Install RStudio
 
 1. Go to
    [posit.co/download/rstudio-desktop](https://posit.co/download/rstudio-desktop/).
@@ -56,7 +59,7 @@ Click the Apple menu, then **About This Mac**. Read the **Chip** line.
 3. Run it. Accept the defaults.
 
 **You should see:** RStudio open with 4 panes. The console at the left shows
-the same R version you read in Step 2.
+the same R version you read in 2 above.
 
 **If it does not work:** if the console says R is missing, close RStudio. Check
 that R itself opens. Then install RStudio again.
@@ -67,7 +70,7 @@ Updating one does not update the other. When you update, you have 2 things to
 update.
 :::
 
-## Step 4 of 5 — Point RStudio at the right R
+## 4. Point RStudio at the right R
 
 Skip this step if you have never used R on this laptop.
 
@@ -76,12 +79,12 @@ More than one R can be installed at once. Check which one RStudio picked.
 1. In RStudio, click **Tools → Global Options → General**.
 2. Read the **R version** line at the top.
 
-**You should see:** the R you installed in Step 1.
+**You should see:** the R you installed in 1 above.
 
 **If it does not work:** click **Change**, choose the right R, then restart
 RStudio.
 
-## Step 5 of 5 — Test the pipe
+## 5. Test the pipe
 
 1. Click once inside the **Console** pane, at the bottom left.
 2. Type `c(1, 2, 3) |> sum()` and press **Enter**.
@@ -89,16 +92,16 @@ RStudio.
 **You should see:** `[1] 6`.
 
 **If it does not work:** an error here means your R is older than 4.1.0. Go
-back to Step 1.
+back to 1 above.
 
 ::: {.callout-note}
 ## Why this matters
 RStudio looks for R when it starts. Install them the other way round and
 RStudio reports that R is missing, even when it is not.
 
-`|>` is the pipe. We use it in every session, so Step 5 is a real test.
+`|>` is the pipe. We use it in every session, so the last test is a real one.
 :::
 
-## Done?
+## Step 1 is done
 
-→ [**Step 2: install the packages**](check-setup.qmd)
+→ [**Step 2 of 5: install the packages**](check-setup.qmd)
