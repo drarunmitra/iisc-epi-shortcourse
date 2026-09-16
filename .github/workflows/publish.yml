@@ -1,0 +1,48 @@
+name: Publish to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Quarto
+        # Pinned to the version the site and the WebR primers were verified on.
+        # The quarto-live extension in _extensions/ was built against it; a
+        # different CI version is an untested render.
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: 1.9.36
+
+      # No R step. Every page on this site is either plain Markdown or a
+      # ```{webr} cell, and a webr cell is never executed at render time - it
+      # is shipped to the reader's browser and run there. Nothing in the repo
+      # needs a local R, so installing one would add ~10 minutes to every
+      # build and verify nothing. If you ever add a ```{r} chunk that must
+      # execute, add r-lib/actions/setup-r and its dependencies back here.
+      - name: Render site
+        run: quarto render
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,116 @@
+project:
+  type: website
+  output-dir: _site
+  execute-dir: project
+  render:
+    - "index.qmd"
+    - "schedule.qmd"
+    - "prelude/*.qmd"
+    - "resources/*.qmd"
+  resources:
+    - "setup/**"
+
+website:
+  title: "Epidemiology: Concepts & Methods"
+  description: "A five-day short course at the Isaac Centre for Public Health, IISc Bengaluru, in collaboration with LSHTM, University of London. 21-25 September 2026."
+  # TBD: replace with the real GitHub org/repo once the repository exists.
+  site-url: "https://drarunmitra.github.io/iisc-epi-shortcourse/"
+  repo-url: "https://github.com/drarunmitra/iisc-epi-shortcourse"
+  repo-actions: [issue]
+  page-navigation: true
+  back-to-top-navigation: true
+  search:
+    location: navbar
+    type: overlay
+  navbar:
+    background: primary
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Before you arrive"
+        href: prelude/index.qmd
+      - text: "Schedule"
+        href: schedule.qmd
+      - text: "Resources"
+        href: resources/index.qmd
+    right:
+      - icon: github
+        href: https://github.com/drarunmitra/iisc-epi-shortcourse
+        aria-label: GitHub repository
+
+  sidebar:
+    - id: prelude
+      title: "Before you arrive"
+      style: floating
+      collapse-level: 2
+      contents:
+        - prelude/index.qmd
+        - prelude/install.qmd
+        - prelude/check-setup.qmd
+        - prelude/send-result.qmd
+        - section: "Step 4 — the primers"
+          href: prelude/primers.qmd
+          contents:
+            - section: "R primers"
+              contents:
+                - prelude/primer-r-01-objects.qmd
+                - prelude/primer-r-02-tibbles.qmd
+                - prelude/primer-r-03-packages-pipe.qmd
+                - prelude/primer-r-04-dplyr-verbs.qmd
+                - prelude/primer-r-05-first-plot.qmd
+            - section: "Epidemiology primers"
+              contents:
+                - prelude/primer-epi-01-frequency.qmd
+                - prelude/primer-epi-02-association.qmd
+                - prelude/primer-epi-03-designs.qmd
+                - prelude/primer-epi-04-bias.qmd
+        - prelude/pre-reading.qmd
+        - section: "Reference"
+          contents:
+            - prelude/r-primer.qmd
+
+    - id: resources
+      title: "Resources"
+      style: floating
+      contents:
+        - resources/index.qmd
+        - resources/cheatsheet.qmd
+        - resources/troubleshooting.qmd
+        - resources/glossary.qmd
+        - resources/further-reading.qmd
+
+  page-footer:
+    background: light
+    left: "Isaac Centre for Public Health, IISc Bengaluru · LSHTM, University of London"
+    center: "Materials licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); code [MIT](https://opensource.org/licenses/MIT)"
+    right: "Built with [Quarto](https://quarto.org)"
+
+format:
+  html:
+    theme:
+      light: [cosmo, styles.scss]
+    toc: true
+    toc-depth: 3
+    toc-title: "On this page"
+    code-copy: true
+    code-overflow: wrap
+    code-link: true
+    df-print: paged
+    link-external-newwindow: true
+    anchor-sections: true
+    fig-align: center
+    fig-width: 7
+    fig-height: 4.5
+
+execute:
+  freeze: auto
+  warning: false
+  message: false
+  echo: true
+
+knitr:
+  opts_chunk:
+    comment: "#>"
+    collapse: true
+    R.options:
+      width: 76

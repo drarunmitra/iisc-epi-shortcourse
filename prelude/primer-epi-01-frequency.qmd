@@ -1,0 +1,401 @@
+---
+title: "Primer 6 · Measuring disease"
+subtitle: "Prevalence, risk, rate, person-time — and which one your question needs"
+engine: knitr
+format:
+  live-html:
+    theme:
+      light: [cosmo, ../styles.scss]
+    toc: true
+    toc-depth: 3
+    toc-title: "On this page"
+    code-copy: true
+    code-overflow: wrap
+    anchor-sections: true
+    link-external-newwindow: true
+    fig-align: center
+    webr:
+      cell-options:
+        persist: true
+        timelimit: 30
+---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+::: {.callout-important title="If the cells below never become ready"}
+This page runs R inside your browser. It needs about 17 MB on first load and a
+minute or two on a slow connection. If nothing happens after that, your network
+is probably blocking it.
+
+**This page still works without them.** Every answer is printed in the text as
+well, so you can follow the whole primer with a pencil and a calculator. The
+cells save you the arithmetic; they do not carry the teaching.
+:::
+
+Epidemiology begins with counting. The hard part is not the arithmetic. It is
+knowing what belongs in the denominator, and what that choice means.
+
+## A count is not a measure
+
+> "Kolar reported 480 tuberculosis cases last year; Tumkur reported 210."
+
+You cannot compare those. Kolar might be 3 times the size. A bare count
+answers "how much work is there", which matters for planning drugs and beds. It
+does not answer "how bad is it here", which needs a denominator.
+
+Every measure below is a count divided by something. Which something you choose
+is the lesson.
+
+## Prevalence — how many have it now
+
+$$\text{Prevalence} = \frac{\text{people with the disease at a point in time}}{\text{people in the population at that time}}$$
+
+Prevalence is a **proportion**. It has no units and it sits between 0 and 1,
+usually reported as a percentage or per 1000.
+
+```{webr}
+# A survey of 2,400 adults found 312 with hypertension.
+cases      <- 312
+population <- 2400
+
+prevalence <- cases / population
+prevalence
+round(prevalence * 100, 1)   # as a percentage
+```
+
+The answer is **0.13, or 13.0%**.
+
+Prevalence describes a **snapshot**. It tells a health service how many people
+need treatment today. It does not tell you how fast the disease is appearing,
+because a case counted today may have started ten years ago.
+
+::: {.callout-note}
+## Point prevalence and period prevalence
+**Point prevalence** is at one moment: "on 1 March, 312 of 2,400 adults had
+hypertension."
+
+**Period prevalence** is over a stretch: "during 2026, 410 of 2,400 adults had
+hypertension at some point." It includes people who recovered in March and
+people who fell ill in November, so it is always at least as large.
+
+Say which one you mean. Papers that do not are a common cause of numbers that
+will not reconcile.
+:::
+
+## Risk — what fraction fell ill over a period
+
+Also called **cumulative incidence**. Now the denominator changes: only people
+who *could* get the disease, counted at the *start*.
+
+$$\text{Risk} = \frac{\text{new cases during the period}}{\text{people free of disease at the start}}$$
+
+```{webr}
+# 800 healthy factory workers followed for 2 years; 48 developed asthma.
+new_cases <- 48
+at_risk   <- 800
+
+risk <- new_cases / at_risk
+risk
+```
+
+The answer is **0.06, or 6% over two years**.
+
+Risk is also a proportion between 0 and 1. Two things make it different from
+prevalence:
+
+1. Only **new** cases count. Someone who already had asthma is excluded from
+   the numerator *and* from the denominator; they were never at risk.
+2. **It is meaningless without a time period.** "A 6% risk" says nothing. "A 6%
+   risk over two years" says something. Always attach the period.
+
+## Rate — how fast, per unit of time at risk
+
+Risk has a problem. It assumes everyone was followed for the whole period. In
+any real study some people leave, some die of other things, some join late.
+Counting them as if they were followed for two years overstates the denominator.
+
+**Person-time** fixes this. Each person contributes exactly as much time as they
+were actually observed and still at risk.
+
+$$\text{Incidence rate} = \frac{\text{new cases}}{\text{total person-time at risk}}$$
+
+```{webr}
+# Five people, followed until the event or until they left the study.
+#   A: 5.0 years, no event
+#   B: 2.0 years, then the event
+#   C: 5.0 years, no event
+#   D: 1.5 years, then moved away
+#   E: 3.0 years, then the event
+
+person_years <- c(5.0, 2.0, 5.0, 1.5, 3.0)
+events       <- c(0,   1,   0,   0,   1)
+
+total_py     <- sum(person_years)
+total_events <- sum(events)
+
+total_py
+total_events
+
+# Rate per 100 person-years
+round(total_events / total_py * 100, 1)
+```
+
+16.5 person-years, 2 events, so a rate of **12.1 per 100 person-years**.
+
+3 things about a rate catch people out:
+
+- **It has units.** Per person-year, per 1000 person-years. A rate without units
+  is not a number you can interpret.
+- **It is not a proportion.** It can exceed 1, and it can exceed 100%, because
+  the denominator is time, not people. A rate of 150 per 100 person-years is
+  perfectly possible.
+- **Person-time stops when the person stops being at risk.** D contributed 1.5
+  years, not 5. B contributed 2 years, not 5, because after the event they are
+  no longer at risk of a first event.
+
+::: {.callout-warning}
+## Person-time assumes the rate is steady
+Ten people followed for 1 year and one person followed for 10 years both give
+10 person-years, and the formula treats them as equivalent. If the risk changes
+with age, or with time since exposure, they are not equivalent at all. This is
+why rates are usually calculated within age bands rather than over a whole
+population at once.
+:::
+
+## Which measure answers which question
+
+| The question | The measure | Denominator |
+|---|---|---|
+| How many patients need treatment today? | Prevalence | everyone, now |
+| How likely is this person to fall ill in 5 years? | Risk | those at risk, at the start |
+| How fast is disease appearing in this population? | Rate | person-time at risk |
+| How much work will the clinic have? | Count | none |
+
+## How the three relate
+
+For a stable condition, prevalence rises both when disease appears more often
+and when it lasts longer:
+
+$$\text{Prevalence} \approx \text{Incidence rate} \times \text{Average duration}$$
+
+```{webr}
+# Incidence 10 new cases per 1000 person-years; average duration 4 years.
+incidence_rate <- 10 / 1000   # per person-year
+duration_years <- 4
+
+round(incidence_rate * duration_years, 3)
+```
+
+About **0.04, or 4%** prevalent.
+
+This explains something that often confuses people. **A treatment that keeps
+patients alive without curing them raises prevalence.** Antiretroviral
+therapy cut HIV incidence and HIV deaths, and the prevalence of people living
+with HIV went up. Nothing went wrong; prevalence was never measuring what
+people assumed.
+
+::: {.callout-note}
+## The approximation has conditions
+It holds when incidence and duration have been roughly steady for long enough,
+and when the disease is not common. In an outbreak, or for a condition
+affecting a large share of the population, it breaks down. Use it to reason,
+not to compute a number you will publish.
+:::
+
+## Exercises
+
+::: {.callout-note title="Exercise 1: prevalence"}
+**Time:** 4 minutes
+
+A house-to-house survey covered 1,850 people. 74 were found to have diabetes.
+
+Compute the prevalence **per 1000 population**, rounded to 1 decimal place.
+
+```{webr}
+#| exercise: ex_prev
+surveyed <- 1850
+cases    <- 74
+
+______
+```
+
+```{webr}
+#| exercise: ex_prev
+#| solution: true
+surveyed <- 1850
+cases    <- 74
+
+round(cases / surveyed * 1000, 1)
+```
+
+```{webr}
+#| exercise: ex_prev
+#| check: true
+# 74 / 1850 = 0.04 exactly, so 40.0 per 1000.
+if (isTRUE(all.equal(as.numeric(.result), 40))) {
+  list(correct = TRUE, message = "Correct — 40.0 per 1000, which is the same thing as 4%. Choose whichever unit makes your number easiest to read aloud.")
+} else if (isTRUE(all.equal(as.numeric(.result), 0.04))) {
+  list(correct = FALSE, message = "That is the proportion. The question asked for it per 1000, so multiply by 1000.")
+} else if (isTRUE(all.equal(as.numeric(.result), 4))) {
+  list(correct = FALSE, message = "That is the percentage. Per 1000 means multiplying by 1000, not by 100.")
+} else if (isTRUE(all.equal(as.numeric(.result), 25, tolerance = 1e-2))) {
+  list(correct = FALSE, message = "You divided the wrong way round. Cases go on top, population underneath.")
+} else {
+  list(correct = FALSE, message = "Divide cases by surveyed, multiply by 1000, round to 1 place.")
+}
+```
+
+::: {.hint exercise="ex_prev"}
+Prevalence is cases divided by population. "Per 1000" means multiplying that
+proportion by 1000.
+:::
+:::
+
+::: {.callout-note title="Exercise 2: risk"}
+**Time:** 5 minutes
+
+1,200 children were enrolled in a measles study. 90 of them **already had
+immunity from past infection** and so could not get measles. Over the following
+year, 111 of the rest developed measles.
+
+Compute the one-year **risk**, as a proportion rounded to 3 decimal places.
+
+Think carefully about the denominator.
+
+```{webr}
+#| exercise: ex_risk
+enrolled      <- 1200
+already_immune <- 90
+new_cases     <- 111
+
+______
+```
+
+```{webr}
+#| exercise: ex_risk
+#| solution: true
+enrolled       <- 1200
+already_immune <- 90
+new_cases      <- 111
+
+round(new_cases / (enrolled - already_immune), 3)
+```
+
+```{webr}
+#| exercise: ex_risk
+#| check: true
+# At risk = 1200 - 90 = 1110.  111 / 1110 = 0.1 exactly.
+if (isTRUE(all.equal(as.numeric(.result), 0.1))) {
+  list(correct = TRUE, message = "Correct — 0.100, a 10% risk over one year. The 90 already-immune children belong in neither the numerator nor the denominator: they were never at risk.")
+} else if (is.numeric(.result) && length(.result) == 1 &&
+           !is.na(.result) && abs(.result - 111/1200) < 0.001) {
+  # 111/1200 is 0.0925, which R rounds to 0.092 at 3 places, not 0.093.
+  # A tolerance band catches both spellings; an equality test on 0.093 would
+  # make this branch unreachable.
+  list(correct = FALSE, message = "You used all 1,200 as the denominator. The 90 immune children could not get measles, so they were never at risk. Subtract them.")
+} else if (is.numeric(.result) && length(.result) == 1 && .result > 1) {
+  list(correct = FALSE, message = "A risk is a proportion and cannot exceed 1. Check which number you put on top.")
+} else if (is.numeric(.result) && length(.result) == 1) {
+  list(correct = FALSE, message = "Right shape, wrong number. New cases divided by the number who were actually at risk at the start, rounded to 3.")
+} else {
+  list(correct = FALSE, message = "One number: new_cases divided by (enrolled - already_immune), rounded to 3 places.")
+}
+```
+
+::: {.hint exercise="ex_risk"}
+Risk counts only people who could have got the disease. Ninety of the 1,200
+could not.
+:::
+:::
+
+::: {.callout-note title="Exercise 3: a rate from person-time"}
+**Time:** 7 minutes
+
+Six patients were followed after starting treatment. Their follow-up in years
+and whether they relapsed:
+
+| Patient | Years followed | Relapsed |
+|---|---|---|
+| A | 3.0 | no |
+| B | 1.2 | yes |
+| C | 3.0 | no |
+| D | 0.8 | no (moved away) |
+| E | 2.5 | yes |
+| F | 1.5 | yes |
+
+Compute the relapse rate **per 100 person-years**, rounded to 1 decimal place.
+
+```{webr}
+#| exercise: ex_rate
+years    <- c(3.0, 1.2, 3.0, 0.8, 2.5, 1.5)
+relapsed <- c(0,   1,   0,   0,   1,   1)
+
+______
+```
+
+```{webr}
+#| exercise: ex_rate
+#| solution: true
+years    <- c(3.0, 1.2, 3.0, 0.8, 2.5, 1.5)
+relapsed <- c(0,   1,   0,   0,   1,   1)
+
+round(sum(relapsed) / sum(years) * 100, 1)
+```
+
+```{webr}
+#| exercise: ex_rate
+#| check: true
+# 3 relapses over 12.0 person-years = 25.0 per 100 person-years.
+if (isTRUE(all.equal(as.numeric(.result), 25))) {
+  list(correct = TRUE, message = "Correct — 3 relapses in 12.0 person-years, so 25.0 per 100 person-years. Note it is a rate, not a risk: D contributed only 0.8 years, not a whole person.")
+} else if (isTRUE(all.equal(as.numeric(.result), 50))) {
+  list(correct = FALSE, message = "You divided by the number of people, not by person-time. That is the risk, 3 of 6. A rate divides by sum(years).")
+} else if (isTRUE(all.equal(as.numeric(.result), 0.2, tolerance = 1e-2))) {
+  list(correct = FALSE, message = "You have the rate per person-year but have not multiplied by 100.")
+} else if (is.numeric(.result) && length(.result) == 1) {
+  list(correct = FALSE, message = "Right shape, wrong number. sum(relapsed) on top, sum(years) underneath, times 100.")
+} else {
+  list(correct = FALSE, message = "One number: sum(relapsed) / sum(years) * 100, rounded to 1 place.")
+}
+```
+
+::: {.hint exercise="ex_rate"}
+The numerator is how many relapses happened. The denominator is all the
+follow-up time added together, not the number of patients.
+:::
+:::
+
+::: {.callout-note title="Exercise 4: which measure? (on paper)"}
+**Time:** 4 minutes. No code — answer these in your head, then check yourself
+below.
+
+For each question, name the measure you would use.
+
+1. The state wants to know how many insulin pens to buy for next year.
+2. A patient asks how likely she is to have a stroke in the next 10 years.
+3. You want to know whether dengue is appearing faster this monsoon than last.
+4. A hospital is planning how many dialysis chairs it needs.
+
+::: {.callout-tip collapse="true" title="Answers"}
+1. **Prevalence** (or a count). You need everyone currently needing insulin,
+   however long ago they were diagnosed.
+2. **Risk**, over 10 years. She is currently stroke-free, and the question has a
+   time window built into it.
+3. **Rate**. "Faster" is about speed, so the denominator has to be time.
+4. **Prevalence** again. Existing patients on dialysis is exactly a snapshot.
+
+If you found yourself wanting more information before answering, that instinct
+is right, and it is most of the skill.
+:::
+:::
+
+## What you should now be able to do
+
+- Say why a count without a denominator cannot be compared between places.
+- Compute a prevalence, and say whether it is point or period prevalence.
+- Compute a risk, excluding from the denominator anyone who was not at risk.
+- Compute an incidence rate from person-time, and state its units.
+- Explain why a rate can exceed 100% and a risk cannot.
+- Explain why a life-extending treatment raises prevalence.
+
+→ [**Primer 7: measuring association**](primer-epi-02-association.qmd)

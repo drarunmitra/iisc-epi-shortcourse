@@ -1,0 +1,153 @@
+---
+title: "Glossary"
+subtitle: "One line each"
+---
+
+## Epidemiology
+
+**Attributable fraction (exposed)** — the share of disease among the exposed
+that is due to the exposure: `(RR - 1) / RR`.
+
+**Bias** — a systematic error that does not shrink when you collect more data.
+
+**Case-control study** — a study that starts from people with the disease and
+looks back at their exposure. It yields an odds ratio and nothing else.
+
+**Cohort study** — a study that starts from exposure and follows people forward
+to see who develops the disease.
+
+**Confidence interval** — the range of values compatible with the data at a
+stated level, usually 95%. It says nothing about whether the study was biased.
+
+**Confounding** — a third variable that is associated with the exposure, causes
+the outcome, and is not on the path between them.
+
+**Cross-sectional study** — a snapshot measuring exposure and outcome at the
+same moment. It cannot establish which came first.
+
+**Cumulative incidence** — see **Risk**.
+
+**Differential misclassification** — measurement error whose size depends on
+the other variable. Its direction is unpredictable.
+
+**Effect modification** — see **Interaction**.
+
+**Healthy worker effect** — employed people are healthier than the general
+population, so occupational exposures look safer than they are.
+
+**Incidence rate** — new cases divided by person-time at risk. It has units and
+can exceed 1.
+
+**Information bias** — error in how exposure or outcome was measured.
+
+**Interaction** — the effect of the exposure genuinely differs between groups.
+It is a finding to report by stratum, not a nuisance to adjust away.
+
+**Mediator** — a variable on the causal path from exposure to outcome. Adjusting
+for it removes part of the effect you are measuring.
+
+**Misclassification** — putting a person in the wrong exposure or outcome
+category.
+
+**Non-differential misclassification** — measurement error equally likely in
+both groups. On average it pushes the estimate towards 1.
+
+**NNT, number needed to treat** — how many people must be treated for one to
+benefit: `1 / abs(RD)`. Always report the time period with it.
+
+**NNH, number needed to harm** — the same arithmetic when the exposure is
+harmful.
+
+**Odds** — cases divided by non-cases: `a / b`. Not the same as risk.
+
+**Odds ratio** — the cross product `(a*d) / (b*cc)`. It approximates the risk
+ratio only when the outcome is uncommon.
+
+**Overadjustment** — adjusting for a mediator, and so removing part of the real
+effect.
+
+**Person-time** — the follow-up time each person actually contributed while
+still at risk, added up.
+
+**Population attributable fraction** — the share of disease in the whole
+population that is due to the exposure. It depends on how common the exposure
+is.
+
+**Prevalence** — the proportion of a population with the disease at a point in
+time. A snapshot, not a speed.
+
+**Randomised controlled trial** — a study in which the investigator assigns the
+exposure at random. Randomisation balances confounders nobody thought of.
+
+**Recall bias** — cases remember exposures differently from controls, because
+they have had reason to think about them.
+
+**Risk** — new cases divided by the number at risk at the start, over a stated
+period. A proportion between 0 and 1.
+
+**Risk difference** — `risk_exposed - risk_unexposed`. It measures impact.
+
+**Risk ratio** — `risk_exposed / risk_unexposed`. It measures strength of
+association.
+
+**Selection bias** — the people in the study differ from the people you meant
+to study, in a way related to both exposure and outcome. It cannot be fixed in
+the analysis.
+
+**Simpson's paradox** — a crude association that reverses when you stratify.
+Strong confounding.
+
+**Stratification** — splitting the analysis by levels of a third variable, to
+see the association within each level.
+
+## R and Quarto
+
+**Argument** — a value you pass to a function, inside its brackets.
+
+**Assignment** — `<-`, which puts a value into a name.
+
+**Console** — the pane where you type R and get an answer at once.
+
+**CRAN** — the archive R downloads packages from.
+
+**Data frame** — R's rectangle of data. A tibble is a data frame with better
+printing.
+
+**Function** — a verb. It takes arguments and returns a value.
+
+**ggplot2** — the plotting package. A plot is data, an `aes()` mapping, and a
+`geom_`.
+
+**Logical** — a `TRUE`/`FALSE` value. `sum()` of logicals counts; `mean()` gives
+a proportion.
+
+**NA** — a missing value. It is contagious on purpose.
+
+**Native pipe `|>`** — puts the value on its left into the first argument of the
+function on its right.
+
+**Object** — anything you have given a name.
+
+**Package** — a bundle of functions someone published. Install once, load every
+session.
+
+**Quarto** — the publishing system that turns a `.qmd` file into HTML, Word,
+PDF or slides.
+
+**Script** — a file of R code you save and rerun. `install.packages()` does not
+belong in one.
+
+**Tibble** — the tidyverse rectangle: one row per observation, one column per
+variable.
+
+**Tidyverse** — the family of packages this course uses: dplyr, ggplot2, readr
+and others.
+
+**Vector** — several values of the same type in a row, built with `c()`.
+
+**Vectorisation** — applying an operation to a whole vector at once, with no
+loop.
+
+**WebR** — R compiled to run inside a web browser. It powers the 9 primers.
+
+**Working directory** — the folder R treats as "here". Find it with `getwd()`.

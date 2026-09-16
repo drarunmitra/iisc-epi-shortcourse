@@ -1,0 +1,57 @@
+---
+title: "Resources"
+subtitle: "Use these during the course and after it"
+---
+
+Four reference pages. None of them is a step you have to complete. Open them
+when you need them.
+
+::: {.card-grid}
+
+::: {.card-tile}
+### [Cheatsheet](cheatsheet.qmd)
+Every function and formula the course uses, on one page, with no explanation.
+Print it if you like paper.
+:::
+
+::: {.card-tile}
+### [Troubleshooting](troubleshooting.qmd)
+The errors that actually happen, and what to do about each one. Read this
+before you email us.
+:::
+
+::: {.card-tile}
+### [Glossary](glossary.qmd)
+Epidemiological and R terms, defined in one line each.
+:::
+
+::: {.card-tile}
+### [Further reading](further-reading.qmd)
+Books, papers and free courses, with a note on who each one suits.
+:::
+
+:::
+
+## Getting help
+
+1. Read [Troubleshooting](troubleshooting.qmd) first.
+2. Ask on the course WhatsApp group: [TBD: WhatsApp group link]{.tbd}. During
+   the course this is the fastest route.
+3. Email [office.msicph@iisc.ac.in](mailto:office.msicph@iisc.ac.in).
+
+When you ask, include 3 things:
+
+- your operating system and its version;
+- the exact error message, as text rather than a screenshot;
+- the output of `sessionInfo()`.
+
+Those 3 things turn a question we cannot answer into one we can.
+
+## After the course
+
+This site stays online. The materials are licensed
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) and the code is MIT,
+so you may reuse and adapt them with attribution.
+
+Corrections are welcome. Use the **Report an issue** link at the top right of
+any page.

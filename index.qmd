@@ -1,0 +1,154 @@
+---
+title: "Epidemiology: Concepts & Methods"
+subtitle: "A five-day short course · IISc Bengaluru · 21–25 September 2026"
+toc: false
+---
+
+A hands-on short course for researchers, public health professionals and
+students who want to strengthen both the theory and the practice of
+epidemiology. Lectures alternate with hands-on training. You will leave able to
+choose a study design, compute and interpret the measures that design produces,
+tell a real effect from a biased one, and do all of it in R in a way someone
+else can rerun.
+
+::: {.organisers}
+::: {.org}
+[Organised by]{.org-role}
+[Isaac Centre for Public Health, Indian Institute of Science, Bengaluru]{.org-name}
+:::
+::: {.org}
+[In collaboration with]{.org-role}
+[London School of Hygiene & Tropical Medicine, University of London, UK]{.org-name}
+:::
+::: {.org}
+[Dates and venue]{.org-role}
+[21–25 September 2026 · IISc, Bengaluru]{.org-name}
+:::
+:::
+
+::: {.callout-important}
+## Before you arrive
+Selected participants: there are 5 things to do before Monday 21 September.
+They take about 4 hours in total. Spread them over several evenings. Installing
+the software is the only one we cannot fix for you on the day.
+
+→ [**Start here: the 5 steps**](prelude/index.qmd)
+:::
+
+## What you will be able to do
+
+::: {.card-grid}
+
+::: {.card-tile}
+### Measure disease
+Turn counts into prevalence, risk, rate and person-time, and say out loud
+which one a given question needs.
+:::
+
+::: {.card-tile}
+### Measure association
+Build a 2×2 table and read a risk ratio, an odds ratio, a risk difference and
+a number needed to treat off it without looking anything up.
+:::
+
+::: {.card-tile}
+### Choose a design
+Match a research question to a cohort, case-control, cross-sectional or trial
+design, and know what each one can and cannot tell you.
+:::
+
+::: {.card-tile}
+### Spot bias
+Name the bias you are looking at: selection, information, confounding. Tell
+confounding from interaction, and handle each correctly.
+:::
+
+::: {.card-tile}
+### Analyse in R
+Import, clean, summarise and plot epidemiological data with the tidyverse,
+instead of clicking through a menu you cannot document.
+:::
+
+::: {.card-tile}
+### Work reproducibly
+Organise an analysis so a colleague, a reviewer, or you in six months can
+rerun every number in your paper from the raw data.
+:::
+
+:::
+
+## Structure
+
+Five days, Monday to Friday. Each teaching block is followed by a hands-on
+block of about the same length, so roughly two-thirds of your time is spent
+with your hands on a keyboard or a pencil.
+
+| Day | Theme |
+|---|---|
+| **Mon 21 Sep** | Measuring disease: prevalence, risk, rate, person-time |
+| **Tue 22 Sep** | Measuring association, and comparing groups fairly |
+| **Wed 23 Sep** | Study designs: cohort, case-control, cross-sectional, trial |
+| **Thu 24 Sep** | Bias, confounding, interaction, and what to do about them |
+| **Fri 25 Sep** | Putting it together: analysis, reporting, group projects |
+
+→ [Full schedule with timings and faculty](schedule.qmd)
+
+::: {.callout-note appearance="simple"}
+The day themes above are the shape of the course as announced. Confirm each
+session title and its faculty against the final programme before you rely on
+this table.
+:::
+
+## Who this is for
+
+Researchers, public health professionals, programme managers and students. No
+prior programming is assumed. If you have used SPSS, Excel or Stata you already
+understand most of the statistical ideas; this course changes the tools and
+sharpens the reasoning.
+
+You need a laptop you can install software on, and about 4 hours before the
+course to work through the [prelude](prelude/index.qmd).
+
+## Faculty
+
+| Faculty | Affiliation |
+|---|---|
+| **Neil Pearce** | LSHTM, University of London |
+| **Uttara Partap** | LSHTM, University of London |
+| **Prabhdeep Kaur** | Isaac Centre for Public Health, IISc |
+| **Arun Mitra** | Isaac Centre for Public Health, IISc |
+| **Manikandanesan Sakthivel** | Isaac Centre for Public Health, IISc |
+
+::: {.callout-note appearance="simple"}
+Affiliations and the session each person teaches are provisional. Fix them in
+`index.qmd` and `schedule.qmd` once the final programme is out.
+:::
+
+## Admissions and fees
+
+Applications closed on **25 July 2026**. Selected participants have been
+notified.
+
+| | Fee |
+|---|---|
+| Students | ₹5,000 |
+| Professionals | ₹10,000 |
+
+Questions about registration, payment, travel or accommodation go to
+[office.msicph@iisc.ac.in](mailto:office.msicph@iisc.ac.in).
+
+## How to use this site
+
+- **[Before you arrive](prelude/index.qmd)**. The 5 steps, including 9 primers
+  that run R inside your web browser with nothing to install. Start here.
+- **[Schedule](schedule.qmd)** — timings, sessions and faculty.
+- **[Resources](resources/index.qmd)** — cheatsheet, troubleshooting, glossary,
+  further reading. Use these during and after the course.
+
+All materials stay online after the course. The site is built from a public
+repository; corrections are welcome as issues or pull requests.
+
+::: {.callout-note appearance="simple"}
+Materials are licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/);
+code is MIT. Please reuse and adapt with attribution.
+:::

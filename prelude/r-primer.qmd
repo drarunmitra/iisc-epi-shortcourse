@@ -1,0 +1,356 @@
+---
+title: "R primer (reference)"
+subtitle: "The same material as Primers 1 to 5, for RStudio"
+---
+
+Use this page if the browser primers will not run on your network, or if you
+prefer to work in RStudio.
+
+Everything taught in Primers 1 to 5 is taught here. The difference is that you
+run the code in your own R, so you also have to load packages yourself.
+
+::: {.callout-note}
+## Run this first
+Open RStudio, then run these 2 lines in the Console.
+
+```r
+library(dplyr)
+library(ggplot2)
+```
+
+In the browser primers these packages are loaded for you. In RStudio they are
+not. Every script you write from now on starts with its `library()` lines.
+:::
+
+## Objects
+
+`<-` puts the value on its right into the name on its left.
+
+```r
+n_screened <- 2400
+district   <- "Kolar"
+
+n_screened
+district
+```
+
+Nothing prints when you assign. Typing the name on its own line prints it.
+
+## Functions
+
+A function takes arguments in brackets and returns a value.
+
+```r
+sqrt(144)                     # 12
+round(3.14159, 2)             # 3.14
+round(x = 3.14159, digits = 2)  # the same, with the arguments named
+```
+
+## Vectors
+
+`c()` combines values of the same type.
+
+```r
+cases <- c(14, 22, 31, 27, 19, 11)
+
+length(cases)   # 6
+sum(cases)      # 124
+mean(cases)     # 20.66667
+range(cases)    # 11 31
+```
+
+Arithmetic applies to the whole vector at once. There is no loop to write.
+
+```r
+cases      <- c(14, 22, 31, 27, 19, 11)
+population <- c(12000, 12000, 12500, 12500, 13000, 13000)
+
+cases / population * 1000
+```
+
+## Types
+
+```r
+counts   <- c(14, 22, 31)                    # numeric
+district <- c("Kolar", "Tumkur", "Hassan")   # character
+exposed  <- c(TRUE, FALSE, TRUE)             # logical
+
+class(counts)
+```
+
+Mixing types converts everything to the most forgiving one, usually character.
+That is how a column of numbers becomes text.
+
+## Comparison and counting
+
+A comparison returns one `TRUE` or `FALSE` per element. `sum()` then counts, and
+`mean()` gives a proportion.
+
+```r
+age <- c(34, 51, 22, 67, 45, 19, 58, 40)
+
+age >= 45          # TRUE/FALSE for each
+sum(age >= 45)     # 4
+mean(age >= 45)    # 0.5
+```
+
+`mean()` of a comparison is prevalence in miniature.
+
+## Missing values
+
+```r
+sbp <- c(128, 142, NA, 136, 151, NA, 119)
+
+mean(sbp)                 # NA
+mean(sbp, na.rm = TRUE)   # 135.2
+sum(is.na(sbp))           # 2
+```
+
+`na.rm = TRUE` changes the question from "the mean of these 7 people" to "the
+mean of the 5 we measured". Ask why the values are missing before you drop them.
+
+## Tibbles
+
+A tibble is several equal-length vectors side by side: one row per observation,
+one column per variable.
+
+```r
+library(dplyr)
+
+participants <- tibble(
+  id       = c("P01", "P02", "P03", "P04", "P05"),
+  district = c("Kolar", "Kolar", "Tumkur", "Hassan", "Tumkur"),
+  age      = c(34, 51, 22, 67, 45),
+  smoker   = c(TRUE, FALSE, FALSE, TRUE, TRUE),
+  sbp      = c(128, 142, 118, 156, 134)
+)
+
+participants
+```
+
+Look at any new dataset with these before you analyse it.
+
+```r
+nrow(participants)
+names(participants)
+str(participants)
+summary(participants)
+```
+
+`$` pulls a column back out as a vector.
+
+```r
+participants$age
+mean(participants$sbp)
+mean(participants$smoker)          # proportion of smokers
+sum(participants$sbp >= 140)       # how many have raised BP
+```
+
+`table()` counts a categorical column. It hides `NA` unless you ask.
+
+```r
+table(participants$district)
+table(participants$district, useNA = "ifany")
+```
+
+## A dataset to practise on
+
+The examples below use `survey`. Build it by running this once.
+
+```r
+library(dplyr)
+
+set.seed(2026)
+
+survey <- tibble(
+  id           = sprintf("S%03d", 1:200),
+  district     = sample(c("Kolar", "Tumkur", "Hassan"), 200, replace = TRUE),
+  residence    = sample(c("Urban", "Rural"), 200, replace = TRUE),
+  sex          = sample(c("Female", "Male"), 200, replace = TRUE),
+  age          = round(runif(200, 18, 80))
+) |>
+  mutate(
+    sbp          = round(rnorm(200, 104 + 0.38 * age, 14)),
+    dbp          = round(rnorm(200, 68 + 0.14 * age, 9)),
+    hypertension = sbp >= 140 | dbp >= 90
+  )
+
+glimpse(survey)
+```
+
+These numbers are made up. They exist so the code below has something to run on.
+
+## Packages
+
+2 separate steps, and people mix them up.
+
+| Step | Command | How often |
+|---|---|---|
+| Install | `install.packages("dplyr")` | once, ever |
+| Load | `library(dplyr)` | every session |
+
+`install.packages()` belongs in the Console, never in a script.
+
+## The native pipe
+
+`|>` puts the value on its left into the first argument of the function on its
+right.
+
+```r
+# Nested: read inside out
+round(sqrt(mean(c(4, 9, 16, 25, 36))), 2)
+
+# Piped: read left to right
+c(4, 9, 16, 25, 36) |>
+  mean() |>
+  sqrt() |>
+  round(2)
+```
+
+Turn on the native pipe shortcut in **Tools → Global Options → Code → Use
+native pipe operator**. The shortcut is <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>M</kbd>,
+or <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>M</kbd> on macOS.
+
+You will see `%>%` in older code. It behaves almost the same. We use `|>`
+because it is part of R itself.
+
+## The 5 dplyr verbs
+
+| Verb | Does what |
+|---|---|
+| `filter()` | keeps rows matching a condition |
+| `select()` | keeps columns you name |
+| `mutate()` | adds or changes a column |
+| `group_by()` | splits into groups |
+| `summarise()` | collapses each group to one row |
+
+```r
+library(dplyr)
+
+survey |> filter(residence == "Urban")
+survey |> filter(residence == "Urban", age >= 50)
+survey |> filter(district %in% c("Kolar", "Hassan"))
+
+survey |> select(id, age, sbp)
+survey |> select(-dbp)
+
+survey |> mutate(age_group = if_else(age >= 50, "50+", "under 50"))
+
+survey |>
+  mutate(age_band = case_when(
+    age < 40 ~ "under 40",
+    age < 60 ~ "40-59",
+    .default = "60+"
+  ))
+```
+
+`filter()` drops rows where the condition is `NA`, silently. Count your rows
+before and after.
+
+```r
+survey |>
+  group_by(district) |>
+  summarise(
+    n            = n(),
+    mean_age     = round(mean(age), 1),
+    n_hypertense = sum(hypertension),
+    prevalence   = round(mean(hypertension), 3)
+  )
+```
+
+Put `n()` in every `summarise()` you write. A mean over 3 people and one over
+300 look the same on the page without it.
+
+## Plots
+
+3 pieces: the data, the `aes()` mapping, and a `geom_`.
+
+```r
+library(ggplot2)
+
+ggplot(survey, aes(x = age, y = sbp)) +
+  geom_point()
+```
+
+Layers join with `+`, not `|>`.
+
+Inside `aes()` means the property comes from a column. Outside `aes()` means it
+is a fixed setting for the whole layer.
+
+```r
+ggplot(survey, aes(x = age, y = sbp, colour = residence)) +
+  geom_point(size = 2, alpha = 0.6)
+```
+
+```r
+ggplot(survey, aes(x = sbp)) +
+  geom_histogram(binwidth = 10, colour = "white")
+
+ggplot(survey, aes(x = district, y = sbp)) +
+  geom_boxplot()
+
+ggplot(survey, aes(x = district, fill = hypertension)) +
+  geom_bar(position = "dodge")
+```
+
+Label every plot. A title that states the finding is worth more than one that
+names the axes.
+
+```r
+ggplot(survey, aes(x = age, y = sbp, colour = residence)) +
+  geom_point(size = 2, alpha = 0.6) +
+  labs(
+    title    = "Systolic blood pressure rises with age in both urban and rural adults",
+    x        = "Age (years)",
+    y        = "Systolic BP (mmHg)",
+    colour   = "Residence",
+    caption  = "Simulated data for teaching."
+  ) +
+  theme_minimal()
+```
+
+## Epidemiological measures from a 2×2
+
+The 4 cells are called `a`, `b`, `cc` and `d`. The third is `cc` because `c()`
+is a function.
+
+<table class="twobytwo">
+<tr><th></th><th>Disease</th><th>No disease</th></tr>
+<tr><th>Exposed</th><td>a</td><td>b</td></tr>
+<tr><th>Unexposed</th><td>cc</td><td>d</td></tr>
+</table>
+
+```r
+a  <- 90
+b  <- 910
+cc <- 30
+d  <- 970
+
+risk_exposed   <- a / (a + b)          # 0.09
+risk_unexposed <- cc / (cc + d)        # 0.03
+
+risk_exposed / risk_unexposed          # risk ratio   3.00
+risk_exposed - risk_unexposed          # risk difference 0.06
+1 / abs(risk_exposed - risk_unexposed) # NNT  16.7
+(a * d) / (b * cc)                     # odds ratio  3.20
+```
+
+On the course we use `epitools`, which does this and gives confidence intervals
+as well.
+
+```r
+library(epitools)
+
+tab <- matrix(c(d, cc, b, a), nrow = 2, byrow = TRUE)
+riskratio(tab, method = "wald")
+```
+
+`epitools` wants the unexposed row first and the non-case column first. Read
+the table it prints back before you trust the number.
+
+## Where to go next
+
+- The interactive versions: [Primer 1](primer-r-01-objects.qmd) onwards.
+- [Cheatsheet](../resources/cheatsheet.qmd) for the same code without the
+  explanation.
+- [Troubleshooting](../resources/troubleshooting.qmd) when something breaks.

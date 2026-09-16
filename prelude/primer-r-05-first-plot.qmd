@@ -1,0 +1,345 @@
+---
+title: "Primer 5 · Your first plot"
+subtitle: "ggplot2, one layer at a time"
+engine: knitr
+format:
+  live-html:
+    theme:
+      light: [cosmo, ../styles.scss]
+    toc: true
+    toc-depth: 3
+    toc-title: "On this page"
+    code-copy: true
+    code-overflow: wrap
+    anchor-sections: true
+    link-external-newwindow: true
+    fig-align: center
+    webr:
+      cell-options:
+        persist: true
+        timelimit: 30
+webr:
+  packages:
+    - ggplot2
+    - dplyr
+    - tibble
+---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+::: {.callout-important title="This is the heavy page"}
+This page needs about **37 MB** on first load, because drawing plots in a
+browser means downloading `ggplot2` and everything it depends on. On a fast
+connection expect around 30 seconds before the first cell will run; on a slow or
+shared connection, considerably longer.
+
+**Do this one at home, not at IISc.** Your browser keeps the download for 7
+days, so a page you open this week costs nothing on Monday.
+
+If the cells never become ready, your network is blocking it. The static
+[R primer](r-primer.qmd) covers the same material for RStudio.
+
+There is no Stop button. If you write a loop that never ends, reload the page.
+:::
+
+`ggplot2` is not a menu of chart types. It is a grammar: you say what data to
+use, which variable maps to which visual property, and what shape to draw. Three
+decisions, three pieces of code.
+
+## The three pieces
+
+```{webr}
+library(ggplot2)
+library(tibble)
+
+survey <- tibble(
+  id       = sprintf("S%02d", 1:20),
+  age      = c(23,45,67,34,56,29,71,38,52,41,60,33,48,25,63,55,30,44,58,36),
+  sbp      = c(112,138,162,124,145,118,171,129,150,133,158,121,142,115,160,148,120,136,155,127),
+  district = c("Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur",
+               "Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar",
+               "Tumkur","Hassan","Kolar","Tumkur"),
+  smoker   = c(FALSE,TRUE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,
+               TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,TRUE,
+               FALSE,TRUE,TRUE,FALSE)
+)
+
+ggplot(survey, aes(x = age, y = sbp)) +
+  geom_point()
+```
+
+Read it in three parts:
+
+| Part | Says |
+|---|---|
+| `ggplot(survey, ...)` | use this dataset |
+| `aes(x = age, y = sbp)` | put age on the x axis, blood pressure on y |
+| `geom_point()` | draw each row as a point |
+
+`aes()` is short for *aesthetic mapping*: it connects a column in your data to
+something you can see. `geom_` functions say what shape to draw.
+
+::: {.callout-warning}
+## Layers join with `+`, not `|>`
+This is the one place in the tidyverse where the pipe does not apply.
+`ggplot2` is older than the pipe and uses `+` to add layers. Using `|>` here
+gives an error that does not explain itself.
+:::
+
+## Mapping a third variable
+
+Anything inside `aes()` is driven by the data. Map `smoker` to colour and
+ggplot2 splits the points and builds a legend for you:
+
+```{webr}
+library(ggplot2)
+library(tibble)
+survey <- tibble(
+  age = c(23,45,67,34,56,29,71,38,52,41,60,33,48,25,63,55,30,44,58,36),
+  sbp = c(112,138,162,124,145,118,171,129,150,133,158,121,142,115,160,148,120,136,155,127),
+  smoker = c(FALSE,TRUE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,TRUE,FALSE,TRUE,TRUE,FALSE)
+)
+
+ggplot(survey, aes(x = age, y = sbp, colour = smoker)) +
+  geom_point(size = 3)
+```
+
+Note where `size = 3` went: **outside** `aes()`. That is the rule, and it is
+easy to get wrong the first time.
+
+- Inside `aes()` — "this property comes from a column".
+- Outside `aes()` — "this property is a fixed setting for the whole layer".
+
+`colour = smoker` inside means colour by the smoking column. `colour = "blue"`
+outside would mean make every point blue.
+
+## Distributions: the histogram
+
+One variable, so only `x`. A histogram counts how many observations fall in each
+bin.
+
+```{webr}
+library(ggplot2)
+library(tibble)
+survey <- tibble(
+  sbp = c(112,138,162,124,145,118,171,129,150,133,158,121,142,115,160,148,120,136,155,127)
+)
+
+ggplot(survey, aes(x = sbp)) +
+  geom_histogram(binwidth = 10, colour = "white")
+```
+
+Change `binwidth` to 5, then to 25, and run it again. The data has not changed;
+the story has. Always say what binwidth you used.
+
+## Comparing groups: the boxplot
+
+```{webr}
+library(ggplot2)
+library(tibble)
+survey <- tibble(
+  sbp = c(112,138,162,124,145,118,171,129,150,133,158,121,142,115,160,148,120,136,155,127),
+  district = c("Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur")
+)
+
+ggplot(survey, aes(x = district, y = sbp)) +
+  geom_boxplot()
+```
+
+::: {.callout-note}
+## A boxplot of 7 points looks as confident as one of 700
+Each box here rests on 6 or 7 observations. A box drawn over that few points
+looks as authoritative as one drawn over 600. Add the points on top so the
+reader can see how thin the evidence is:
+
+```r
+ggplot(survey, aes(x = district, y = sbp)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(width = 0.15, alpha = 0.6)
+```
+:::
+
+## Counting categories: the bar chart
+
+`geom_bar()` counts rows for you. Give it only an `x`.
+
+```{webr}
+library(ggplot2)
+library(tibble)
+survey <- tibble(
+  district = c("Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur"),
+  smoker = c(FALSE,TRUE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,TRUE,FALSE,TRUE,TRUE,FALSE)
+)
+
+ggplot(survey, aes(x = district, fill = smoker)) +
+  geom_bar(position = "dodge")
+```
+
+If you already have the counts in a column, use `geom_col()` instead, which
+draws the number you give it rather than counting rows.
+
+## Labels are not decoration
+
+A plot that needs you standing next to it is not finished. `labs()` is the
+cheapest improvement you can make to one.
+
+```{webr}
+library(ggplot2)
+library(tibble)
+survey <- tibble(
+  age = c(23,45,67,34,56,29,71,38,52,41,60,33,48,25,63,55,30,44,58,36),
+  sbp = c(112,138,162,124,145,118,171,129,150,133,158,121,142,115,160,148,120,136,155,127),
+  smoker = c(FALSE,TRUE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,TRUE,FALSE,TRUE,TRUE,FALSE)
+)
+
+ggplot(survey, aes(x = age, y = sbp, colour = smoker)) +
+  geom_point(size = 3) +
+  labs(
+    title    = "Systolic blood pressure rises with age in this sample",
+    subtitle = "20 adults screened in three districts, 2026",
+    x        = "Age (years)",
+    y        = "Systolic BP (mmHg)",
+    colour   = "Current smoker",
+    caption  = "Simulated data for teaching."
+  ) +
+  theme_minimal()
+```
+
+Two habits worth copying from that cell:
+
+1. The title says what the reader should **conclude**, not what the axes are.
+   "Systolic blood pressure rises with age" beats "Scatter plot of SBP by age".
+2. The caption says the data is simulated. If your data is real, the caption is
+   where the source goes.
+
+## Exercises
+
+::: {.callout-note title="Exercise 1: a histogram of age"}
+**Time:** 6 minutes
+
+Draw a histogram of `age` from `survey`, with a binwidth of 10.
+
+```{webr}
+#| setup: true
+#| exercise:
+#|   - ex_hist
+#|   - ex_labs
+library(ggplot2)
+library(tibble)
+
+survey <- tibble(
+  id       = sprintf("S%02d", 1:20),
+  age      = c(23,45,67,34,56,29,71,38,52,41,60,33,48,25,63,55,30,44,58,36),
+  sbp      = c(112,138,162,124,145,118,171,129,150,133,158,121,142,115,160,148,120,136,155,127),
+  district = c("Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur",
+               "Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar",
+               "Tumkur","Hassan","Kolar","Tumkur"),
+  smoker   = c(FALSE,TRUE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,
+               TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,TRUE,
+               FALSE,TRUE,TRUE,FALSE)
+)
+```
+
+```{webr}
+#| exercise: ex_hist
+ggplot(survey, aes(______)) +
+  ______
+```
+
+```{webr}
+#| exercise: ex_hist
+#| solution: true
+ggplot(survey, aes(x = age)) +
+  geom_histogram(binwidth = 10)
+```
+
+```{webr}
+#| exercise: ex_hist
+#| check: true
+if (!inherits(.result, "ggplot")) {
+  list(correct = FALSE, message = "That did not produce a plot. If there is a red error above, read that first — a geom you were not asked for, such as geom_point(), needs a y as well as an x. Otherwise start with ggplot(survey, aes(x = age)).")
+} else if (!identical(rlang::as_label(.result$mapping$x), "age")) {
+  list(correct = FALSE, message = "Map age to x inside aes(): aes(x = age).")
+} else if (length(.result$layers) == 0) {
+  list(correct = FALSE, message = "You have the mapping but nothing to draw. Add + geom_histogram() on the next line.")
+} else if (!any(vapply(.result$layers, function(l) inherits(l$geom, "GeomBar"), logical(1)))) {
+  list(correct = FALSE, message = "That geom is not a histogram. Use geom_histogram().")
+} else {
+  list(correct = TRUE, message = "Correct. Now change binwidth to 5, then to 25, and watch the shape of the distribution change without the data changing at all.")
+}
+```
+
+::: {.hint exercise="ex_hist"}
+A histogram takes only `x`. The layer goes on the next line after a `+`, and
+`binwidth` is a setting, so it goes inside `geom_histogram()`, not inside
+`aes()`.
+:::
+:::
+
+::: {.callout-note title="Exercise 2: finish the plot"}
+**Time:** 8 minutes
+
+Draw a scatter plot of `sbp` against `age`, coloured by `district`, and give it
+a title with `labs()`.
+
+Three things must be true: `age` on x, `district` mapped to colour, and a title
+that is not empty.
+
+```{webr}
+#| exercise: ex_labs
+ggplot(survey, aes(x = ______, y = ______, colour = ______)) +
+  geom_point(size = 3) +
+  labs(______)
+```
+
+```{webr}
+#| exercise: ex_labs
+#| solution: true
+ggplot(survey, aes(x = age, y = sbp, colour = district)) +
+  geom_point(size = 3) +
+  labs(
+    title = "Systolic blood pressure by age and district",
+    x     = "Age (years)",
+    y     = "Systolic BP (mmHg)"
+  )
+```
+
+```{webr}
+#| exercise: ex_labs
+#| check: true
+if (!inherits(.result, "ggplot")) {
+  list(correct = FALSE, message = "That did not produce a plot. If there is a red error above, read that first. Otherwise start with ggplot(survey, aes(x = age, y = sbp, colour = district)).")
+} else if (!identical(rlang::as_label(.result$mapping$x), "age")) {
+  list(correct = FALSE, message = "Map age to x inside aes().")
+} else if (!identical(rlang::as_label(.result$mapping$y), "sbp")) {
+  list(correct = FALSE, message = "Map sbp to y inside aes().")
+} else if (is.null(.result$mapping$colour)) {
+  list(correct = FALSE, message = "Nothing is mapped to colour. Add colour = district INSIDE aes() — a colour that comes from a column always goes inside aes().")
+} else if (!identical(rlang::as_label(.result$mapping$colour), "district")) {
+  list(correct = FALSE, message = "Colour is mapped, but not to district.")
+} else if (is.null(.result$labels$title) || !nzchar(.result$labels$title)) {
+  list(correct = FALSE, message = "Nearly. Add labs(title = \"...\") so the plot explains itself without you standing next to it.")
+} else {
+  list(correct = TRUE, message = "Correct. Now read your own title: does it state a finding, or just name the axes? A title that states the finding is worth writing.")
+}
+```
+
+::: {.hint exercise="ex_labs"}
+All three mappings go inside the one `aes()`. `labs()` needs at least
+`title = "something"`, in quotation marks.
+:::
+:::
+
+## What you should now be able to do
+
+- Build a plot from data, an `aes()` mapping, and a `geom_`.
+- Tell when something goes inside `aes()` (it comes from a column) and when it
+  goes outside (it is a fixed setting).
+- Draw a scatter plot, a histogram, a boxplot and a bar chart.
+- Add layers with `+`, not `|>`.
+- Label a plot so it survives being separated from you.
+
+## You have finished the R primers
+
+→ [**Primer 6: measuring disease**](primer-epi-01-frequency.qmd) — the
+epidemiology starts here, and it is lighter than this page.

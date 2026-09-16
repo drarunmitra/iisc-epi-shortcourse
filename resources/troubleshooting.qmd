@@ -1,0 +1,203 @@
+---
+title: "Troubleshooting"
+subtitle: "The errors that actually happen"
+---
+
+Find your symptom below. If it is not here, see [Still
+stuck?](#still-stuck) at the bottom.
+
+## Installing
+
+### The installer will not run, or asks for a password
+
+You do not have administrator rights on this laptop.
+
+**Do this:** ask your IT department to install R, RStudio and Quarto. Send them
+[Step 1](../prelude/install.qmd). Do it this week.
+
+### RStudio says R is not installed, but it is
+
+RStudio looks for R when it starts, and it was probably installed before R was.
+
+**Do this:**
+
+1. Close RStudio.
+2. Open R on its own and confirm it works.
+3. Install RStudio again.
+4. If it still fails, open RStudio and click **Tools → Global Options →
+   General**, then **Change**, and choose your R by hand.
+
+### `quarto: command not found`, or Quarto is missing after you installed it
+
+Quarto adds itself to your system PATH. Programs already running cannot see
+that change.
+
+**Do this:** restart the whole computer, not only RStudio. Then run
+`quarto::quarto_version()` in the Console.
+
+### The check says Quarto is installed but the `quarto` R package is not
+
+These are 2 separate things with the same name.
+
+**Do this:** run `install.packages("quarto")` in the Console.
+
+## Installing packages
+
+### The install stops part way through
+
+**Do this:** run the install line again. It installs only what is still
+missing, so it picks up where it stopped.
+
+```r
+source("https://drarunmitra.github.io/iisc-epi-shortcourse/setup/install_packages.R")
+```
+
+### R asks `Do you want to install from sources the package which needs compilation?`
+
+**Do this:** type `n` and press **Enter**. Installing from source needs a
+compiler you probably do not have, and the ready-made version is fine for this
+course.
+
+### `cannot open URL` or `unable to access index for repository`
+
+Your network is blocking CRAN, or you are behind a proxy.
+
+**Do this:**
+
+1. Try a phone hotspot.
+2. If that works, the problem is your institutional network. Tell your IT
+   department that CRAN is blocked.
+3. If nothing works, you can still do all 9 primers, because they need only a
+   web browser. Tell us and we will pair you with someone on Day 1.
+
+### `there is no package called 'xyz'`
+
+That package did not install, even though others did.
+
+**Do this:** install it on its own so you can read its error.
+
+```r
+install.packages("xyz")
+```
+
+### The install works but `library()` fails with a version error
+
+An old copy of the package is loaded in memory.
+
+**Do this:** restart R with <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F10</kbd>,
+then try again.
+
+### `package 'xyz' was built under R version ...`
+
+This is a warning, not an error. Your R is older than the package expects.
+
+**Do this:** nothing, if the package loads. If it fails, install the current R.
+
+## Paths and folders
+
+### `cannot open file 'something.csv': No such file or directory`
+
+R is looking somewhere other than where you think.
+
+**Do this:**
+
+1. Run `getwd()` and read what it prints.
+2. Run `list.files()` and see what is actually there.
+3. Move to the right folder, or give the full path.
+
+### Files vanish, or a render fails at random
+
+Your folder is inside OneDrive, Dropbox or Google Drive. The sync client
+rewrites files while R is using them.
+
+**Do this:** move your work to a folder on your local disk.
+
+### Package installs fail with a path error on Windows
+
+Your R was installed into a path containing spaces or non-English characters.
+
+**Do this:** uninstall R and install it again into the default location.
+
+## The browser primers
+
+### The cells never become ready
+
+Wait 2 or 3 minutes first. The page downloads about 17 MB before anything runs,
+and Primer 5 downloads about 37 MB.
+
+**If it still does not work:**
+
+1. Try a phone hotspot. Institutional and hospital wifi often block this.
+2. Use a current Chrome, Edge, Firefox or Safari.
+3. Turn off any ad blocker or script blocker for this site.
+4. Use the [R primer reference](../prelude/r-primer.qmd) in RStudio instead.
+
+### A cell runs and never stops
+
+There is no Stop button.
+
+**Do this:** reload the page. Everything on that page starts again from the
+top.
+
+### My answer looks right but the checker says no
+
+Read the message under the cell. It names what is wrong.
+
+Common causes: the wrong number of decimal places; a count where a proportion
+was asked for; the right value reached the wrong way when the method was the
+point of the exercise.
+
+### My work disappeared when I moved to the next page
+
+Each page runs its own R from scratch. Nothing carries between pages.
+
+**Do this:** finish a page before you leave it.
+
+## Rendering
+
+### The render test in `check_setup.R` fails
+
+R and Quarto are both installed but are not co-operating.
+
+**Do this:**
+
+1. Restart your computer.
+2. Run `quarto::quarto_version()` in the Console. If it errors, run
+   `install.packages("quarto")`.
+3. Run the check again.
+
+### The render works but produces no output file
+
+Check that you are not rendering into a folder you cannot write to. Run
+`getwd()` and confirm.
+
+## Reading an error message
+
+Most R errors name the function that failed and the reason. Read the last 2
+lines first: the bottom of the message is usually the useful part.
+
+| Message | Usually means |
+|---|---|
+| `could not find function "xyz"` | you forgot a `library()` line, or misspelled it |
+| `object 'xyz' not found` | you have not created that object yet, or you misspelled it |
+| `unexpected symbol` / `unexpected ')'` | a missing comma or an unclosed bracket, at or before that point |
+| `undefined columns selected` | that column name does not exist; check `names(d)` |
+| `argument "x" is missing, with no default` | a function needs an argument you did not give |
+| `NAs introduced by coercion` | you tried to make numbers out of something that is not numeric |
+| `$ operator is invalid for atomic vectors` | you used `$` on a vector; `$` works on tibbles and lists |
+
+## Still stuck? {#still-stuck}
+
+1. Ask on the course WhatsApp group: [TBD: WhatsApp group link]{.tbd}. This is
+   the fastest route during the course.
+2. Email [office.msicph@iisc.ac.in](mailto:office.msicph@iisc.ac.in).
+
+Include 3 things, every time:
+
+- your operating system and its version;
+- the exact error message, pasted as text rather than as a screenshot;
+- the output of `sessionInfo()`.
+
+**Paste text, not a picture.** A screenshot of an error cannot be searched,
+cannot be pasted back to you as a fix, and is usually cropped one line above the
+line that mattered.

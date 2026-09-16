@@ -1,0 +1,72 @@
+---
+title: "Step 5 — Do the reading"
+subtitle: "Step 5 of 5"
+---
+
+**Time:** 25 minutes.
+**Before you start:** nothing. Do this on the train.
+**When you finish:** you have read one short paper and written 3 sentences about
+it.
+
+This is the last step. It is short, and it shapes the Day 4 critical appraisal
+session.
+
+## Step 1 of 2 — Read one paper
+
+1. Choose one paper from the list below, or use one of your own.
+2. Read the abstract, the methods and the first table. Skip the discussion.
+
+**You should see:** a study design you can name, and a measure of association
+you can find in the text.
+
+**If it does not work:** if you cannot tell which design it is, that is a useful
+finding. Bring the paper and we will work it out on Day 3.
+
+| Paper | Why this one |
+|---|---|
+| Doll R, Hill AB. Smoking and carcinoma of the lung. *BMJ* 1950;2:739–48. [Open](https://doi.org/10.1136/bmj.2.4682.739) | The case-control study that started modern epidemiology. Short, readable, and the reasoning is all on the surface. |
+| Snow J. On the mode of communication of cholera. 1855. [Open](https://www.ph.ucla.edu/epi/snow/snowbook.html) | Read only the Broad Street section. Natural experiment, done with no statistics at all. |
+| A recent paper from your own field | The one you will actually argue about. |
+
+## Step 2 of 2 — Write 3 sentences
+
+Write these down. Bring them on paper or on your laptop.
+
+1. What design is this study, and how do you know?
+2. What measure of association does it report, and what is its value?
+3. Name one thing other than the exposure that could explain the result.
+
+**You should see:** 3 short sentences. A few lines each is enough.
+
+**If it does not work:** if you cannot answer question 3, look at who was
+recruited and how the exposure was measured. [Primer
+9](primer-epi-04-bias.qmd) covers both.
+
+## Optional background reading
+
+Read these only if you have time. None of them is assumed on Day 1.
+
+| Topic | Source |
+|---|---|
+| Study designs, in one page each | Grimes DA, Schulz KF. An overview of clinical research: the lay of the land. *Lancet* 2002;359:57–61. |
+| Bias, plainly explained | Delgado-Rodríguez M, Llorca J. Bias. *J Epidemiol Community Health* 2004;58:635–41. |
+| Why absolute risks matter | Gigerenzer G et al. Helping doctors and patients make sense of health statistics. *Psychol Sci Public Interest* 2007;8:53–96. |
+| R, if you want more than the primers | Wickham H, Çetinkaya-Rundel M, Grolemund G. *R for Data Science*, 2nd edition. [Free online](https://r4ds.hadley.nz/) |
+
+::: {.callout-note}
+## Why this matters
+Day 4 ends with a critical appraisal exercise in groups. That session works only
+if everybody arrives having read at least one paper closely enough to argue
+about it.
+
+The 3 questions are the same 3 we ask of every paper on the course.
+:::
+
+## You have finished the prelude
+
+All 5 steps are done. Your laptop works, you have run R, and you have read a
+paper closely enough to argue about it.
+
+See you at IISc on Monday 21 September, 09:00.
+
+→ [The schedule](../schedule.qmd)

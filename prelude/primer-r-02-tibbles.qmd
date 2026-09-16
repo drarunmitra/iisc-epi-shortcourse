@@ -1,0 +1,316 @@
+---
+title: "Primer 2 · Tibbles"
+subtitle: "The rectangle you actually analyse"
+engine: knitr
+format:
+  live-html:
+    theme:
+      light: [cosmo, ../styles.scss]
+    toc: true
+    toc-depth: 3
+    toc-title: "On this page"
+    code-copy: true
+    code-overflow: wrap
+    anchor-sections: true
+    link-external-newwindow: true
+    fig-align: center
+    webr:
+      cell-options:
+        persist: true
+        timelimit: 30
+webr:
+  packages:
+    - tibble
+---
+
+{{< include ../_extensions/r-wasm/live/_knitr.qmd >}}
+
+::: {.callout-important title="If the cells below never become ready"}
+This page runs R inside your browser. It needs about 21 MB on first load (the R
+engine, the machinery that runs and marks your code, and the **tibble** package)
+and a minute or two on a slow connection. If nothing happens after that, your
+network is probably blocking it. Work through [the R primer](r-primer.qmd) in
+RStudio instead.
+
+There is no Stop button. If you write a loop that never ends, reload the page.
+:::
+
+Primer 1 left you with vectors. Stand several equal-length vectors side by side
+and you have the rectangle you will analyse: **one row per observation**, such as
+a person, a household or a notification, and **one column per variable**. In the
+tidyverse that rectangle is a **tibble**.
+
+## Building a tibble
+
+`tibble()` takes named vectors and lines them up as columns. Each one must be
+the same length.
+
+```{webr}
+library(tibble)
+
+participants <- tibble(
+  id       = c("P01", "P02", "P03", "P04", "P05"),
+  district = c("Kolar", "Kolar", "Tumkur", "Hassan", "Tumkur"),
+  age      = c(34, 51, 22, 67, 45),
+  smoker   = c(TRUE, FALSE, FALSE, TRUE, TRUE),
+  sbp      = c(128, 142, 118, 156, 134)
+)
+
+participants
+```
+
+Read the header it printed. `# A tibble: 5 × 5` is 5 rows by 5 columns, and
+under each column name sits its type: `<chr>` for text, `<dbl>` for a number
+with decimals, `<lgl>` for `TRUE`/`FALSE`. A plain `data.frame` tells you none
+of that until you ask.
+
+::: {.callout-note}
+## Know what one row represents
+Many "how do I do X in R" problems turn out to be data in the wrong shape. If a person appears on 3 rows because they had 3 visits, the observation
+is a *visit*, not a person. That is fine, as long as you know it and say it.
+Confusion starts when you cannot say what one row is.
+:::
+
+## Looking at one
+
+4 functions. Use them on every dataset you open, before anything else.
+
+```{webr}
+library(tibble)
+participants <- tibble(
+  id       = c("P01", "P02", "P03", "P04", "P05"),
+  district = c("Kolar", "Kolar", "Tumkur", "Hassan", "Tumkur"),
+  age      = c(34, 51, 22, 67, 45),
+  smoker   = c(TRUE, FALSE, FALSE, TRUE, TRUE),
+  sbp      = c(128, 142, 118, 156, 134)
+)
+
+nrow(participants)      # how many rows
+ncol(participants)      # how many columns
+names(participants)     # what the columns are called
+str(participants)       # types and the first few values
+```
+
+`summary()` is the fifth, and it is worth the extra second:
+
+```{webr}
+library(tibble)
+participants <- tibble(
+  id       = c("P01", "P02", "P03", "P04", "P05"),
+  district = c("Kolar", "Kolar", "Tumkur", "Hassan", "Tumkur"),
+  age      = c(34, 51, 22, 67, 45),
+  smoker   = c(TRUE, FALSE, FALSE, TRUE, TRUE),
+  sbp      = c(128, 142, 118, 156, 134)
+)
+
+summary(participants)
+```
+
+A minimum age of 3, or a blood pressure of 0, shows up here and nowhere else
+until it has already ruined an analysis.
+
+## Getting a column out
+
+`$` unwraps one column back into the vector it was.
+
+```{webr}
+library(tibble)
+participants <- tibble(
+  id       = c("P01", "P02", "P03", "P04", "P05"),
+  district = c("Kolar", "Kolar", "Tumkur", "Hassan", "Tumkur"),
+  age      = c(34, 51, 22, 67, 45),
+  smoker   = c(TRUE, FALSE, FALSE, TRUE, TRUE),
+  sbp      = c(128, 142, 118, 156, 134)
+)
+
+participants$age
+mean(participants$sbp)
+```
+
+That is the pattern: a tibble is a bundle of vectors, and `$` gets one.
+
+Everything you learned in Primer 1 now applies to a real dataset:
+
+```{webr}
+library(tibble)
+participants <- tibble(
+  id       = c("P01", "P02", "P03", "P04", "P05"),
+  district = c("Kolar", "Kolar", "Tumkur", "Hassan", "Tumkur"),
+  age      = c(34, 51, 22, 67, 45),
+  smoker   = c(TRUE, FALSE, FALSE, TRUE, TRUE),
+  sbp      = c(128, 142, 118, 156, 134)
+)
+
+# What proportion are smokers? A logical column sums as 1s and 0s.
+mean(participants$smoker)
+
+# How many have systolic BP of 140 or more?
+sum(participants$sbp >= 140)
+```
+
+## Counting a categorical variable
+
+`table()` is base R and it is still the fastest way to see what is in a column.
+
+```{webr}
+library(tibble)
+participants <- tibble(
+  id       = c("P01", "P02", "P03", "P04", "P05"),
+  district = c("Kolar", "Kolar", "Tumkur", "Hassan", "Tumkur"),
+  age      = c(34, 51, 22, 67, 45),
+  smoker   = c(TRUE, FALSE, FALSE, TRUE, TRUE),
+  sbp      = c(128, 142, 118, 156, 134)
+)
+
+table(participants$district)
+```
+
+Cross two columns and you have the beginning of a 2×2 table, which is where
+Primer 7 starts:
+
+```{webr}
+library(tibble)
+participants <- tibble(
+  id       = c("P01", "P02", "P03", "P04", "P05"),
+  district = c("Kolar", "Kolar", "Tumkur", "Hassan", "Tumkur"),
+  age      = c(34, 51, 22, 67, 45),
+  smoker   = c(TRUE, FALSE, FALSE, TRUE, TRUE),
+  sbp      = c(128, 142, 118, 156, 134)
+)
+
+table(participants$smoker, participants$sbp >= 140)
+```
+
+::: {.callout-warning}
+## `table()` drops missing values silently
+By default `table()` does not count `NA`s and does not tell you it left them
+out. Your percentages then quietly refer to a smaller denominator than you
+think. Use `table(x, useNA = "ifany")` whenever the column might have holes.
+:::
+
+## Exercises
+
+::: {.callout-note title="Exercise 1: build a tibble"}
+**Time:** 5 minutes
+
+Three villages were surveyed for anaemia. Kolar screened 120 women and found
+44 anaemic; Tumkur screened 95 and found 28; Hassan screened 140 and found 61.
+
+Put this into a tibble called `survey` with three columns: `village`,
+`screened` and `anaemic`, in that order.
+
+```{webr}
+#| exercise: ex_tibble
+survey <- tibble(
+  village  = ______,
+  screened = ______,
+  anaemic  = ______
+)
+
+survey
+```
+
+```{webr}
+#| exercise: ex_tibble
+#| solution: true
+survey <- tibble(
+  village  = c("Kolar", "Tumkur", "Hassan"),
+  screened = c(120, 95, 140),
+  anaemic  = c(44, 28, 61)
+)
+
+survey
+```
+
+```{webr}
+#| exercise: ex_tibble
+#| check: true
+expected <- tibble::tibble(
+  village  = c("Kolar", "Tumkur", "Hassan"),
+  screened = c(120, 95, 140),
+  anaemic  = c(44, 28, 61)
+)
+# A data.frame answer is just as correct as a tibble one, so normalise first.
+if (isTRUE(all.equal(as.data.frame(.result), as.data.frame(expected),
+                     check.attributes = FALSE))) {
+  list(correct = TRUE, message = "Correct: three rows, three columns, one row per village.")
+} else if (!is.data.frame(.result)) {
+  list(correct = FALSE, message = "That is not a table yet. Use tibble() with three named columns.")
+} else if (ncol(.result) != 3) {
+  list(correct = FALSE, message = "You need exactly three columns: village, screened and anaemic.")
+} else if (nrow(.result) != 3) {
+  list(correct = FALSE, message = "You need one row per village, so three rows.")
+} else {
+  list(correct = FALSE, message = "Check the spelling and the order. Kolar first, then Tumkur, then Hassan, with each village's own two numbers.")
+}
+```
+
+::: {.hint exercise="ex_tibble"}
+Each column is its own vector, so each needs its own `c()`. The village names
+are text and need quotation marks; the counts are numbers and do not.
+:::
+:::
+
+::: {.callout-note title="Exercise 2: prevalence from a column"}
+**Time:** 5 minutes
+
+Using `survey`, compute the **overall** prevalence of anaemia across all three
+villages: total anaemic divided by total screened, as a proportion rounded to
+three decimal places.
+
+```{webr}
+#| exercise: ex_prev
+survey <- tibble(
+  village  = c("Kolar", "Tumkur", "Hassan"),
+  screened = c(120, 95, 140),
+  anaemic  = c(44, 28, 61)
+)
+
+______
+```
+
+```{webr}
+#| exercise: ex_prev
+#| solution: true
+survey <- tibble(
+  village  = c("Kolar", "Tumkur", "Hassan"),
+  screened = c(120, 95, 140),
+  anaemic  = c(44, 28, 61)
+)
+
+round(sum(survey$anaemic) / sum(survey$screened), 3)
+```
+
+```{webr}
+#| exercise: ex_prev
+#| check: true
+# 133 anaemic out of 355 screened = 0.3746...
+if (isTRUE(all.equal(as.numeric(.result), 0.375))) {
+  list(correct = TRUE, message = "Correct — 133 of 355, so 37.5%. Note this is NOT the average of the three village prevalences; the villages are different sizes.")
+} else if (length(.result) == 3) {
+  list(correct = FALSE, message = "Those are the three village prevalences. The overall figure needs the totals: sum the numerators and sum the denominators first.")
+} else if (isTRUE(all.equal(as.numeric(.result), 0.366, tolerance = 2e-3))) {
+  list(correct = FALSE, message = "That is the unweighted mean of the three village prevalences. It gives Tumkur's 95 women the same weight as Hassan's 140. Divide total anaemic by total screened instead.")
+} else if (is.numeric(.result) && length(.result) == 1) {
+  list(correct = FALSE, message = "Right shape, wrong number. You want sum(survey$anaemic) / sum(survey$screened), rounded to 3 places.")
+} else {
+  list(correct = FALSE, message = "Pull each column out with $, sum it, divide one total by the other, then round to 3.")
+}
+```
+
+::: {.hint exercise="ex_prev"}
+`survey$anaemic` gives you the three counts. `sum()` adds them. Do the same for
+`screened`, divide, then `round(..., 3)`.
+:::
+:::
+
+## What you should now be able to do
+
+- Build a tibble from named, equal-length vectors.
+- Say what one row of any dataset represents, before you analyse it.
+- Look at a new dataset with `nrow`, `names`, `str` and `summary`.
+- Pull a column out with `$` and use everything from Primer 1 on it.
+- Count categories with `table()`, and remember that it hides `NA` by default.
+- See why an overall proportion is not the average of group proportions.
+
+→ [**Primer 3: packages and the pipe**](primer-r-03-packages-pipe.qmd)

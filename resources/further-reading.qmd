@@ -1,0 +1,70 @@
+---
+title: "Further reading"
+subtitle: "With a note on who each one suits"
+---
+
+None of this is assumed on the course. Use it afterwards, or when a topic
+catches you.
+
+## Epidemiology textbooks
+
+| Book | Suits you if |
+|---|---|
+| Bonita R, Beaglehole R, Kjellström T. **Basic Epidemiology**, 2nd ed. WHO, 2006. [Free PDF](https://apps.who.int/iris/handle/10665/43541) | You want one short book that covers the whole of this course. Written for a global audience and free. |
+| Webb P, Bain C, Page A. **Essential Epidemiology**, 4th ed. Cambridge, 2019. | You want a full textbook with exercises. The clearest of the standard undergraduate texts. |
+| Rothman KJ. **Epidemiology: An Introduction**, 2nd ed. Oxford, 2012. | You want the reasoning rather than the recipes. Short, and unusually honest about what the methods cannot do. |
+| Rothman KJ, Greenland S, Lash TL. **Modern Epidemiology**, 4th ed. Wolters Kluwer, 2021. | You are going further into methods. This is the reference, not an introduction. |
+| Pearce N. **A Short Introduction to Epidemiology**, 2nd ed. 2005. [Free PDF](https://www.lshtm.ac.uk/research/centres-projects-groups/pearce) | You want the course's own framing. Written by one of the faculty. |
+
+## Papers worth an hour
+
+| Paper | Why |
+|---|---|
+| Grimes DA, Schulz KF. An overview of clinical research: the lay of the land. *Lancet* 2002;359:57–61. | Every study design in 5 pages. The clearest thing written on the subject. |
+| Delgado-Rodríguez M, Llorca J. Bias. *J Epidemiol Community Health* 2004;58:635–41. | A catalogue of biases with an example of each. |
+| Greenland S et al. Statistical tests, P values, confidence intervals, and power: a guide to misinterpretations. *Eur J Epidemiol* 2016;31:337–50. | 25 ways to misread a p-value, each corrected. Read it before you write a results section. |
+| Gigerenzer G et al. Helping doctors and patients make sense of health statistics. *Psychol Sci Public Interest* 2007;8:53–96. | Why absolute risks communicate and relative risks mislead. |
+| Doll R, Hill AB. Smoking and carcinoma of the lung. *BMJ* 1950;2:739–48. | The case-control study that started modern epidemiology. The reasoning is all on the surface. |
+| Hill AB. The environment and disease: association or causation? *Proc R Soc Med* 1965;58:295–300. | The 9 viewpoints, from the man who wrote them. Shorter and more careful than its reputation. |
+
+## Reporting guidelines
+
+Use the one that matches your design, from the first day of the study rather
+than the week before submission.
+
+| Design | Guideline |
+|---|---|
+| Observational (cohort, case-control, cross-sectional) | [STROBE](https://www.strobe-statement.org/) |
+| Randomised trial | [CONSORT](https://www.equator-network.org/reporting-guidelines/consort/) |
+| Systematic review | [PRISMA](https://www.prisma-statement.org/) |
+| Routinely collected data | [RECORD](https://www.record-statement.org/) |
+| Diagnostic accuracy | [STARD](https://www.equator-network.org/reporting-guidelines/stard/) |
+| Prediction model | [TRIPOD](https://www.tripod-statement.org/) |
+
+The [EQUATOR Network](https://www.equator-network.org/) indexes all of them.
+
+## R
+
+| Resource | Suits you if |
+|---|---|
+| Wickham H, Çetinkaya-Rundel M, Grolemund G. **R for Data Science**, 2nd ed. [Free online](https://r4ds.hadley.nz/) | You want the standard tidyverse book. Start at the Data Transformation chapter. |
+| **The Epidemiologist R Handbook**. [Free online](https://epirhandbook.com/) | You want recipes for outbreak and surveillance work, written by field epidemiologists. The most directly useful R book for this audience. |
+| Kabacoff R. **R in Action**, 3rd ed. Manning, 2022. | You come from SPSS or Stata and want base R as well as the tidyverse. |
+| [Posit cheatsheets](https://posit.co/resources/cheatsheets/) | You want one printable page per package. |
+| Wickham H. **ggplot2: Elegant Graphics for Data Analysis**. [Free online](https://ggplot2-book.org/) | You want to understand the grammar rather than copy plots. |
+
+## Quarto and reproducibility
+
+| Resource | Suits you if |
+|---|---|
+| [Quarto documentation](https://quarto.org/docs/guide/) | You want the reference. The Authoring section is the part you need first. |
+| [The Turing Way](https://the-turing-way.netlify.app/) | You want the case for reproducible research, and the practices that deliver it. |
+| Wilson G et al. Good enough practices in scientific computing. *PLoS Comput Biol* 2017;13:e1005510. | You want a realistic minimum rather than a counsel of perfection. |
+
+## Free courses
+
+| Course | Note |
+|---|---|
+| [LSHTM free short courses](https://www.lshtm.ac.uk/study/courses/short-courses) | Several are free and online. |
+| [Coursera: Epidemiology in Public Health Practice](https://www.coursera.org/specializations/professional-epidemiology) | Johns Hopkins. Free to audit. |
+| [OpenWHO](https://openwho.org/) | Short outbreak and surveillance courses, free, several in more than one language. |

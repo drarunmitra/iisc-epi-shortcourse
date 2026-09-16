@@ -1,0 +1,29 @@
+# Quarto
+/_site/
+/.quarto/
+*_files/
+/_freeze/
+
+# R
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+
+# Working files that must never reach the published site.
+# setup/ is listed under resources: in _quarto.yml, so anything dropped in it is
+# copied into _site verbatim and served publicly. private/ is in neither the
+# render list nor resources:, which is the point.
+/private/*
+
+# OS
+.DS_Store
+Thumbs.db
+~$*
+
+# Stray render output (an aborted project render scatters these into the source tree)
+/site_libs/
+/*.html
+
+**/*.quarto_ipynb

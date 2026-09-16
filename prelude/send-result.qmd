@@ -1,0 +1,79 @@
+---
+title: "Step 3 — Send us your check result"
+subtitle: "Step 3 of 5"
+---
+
+**Time:** 2 minutes.
+**Before you start:** [Step 2](check-setup.qmd) finished, with the check output
+copied.
+**When you finish:** we know whether your laptop is ready, and we have time to
+fix it if it is not.
+
+Send this whether it passed or failed.
+
+## Step 1 of 3 — Write the email
+
+1. Open your email program.
+2. Address it to
+   [office.msicph@iisc.ac.in](mailto:office.msicph@iisc.ac.in).
+3. Type this subject line, with your own name:
+   `Epi course setup check — <your full name>`
+
+**You should see:** a blank email with that subject line.
+
+## Step 2 of 3 — Paste the output
+
+1. Click inside the body of the email.
+2. Paste the check output you copied in Step 2.
+3. Above the pasted text, type your operating system and its version, for
+   example `Windows 11 23H2` or `macOS 15.3 on an M2`.
+4. On the next line, type whether you have administrator rights on that laptop.
+
+**You should see:** the full check output as plain text in the email body.
+
+**If it does not work:** paste text, not a screenshot. A picture of an error
+cannot be searched, cannot be pasted back to you as a fix, and is usually
+cropped one line above the line that mattered.
+
+## Step 3 of 3 — Send it
+
+1. Read the subject line once more. Your name must be in it.
+2. Press **Send**.
+
+**You should see:** the email in your Sent folder.
+
+**If it does not work:** if the email bounces, send the same text on the course
+WhatsApp group instead: [TBD: WhatsApp group link]{.tbd}.
+
+## Template
+
+Copy this, fill it in, send it.
+
+```
+Subject: Epi course setup check — Priya Sharma
+
+Name: Priya Sharma
+Operating system: Windows 11 23H2
+Administrator rights: yes
+
+--- check_setup.R output below ---
+
+<paste the whole console output here>
+```
+
+::: {.callout-note}
+## Why this matters
+A passing report takes us 10 seconds to file. A failing report takes us a day to
+fix, and we would rather have that day than have you sitting in the room on
+Monday with a laptop that does not work.
+
+We ask for your operating system because most install failures are
+platform-specific. We ask about administrator rights because that is the fix
+we cannot apply for you.
+:::
+
+## Done?
+
+→ [**Step 4: the 9 primers**](primers.qmd)
+
+This is the long step. Start it tonight.

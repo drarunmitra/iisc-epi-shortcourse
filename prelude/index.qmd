@@ -1,0 +1,71 @@
+---
+title: "Before you arrive"
+subtitle: "Do this before Monday 21 September"
+---
+
+**Time:** about 4 hours in total. Spread it over several evenings.
+**Before you start:** the laptop you will bring to IISc.
+**When you finish:** your laptop runs R, you have already written R code and
+computed a risk ratio, and you have read one paper closely.
+
+## Do these 5 steps, in this order
+
+| | Step | Time | Go here |
+|---|---|---|---|
+| ☐ | 1. Install R, RStudio and Quarto | 30 min | [Step 1](install.qmd) |
+| ☐ | 2. Install the packages and run the check | 20 min | [Step 2](check-setup.qmd) |
+| ☐ | 3. Send us your check result | 2 min | [Step 3](send-result.qmd) |
+| ☐ | 4. Do the 9 browser primers | 2 h 45 min | [Step 4](primers.qmd) |
+| ☐ | 5. Do the reading | 25 min | [Step 5](pre-reading.qmd) |
+
+Do Step 1 first.
+
+## If you are short of time
+
+Do them in this order. Stop when you run out of evening.
+
+1. **Steps 1, 2 and 3.** Without these you cannot do the hands-on work at all.
+2. **Epidemiology primers 6 to 9.** These carry the concepts the lectures build
+   on. Start with Primer 9, on bias and confounding.
+3. **R primers 1 to 5.** We re-teach the basics on Day 1, so these can wait.
+4. **Step 5,** the reading. 25 minutes. Do it on the train.
+
+## Open the primers at home, not at IISc
+
+The primers run R inside your web browser. The first page you open downloads
+about 17 MB. The heaviest page downloads about 37 MB. Your browser keeps that
+download for 7 days.
+
+**You should see:** a page you opened at home this week loading in a few seconds
+when you open it again at IISc.
+
+**If it does not work:** open the primers before you travel. If 40 people
+download 37 MB at the same moment on Monday morning, the venue wifi will not
+cope.
+
+::: {.callout-note}
+## Why this matters
+5 days is a short time. If your laptop is not ready on Monday morning, you will
+spend the first session watching downloads instead of working. We cannot give
+that time back.
+
+Step 1 is first because it is the only step that can fail on the day, and the
+only one we cannot fix for you in the room.
+
+Step 4 is the long one. The 9 primers teach the R and the epidemiological
+arithmetic that every hands-on block assumes you already have. Participants who
+skip them spend Day 1 catching up.
+:::
+
+## Stuck?
+
+1. Read [Troubleshooting](../resources/troubleshooting.qmd). It covers the
+   common install failures on Windows, macOS and Linux.
+2. If that does not help, email
+   [office.msicph@iisc.ac.in](mailto:office.msicph@iisc.ac.in), or ask on the
+   course WhatsApp group: [TBD: WhatsApp group link]{.tbd}.
+3. Include 3 things: your operating system and its version, the exact error
+   message, and the output of `sessionInfo()`.
+
+Do not wait until the weekend before the course to ask. We answer email on
+working days.

@@ -1,0 +1,206 @@
+---
+title: "Cheatsheet"
+subtitle: "Everything the course uses, with no explanation"
+---
+
+For the explanations, see the [primers](../prelude/primers.qmd) and the
+[R primer reference](../prelude/r-primer.qmd).
+
+## Epidemiological measures
+
+The 4 cells of a 2×2 table. The third is named `cc` because `c()` is a function.
+
+<table class="twobytwo">
+<tr><th></th><th>Disease</th><th>No disease</th><th>Total</th></tr>
+<tr><th>Exposed</th><td>a</td><td>b</td><td>a + b</td></tr>
+<tr><th>Unexposed</th><td>cc</td><td>d</td><td>cc + d</td></tr>
+</table>
+
+| Measure | Formula | Range | Units |
+|---|---|---|---|
+| Prevalence | cases / population | 0 to 1 | none |
+| Risk (cumulative incidence) | new cases / at risk at start | 0 to 1 | needs a time period |
+| Incidence rate | new cases / person-time | 0 upward | per person-time |
+| Risk ratio | `(a/(a+b)) / (cc/(cc+d))` | 0 upward | none |
+| Risk difference | `a/(a+b) - cc/(cc+d)` | −1 to 1 | none |
+| Odds ratio | `(a*d) / (b*cc)` | 0 upward | none |
+| NNT or NNH | `1 / abs(RD)` | 1 upward | needs a time period |
+| Attributable fraction, exposed | `(RR - 1) / RR` | | none |
+| Population attributable fraction | `(risk_total - risk_unexposed) / risk_total` | | none |
+
+```r
+a  <- 90; b <- 910; cc <- 30; d <- 970
+
+risk_exposed   <- a / (a + b)
+risk_unexposed <- cc / (cc + d)
+
+risk_exposed / risk_unexposed            # RR  3.00
+risk_exposed - risk_unexposed            # RD  0.06
+1 / abs(risk_exposed - risk_unexposed)   # NNH 16.7
+(a * d) / (b * cc)                       # OR  3.20
+```
+
+With confidence intervals:
+
+```r
+library(epitools)
+
+# epitools wants the unexposed row first and the non-case column first
+tab <- matrix(c(d, cc, b, a), nrow = 2, byrow = TRUE)
+
+riskratio(tab, method = "wald")
+oddsratio(tab, method = "wald")
+riskratio(tab)$measure     # the estimate and its 95% CI
+```
+
+Read the table `epitools` prints back before you trust the number.
+
+## Which measure for which design
+
+| Design | You may compute |
+|---|---|
+| Cohort | risk, rate, RR, RD, OR |
+| Case-control | OR only |
+| Cross-sectional | prevalence, prevalence ratio, prevalence OR |
+| Trial | risk, rate, RR, RD, NNT |
+
+## R basics
+
+```r
+x <- 5                     # assign
+c(1, 2, 3)                 # vector
+length(x); class(x)        # how many, what type
+
+sum(x); mean(x); median(x); sd(x); min(x); max(x); range(x)
+round(x, 2)
+sqrt(x)
+
+mean(x, na.rm = TRUE)      # ignore missing values
+sum(is.na(x))              # how many are missing
+
+sum(x >= 45)               # count
+mean(x >= 45)              # proportion
+```
+
+## Looking at a dataset
+
+```r
+nrow(d); ncol(d); dim(d)
+names(d)
+str(d)
+glimpse(d)                 # dplyr
+summary(d)
+head(d, 10)
+
+table(d$district)
+table(d$district, useNA = "ifany")
+table(d$exposed, d$disease)
+```
+
+## dplyr
+
+```r
+library(dplyr)
+
+d |> filter(age >= 50)
+d |> filter(age >= 50, sex == "Female")     # comma means AND
+d |> filter(district %in% c("Kolar", "Hassan"))
+
+d |> select(id, age, sbp)
+d |> select(-dbp)
+d |> rename(bp = sbp)
+
+d |> mutate(bmi_cat = if_else(bmi >= 25, "overweight", "normal"))
+d |> mutate(band = case_when(
+      age < 40 ~ "under 40",
+      age < 60 ~ "40-59",
+      .default = "60+"
+    ))
+
+d |> arrange(age)
+d |> arrange(desc(age))
+
+d |> count(district)
+d |> count(district, sort = TRUE)
+
+d |>
+  group_by(district) |>
+  summarise(
+    n    = n(),
+    mean = round(mean(age), 1),
+    risk = round(mean(event), 3)
+  )
+```
+
+`filter()` silently drops rows where the condition is `NA`. Count rows before
+and after.
+
+Put `n()` in every `summarise()`.
+
+## ggplot2
+
+```r
+library(ggplot2)
+
+ggplot(d, aes(x = age, y = sbp)) + geom_point()
+ggplot(d, aes(x = sbp)) + geom_histogram(binwidth = 10)
+ggplot(d, aes(x = district, y = sbp)) + geom_boxplot()
+ggplot(d, aes(x = district)) + geom_bar()
+ggplot(d, aes(x = district, y = n)) + geom_col()     # when you have the counts
+ggplot(d, aes(x = date, y = cases)) + geom_line()
+```
+
+Inside `aes()` means the property comes from a column. Outside `aes()` means a
+fixed setting.
+
+```r
+ggplot(d, aes(x = age, y = sbp, colour = smoker)) +
+  geom_point(size = 2, alpha = 0.6) +
+  facet_wrap(~ district) +
+  labs(title = "...", x = "...", y = "...", colour = "...", caption = "...") +
+  theme_minimal()
+```
+
+Layers join with `+`, not `|>`.
+
+## Tables for a paper
+
+```r
+library(gtsummary)
+
+d |>
+  select(age, sex, smoker, sbp, event) |>
+  tbl_summary(by = event) |>
+  add_p() |>
+  add_overall()
+```
+
+```r
+glm(event ~ smoker + age + sex, data = d, family = binomial) |>
+  tbl_regression(exponentiate = TRUE)
+```
+
+`exponentiate = TRUE` turns log-odds into odds ratios. Without it the column is
+not an OR.
+
+## Keyboard shortcuts in RStudio
+
+| Shortcut | Does |
+|---|---|
+| <kbd>Ctrl</kbd>+<kbd>Enter</kbd> | run the current line |
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>M</kbd> | insert the pipe |
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>K</kbd> | render the document |
+| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F10</kbd> | restart R |
+| <kbd>Tab</kbd> | complete a name |
+| <kbd>F1</kbd> on a function | open its help |
+
+On macOS, use <kbd>Cmd</kbd> in place of <kbd>Ctrl</kbd>.
+
+## Getting help inside R
+
+```r
+?mean                # help for one function
+??"risk ratio"       # search all help
+args(round)          # what arguments it takes
+sessionInfo()        # your R version and loaded packages
+```
