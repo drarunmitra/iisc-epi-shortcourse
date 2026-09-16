@@ -1,30 +1,34 @@
-# Placeholders to fill in before the site goes out
+# Placeholders
 
-Every item below is marked in the source with `[TBD: ...]{.tbd}`, which renders
-with a yellow highlight so nothing ships unnoticed. Search the repo for `TBD`
-to find them all.
+**There are none left.** Every `[TBD: ...]{.tbd}` marker has been resolved and
+the yellow-highlight style is now unused on every page. If you add a new
+unknown, mark it `[TBD: what is missing]{.tbd}` so it ships visibly, and list it
+here.
 
-## Blocking — the site is wrong without these
+Check with:
 
-| What | File | Note |
-|---|---|---|
-| GitHub org and repo | `_quarto.yml` (`site-url`, `repo-url`, the navbar GitHub link) | Currently guessed as `drarunmitra/iisc-epi-shortcourse`. |
-| The two `source()` URLs | `prelude/check-setup.qmd`, `resources/troubleshooting.qmd` | These must match `site-url` exactly, or Step 2 fails for every participant. |
-| WhatsApp group link | `prelude/index.qmd`, `prelude/send-result.qmd`, `resources/index.qmd`, `resources/troubleshooting.qmd` | 4 places. |
+```bash
+grep -rn "TBD" --include="*.qmd" .
+```
 
-## Provisional — confirmed in outline, not in detail
+## Resolved
 
-| What | File | Note |
-|---|---|---|
+| What | Resolved to |
+|---|---|
+| GitHub org and repo | `drarunmitra/iisc-epi-shortcourse`, live and deploying. `site-url` and `repo-url` in `_quarto.yml` match. |
+| The two `source()` URLs | `prelude/check-setup.qmd` and `resources/troubleshooting.qmd` point at the live `setup/` scripts. Both fetch and parse; verified 2026-09-16. |
+| Poppy's full name | Poppy Mallinson. |
+| WhatsApp group link | Removed. Email is the only participant channel. |
+| Session titles and faculty assignments | No longer on the site. The programme is circulated separately. |
 
-## Confirmed from the course announcement — do not change without a source
+## Confirmed — do not change without a source
 
 - Course title: Short Course in Epidemiology: Concepts & Methods
 - Organiser: Isaac Centre for Public Health, Indian Institute of Science, Bengaluru
 - Collaborator: London School of Hygiene & Tropical Medicine, University of London
 - Dates: 21–25 September 2026
 - Venue: IISc, Bengaluru
-- Applications closed: 25 July 2026; participants already shortlisted
+- Applications closed 25 July 2026; participants already shortlisted
 - Contact: office.msicph@iisc.ac.in
 - Faculty, all 6 names confirmed: Neil Pearce, Prabhdeep Kaur, Poppy Mallinson,
   Arun Mitra, Manikandanesan Sakthivel ("Nesan"), Uttara Partap.
@@ -36,8 +40,9 @@ to find them all.
 
 - **No downloadable datasets, and no project folder.** Every example builds its
   own data inline. Do not add a `data/` folder back.
-- **No Moodle.** Email and WhatsApp only.
+- **No Moodle and no WhatsApp.** Email is the only participant channel.
 - **No schedule page, and no admissions or fees section.** Participants are
   already shortlisted and the programme is circulated separately. Do not
-  recreate `schedule.qmd` or put day-by-day themes back on the home page.
+  recreate `schedule.qmd` or put day-by-day themes back on the home page, and
+  keep new prose free of "on Day 3" claims.
 - **No slides, and no day-by-day session pages.**

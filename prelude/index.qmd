@@ -62,8 +62,7 @@ skip them spend the first sessions catching up.
 1. Read [Troubleshooting](../resources/troubleshooting.qmd). It covers the
    common install failures on Windows, macOS and Linux.
 2. If that does not help, email
-   [office.msicph@iisc.ac.in](mailto:office.msicph@iisc.ac.in), or ask on the
-   course WhatsApp group: [TBD: WhatsApp group link]{.tbd}.
+   [office.msicph@iisc.ac.in](mailto:office.msicph@iisc.ac.in).
 3. Include 3 things: your operating system and its version, the exact error
    message, and the output of `sessionInfo()`.
 

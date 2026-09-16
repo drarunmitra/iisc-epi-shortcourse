@@ -42,8 +42,8 @@ cropped one line above the line that mattered.
 
 **You should see:** the email in your Sent folder.
 
-**If it does not work:** if the email bounces, send the same text on the course
-WhatsApp group instead: [TBD: WhatsApp group link]{.tbd}.
+**If it does not work:** if the email bounces, send it again from a different
+address, and say in the message which address bounced.
 
 ## Template
 

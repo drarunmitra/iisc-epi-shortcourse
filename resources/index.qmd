@@ -35,9 +35,7 @@ Books, papers and free courses, with a note on who each one suits.
 ## Getting help
 
 1. Read [Troubleshooting](troubleshooting.qmd) first.
-2. Ask on the course WhatsApp group: [TBD: WhatsApp group link]{.tbd}. During
-   the course this is the fastest route.
-3. Email [office.msicph@iisc.ac.in](mailto:office.msicph@iisc.ac.in).
+2. Email [office.msicph@iisc.ac.in](mailto:office.msicph@iisc.ac.in).
 
 When you ask, include 3 things:
 

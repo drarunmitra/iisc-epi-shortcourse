@@ -18,9 +18,10 @@ is the source of the WebR primer machinery and the house writing style.
   lead's instruction. Every code example builds its own data inline with
   `tibble()`. Do not reintroduce a `data/` folder, a `read_csv("data/...")`
   example, or an `epi-course-2026` project folder.
-- **No Moodle.** The only participant channels are email
-  (office.msicph@iisc.ac.in) and a WhatsApp group whose link is still a
-  placeholder.
+- **No Moodle, and no WhatsApp group.** Email
+  (office.msicph@iisc.ac.in) is the only participant channel. A WhatsApp group
+  was offered and removed on 2026-09-16 at the course lead's instruction; do not
+  add a second channel back.
 - **No schedule, no admissions or fees section.** Participants are already
   shortlisted, and the programme goes out separately. The site carries only:
   before you arrive, the primers, and resources.
@@ -123,9 +124,6 @@ Rules learned the hard way; full version in
    at the course lead's instruction on 2026-09-16; do not recreate it, and do
    not put day-by-day themes back on the home page. The site promises no
    specific day for any topic, so keep new prose free of "on Day 3" claims.
-2. **The WhatsApp group link is a placeholder** in `prelude/index.qmd`,
-   `prelude/send-result.qmd`, `resources/index.qmd` and
-   `resources/troubleshooting.qmd`.
 3. **`site-url` and `repo-url` in `_quarto.yml` are guesses**
    (`drarunmitra/iisc-epi-shortcourse`). The `source()` URLs in
    `prelude/check-setup.qmd` and `resources/troubleshooting.qmd` depend on

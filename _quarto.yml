@@ -12,7 +12,6 @@ project:
 website:
   title: "Epidemiology: Concepts & Methods"
   description: "A five-day short course at the Isaac Centre for Public Health, IISc Bengaluru, in collaboration with LSHTM, University of London. 21-25 September 2026."
-  # TBD: replace with the real GitHub org/repo once the repository exists.
   site-url: "https://drarunmitra.github.io/iisc-epi-shortcourse/"
   repo-url: "https://github.com/drarunmitra/iisc-epi-shortcourse"
   repo-actions: [issue]

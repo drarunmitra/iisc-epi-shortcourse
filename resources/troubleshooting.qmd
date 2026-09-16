@@ -188,9 +188,7 @@ lines first: the bottom of the message is usually the useful part.
 
 ## Still stuck? {#still-stuck}
 
-1. Ask on the course WhatsApp group: [TBD: WhatsApp group link]{.tbd}. This is
-   the fastest route during the course.
-2. Email [office.msicph@iisc.ac.in](mailto:office.msicph@iisc.ac.in).
+Email [office.msicph@iisc.ac.in](mailto:office.msicph@iisc.ac.in).
 
 Include 3 things, every time:
 
