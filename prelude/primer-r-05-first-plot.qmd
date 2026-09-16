@@ -46,10 +46,17 @@ There is no Stop button. If you write a loop that never ends, reload the page.
 use, which variable maps to which visual property, and what shape to draw. Three
 decisions, three pieces of code.
 
+::: {.callout-note appearance="simple"}
+**Run the cells from the top.** The first one builds the data that all the
+others use. If a later cell says `object not found`, you have skipped it.
+:::
+
+
 ## The three pieces
 
 ```{webr}
 library(ggplot2)
+library(dplyr)
 library(tibble)
 
 survey <- tibble(
@@ -92,14 +99,6 @@ Anything inside `aes()` is driven by the data. Map `smoker` to colour and
 ggplot2 splits the points and builds a legend for you:
 
 ```{webr}
-library(ggplot2)
-library(tibble)
-survey <- tibble(
-  age = c(23,45,67,34,56,29,71,38,52,41,60,33,48,25,63,55,30,44,58,36),
-  sbp = c(112,138,162,124,145,118,171,129,150,133,158,121,142,115,160,148,120,136,155,127),
-  smoker = c(FALSE,TRUE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,TRUE,FALSE,TRUE,TRUE,FALSE)
-)
-
 ggplot(survey, aes(x = age, y = sbp, colour = smoker)) +
   geom_point(size = 3)
 ```
@@ -119,12 +118,6 @@ One variable, so only `x`. A histogram counts how many observations fall in each
 bin.
 
 ```{webr}
-library(ggplot2)
-library(tibble)
-survey <- tibble(
-  sbp = c(112,138,162,124,145,118,171,129,150,133,158,121,142,115,160,148,120,136,155,127)
-)
-
 ggplot(survey, aes(x = sbp)) +
   geom_histogram(binwidth = 10, colour = "white")
 ```
@@ -135,13 +128,6 @@ the story has. Always say what binwidth you used.
 ## Comparing groups: the boxplot
 
 ```{webr}
-library(ggplot2)
-library(tibble)
-survey <- tibble(
-  sbp = c(112,138,162,124,145,118,171,129,150,133,158,121,142,115,160,148,120,136,155,127),
-  district = c("Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur")
-)
-
 ggplot(survey, aes(x = district, y = sbp)) +
   geom_boxplot()
 ```
@@ -164,13 +150,6 @@ ggplot(survey, aes(x = district, y = sbp)) +
 `geom_bar()` counts rows for you. Give it only an `x`.
 
 ```{webr}
-library(ggplot2)
-library(tibble)
-survey <- tibble(
-  district = c("Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur"),
-  smoker = c(FALSE,TRUE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,TRUE,FALSE,TRUE,TRUE,FALSE)
-)
-
 ggplot(survey, aes(x = district, fill = smoker)) +
   geom_bar(position = "dodge")
 ```
@@ -187,18 +166,6 @@ Note the join in the middle: `|>` between the dplyr steps, then `+` between the
 ggplot layers. That switch is the whole trick.
 
 ```{webr}
-library(dplyr)
-library(ggplot2)
-library(tibble)
-
-survey <- tibble(
-  district = c("Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur",
-               "Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar",
-               "Tumkur","Hassan","Kolar","Tumkur"),
-  smoker   = c(FALSE,TRUE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,
-               TRUE,FALSE,TRUE,FALSE,TRUE,TRUE,FALSE,TRUE,TRUE,FALSE)
-)
-
 survey |>
   group_by(district) |>
   summarise(
@@ -234,14 +201,6 @@ A plot that needs you standing next to it is not finished. `labs()` is the
 cheapest improvement you can make to one.
 
 ```{webr}
-library(ggplot2)
-library(tibble)
-survey <- tibble(
-  age = c(23,45,67,34,56,29,71,38,52,41,60,33,48,25,63,55,30,44,58,36),
-  sbp = c(112,138,162,124,145,118,171,129,150,133,158,121,142,115,160,148,120,136,155,127),
-  smoker = c(FALSE,TRUE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,TRUE,FALSE,TRUE,TRUE,FALSE)
-)
-
 ggplot(survey, aes(x = age, y = sbp, colour = smoker)) +
   geom_point(size = 3) +
   labs(

@@ -134,6 +134,34 @@ Do not trust `quarto update` for it; re-pin with the command above.
 - **Never use `gradethis`.** 31.6 MB and 53 packages for feedback that a plain
   `#| check: true` block gives for 0 MB.
 
+## Do not repeat library() or the data in every cell
+
+quarto-live **installs and attaches** every package named in `webr: packages:`
+before the first cell runs. See
+`_extensions/r-wasm/live/templates/webr-setup.ojs`:
+
+    webr::install(pkg, repos = repos)
+    library(pkg, character.only = TRUE)
+
+So `library(dplyr)` inside a cell is a no-op in the browser. Every primer also
+sets `persist: true`, so objects made in one cell are still there in the next.
+
+Each page therefore builds its data **once**, in its first cell, and the later
+cells use it. A `callout-note` near the top tells the reader to run the cells
+from the top. Primer 3 is the exception: that page teaches `library()`, and its
+callout explains that the browser has already done it for you.
+
+Before this was fixed, primer-r-04 repeated the same 12-row tibble 9 times.
+
+**Verify with the cell harness**, which is the only test that runs what the
+reader will run:
+
+    python tools/run_cells.py
+
+It extracts every `{webr}` cell from each primer in page order, attaches the
+declared packages, and runs the lot in one R session. An `object not found`
+there is a page the reader cannot work through.
+
 ## Writing exercise checks
 
 Rules learned the hard way; full version in

@@ -44,6 +44,17 @@ packages live in `setup/install_packages.R` for participants.
 Preview locally with `quarto preview`. Do not open a rendered primer via
 `file://` — the WebAssembly worker is blocked.
 
+## Testing the primers
+
+```bash
+python tools/run_cells.py
+```
+
+Runs every `{webr}` cell from every primer, in page order, in one R session.
+Each page builds its data once in its first cell and the later cells use it, so
+this catches a page a reader could not work through. Needs Rscript with the
+packages the primers declare.
+
 ## House style
 
 Participant-facing instructions follow `.claude/skills/playbook-instructions`.

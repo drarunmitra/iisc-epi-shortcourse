@@ -49,8 +49,13 @@ Five verbs. Almost every table you will ever need is some arrangement of these.
 ## The dataset
 
 We use one small cohort throughout this page. Twelve people, followed up for a
-cardiovascular event. Run this cell first; the later cells rebuild it for you
-so you can run them in any order.
+cardiovascular event.
+
+::: {.callout-note appearance="simple"}
+**Run the cells from the top.** The first one builds the data that all the
+others use. If a later cell says `object not found`, you have skipped it.
+:::
+
 
 ```{webr}
 library(dplyr)
@@ -84,34 +89,12 @@ The condition goes inside. Note **`==`**, two equals signs, for "is equal to".
 One equals sign is assignment and will not work here.
 
 ```{webr}
-library(dplyr)
-cohort <- tibble(
-  id = sprintf("P%02d", 1:12),
-  district = c("Kolar","Kolar","Kolar","Tumkur","Tumkur","Tumkur","Hassan","Hassan","Hassan","Kolar","Tumkur","Hassan"),
-  sex = c("F","M","F","M","F","M","F","M","F","M","F","M"),
-  age = c(34,51,62,45,38,71,29,55,48,66,41,59),
-  smoker = c(FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE),
-  years_fu = c(5.0,4.2,5.0,3.1,5.0,2.4,5.0,4.8,5.0,1.9,5.0,3.6),
-  event = c(FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE)
-)
-
 cohort |> filter(district == "Kolar")
 ```
 
 Several conditions, separated by commas, means **and**:
 
 ```{webr}
-library(dplyr)
-cohort <- tibble(
-  id = sprintf("P%02d", 1:12),
-  district = c("Kolar","Kolar","Kolar","Tumkur","Tumkur","Tumkur","Hassan","Hassan","Hassan","Kolar","Tumkur","Hassan"),
-  sex = c("F","M","F","M","F","M","F","M","F","M","F","M"),
-  age = c(34,51,62,45,38,71,29,55,48,66,41,59),
-  smoker = c(FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE),
-  years_fu = c(5.0,4.2,5.0,3.1,5.0,2.4,5.0,4.8,5.0,1.9,5.0,3.6),
-  event = c(FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE)
-)
-
 cohort |> filter(smoker, age >= 50)
 ```
 
@@ -123,17 +106,6 @@ For **or**, use `|`.
 For "is it one of these", use `%in%`. It reads better than 3 `|`s in a row:
 
 ```{webr}
-library(dplyr)
-cohort <- tibble(
-  id = sprintf("P%02d", 1:12),
-  district = c("Kolar","Kolar","Kolar","Tumkur","Tumkur","Tumkur","Hassan","Hassan","Hassan","Kolar","Tumkur","Hassan"),
-  sex = c("F","M","F","M","F","M","F","M","F","M","F","M"),
-  age = c(34,51,62,45,38,71,29,55,48,66,41,59),
-  smoker = c(FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE),
-  years_fu = c(5.0,4.2,5.0,3.1,5.0,2.4,5.0,4.8,5.0,1.9,5.0,3.6),
-  event = c(FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE)
-)
-
 cohort |> filter(district %in% c("Kolar", "Hassan"))
 ```
 
@@ -149,17 +121,6 @@ your rows before and after every filter.
 ## `select()`: keep columns
 
 ```{webr}
-library(dplyr)
-cohort <- tibble(
-  id = sprintf("P%02d", 1:12),
-  district = c("Kolar","Kolar","Kolar","Tumkur","Tumkur","Tumkur","Hassan","Hassan","Hassan","Kolar","Tumkur","Hassan"),
-  sex = c("F","M","F","M","F","M","F","M","F","M","F","M"),
-  age = c(34,51,62,45,38,71,29,55,48,66,41,59),
-  smoker = c(FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE),
-  years_fu = c(5.0,4.2,5.0,3.1,5.0,2.4,5.0,4.8,5.0,1.9,5.0,3.6),
-  event = c(FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE)
-)
-
 cohort |> select(id, age, event)
 
 # A minus sign drops instead
@@ -171,17 +132,6 @@ cohort |> select(-sex, -years_fu)
 The new column is computed from existing ones, for every row at once.
 
 ```{webr}
-library(dplyr)
-cohort <- tibble(
-  id = sprintf("P%02d", 1:12),
-  district = c("Kolar","Kolar","Kolar","Tumkur","Tumkur","Tumkur","Hassan","Hassan","Hassan","Kolar","Tumkur","Hassan"),
-  sex = c("F","M","F","M","F","M","F","M","F","M","F","M"),
-  age = c(34,51,62,45,38,71,29,55,48,66,41,59),
-  smoker = c(FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE),
-  years_fu = c(5.0,4.2,5.0,3.1,5.0,2.4,5.0,4.8,5.0,1.9,5.0,3.6),
-  event = c(FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE)
-)
-
 cohort |>
   mutate(age_group = if_else(age >= 50, "50+", "under 50")) |>
   select(id, age, age_group)
@@ -192,12 +142,6 @@ use when it is false. For more than two categories, `case_when()` does the same
 job with as many branches as you like:
 
 ```{webr}
-library(dplyr)
-cohort <- tibble(
-  id = sprintf("P%02d", 1:12),
-  age = c(34,51,62,45,38,71,29,55,48,66,41,59)
-)
-
 cohort |>
   mutate(age_band = case_when(
     age < 40            ~ "under 40",
@@ -216,13 +160,6 @@ matters: a 35-year-old is caught by the first line and never reaches the second.
 to a single row.
 
 ```{webr}
-library(dplyr)
-cohort <- tibble(
-  district = c("Kolar","Kolar","Kolar","Tumkur","Tumkur","Tumkur","Hassan","Hassan","Hassan","Kolar","Tumkur","Hassan"),
-  age = c(34,51,62,45,38,71,29,55,48,66,41,59),
-  event = c(FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE)
-)
-
 cohort |>
   group_by(district) |>
   summarise(
@@ -248,17 +185,6 @@ denominator is the only thing that tells them apart.
 ## Putting it together
 
 ```{webr}
-library(dplyr)
-cohort <- tibble(
-  id = sprintf("P%02d", 1:12),
-  district = c("Kolar","Kolar","Kolar","Tumkur","Tumkur","Tumkur","Hassan","Hassan","Hassan","Kolar","Tumkur","Hassan"),
-  sex = c("F","M","F","M","F","M","F","M","F","M","F","M"),
-  age = c(34,51,62,45,38,71,29,55,48,66,41,59),
-  smoker = c(FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE),
-  years_fu = c(5.0,4.2,5.0,3.1,5.0,2.4,5.0,4.8,5.0,1.9,5.0,3.6),
-  event = c(FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE)
-)
-
 cohort |>
   filter(age >= 40) |>
   group_by(smoker) |>

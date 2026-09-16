@@ -42,6 +42,12 @@ That rectangle is what you analyse. **One row per observation**: a person, a
 household, a notification. **One column per variable**. In the tidyverse the
 rectangle is called a **tibble**.
 
+::: {.callout-note appearance="simple"}
+**Run the cells from the top.** The first one builds the data that all the
+others use. If a later cell says `object not found`, you have skipped it.
+:::
+
+
 ## Building a tibble
 
 `tibble()` takes named vectors and lines them up as columns. Each one must be
@@ -79,15 +85,6 @@ Confusion starts when you cannot say what one row is.
 4 functions. Use them on every dataset you open, before anything else.
 
 ```{webr}
-library(tibble)
-participants <- tibble(
-  id       = c("P01", "P02", "P03", "P04", "P05"),
-  district = c("Kolar", "Kolar", "Tumkur", "Hassan", "Tumkur"),
-  age      = c(34, 51, 22, 67, 45),
-  smoker   = c(TRUE, FALSE, FALSE, TRUE, TRUE),
-  sbp      = c(128, 142, 118, 156, 134)
-)
-
 nrow(participants)      # how many rows
 ncol(participants)      # how many columns
 names(participants)     # what the columns are called
@@ -97,15 +94,6 @@ str(participants)       # types and the first few values
 `summary()` is the fifth, and it is worth the extra second:
 
 ```{webr}
-library(tibble)
-participants <- tibble(
-  id       = c("P01", "P02", "P03", "P04", "P05"),
-  district = c("Kolar", "Kolar", "Tumkur", "Hassan", "Tumkur"),
-  age      = c(34, 51, 22, 67, 45),
-  smoker   = c(TRUE, FALSE, FALSE, TRUE, TRUE),
-  sbp      = c(128, 142, 118, 156, 134)
-)
-
 summary(participants)
 ```
 
@@ -117,15 +105,6 @@ until it has already ruined an analysis.
 `$` unwraps one column back into the vector it was.
 
 ```{webr}
-library(tibble)
-participants <- tibble(
-  id       = c("P01", "P02", "P03", "P04", "P05"),
-  district = c("Kolar", "Kolar", "Tumkur", "Hassan", "Tumkur"),
-  age      = c(34, 51, 22, 67, 45),
-  smoker   = c(TRUE, FALSE, FALSE, TRUE, TRUE),
-  sbp      = c(128, 142, 118, 156, 134)
-)
-
 participants$age
 mean(participants$sbp)
 ```
@@ -135,15 +114,6 @@ That is the pattern: a tibble is a bundle of vectors, and `$` gets one.
 Everything you learned in Primer 1 now applies to a real dataset:
 
 ```{webr}
-library(tibble)
-participants <- tibble(
-  id       = c("P01", "P02", "P03", "P04", "P05"),
-  district = c("Kolar", "Kolar", "Tumkur", "Hassan", "Tumkur"),
-  age      = c(34, 51, 22, 67, 45),
-  smoker   = c(TRUE, FALSE, FALSE, TRUE, TRUE),
-  sbp      = c(128, 142, 118, 156, 134)
-)
-
 # What proportion are smokers? A logical column sums as 1s and 0s.
 mean(participants$smoker)
 
@@ -156,15 +126,6 @@ sum(participants$sbp >= 140)
 `table()` is base R and it is still the fastest way to see what is in a column.
 
 ```{webr}
-library(tibble)
-participants <- tibble(
-  id       = c("P01", "P02", "P03", "P04", "P05"),
-  district = c("Kolar", "Kolar", "Tumkur", "Hassan", "Tumkur"),
-  age      = c(34, 51, 22, 67, 45),
-  smoker   = c(TRUE, FALSE, FALSE, TRUE, TRUE),
-  sbp      = c(128, 142, 118, 156, 134)
-)
-
 table(participants$district)
 ```
 
@@ -172,15 +133,6 @@ Cross two columns and you have the beginning of a 2×2 table, which is where
 Primer 7 starts:
 
 ```{webr}
-library(tibble)
-participants <- tibble(
-  id       = c("P01", "P02", "P03", "P04", "P05"),
-  district = c("Kolar", "Kolar", "Tumkur", "Hassan", "Tumkur"),
-  age      = c(34, 51, 22, 67, 45),
-  smoker   = c(TRUE, FALSE, FALSE, TRUE, TRUE),
-  sbp      = c(128, 142, 118, 156, 134)
-)
-
 table(participants$smoker, participants$sbp >= 140)
 ```
 
