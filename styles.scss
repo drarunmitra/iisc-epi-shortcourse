@@ -37,40 +37,6 @@ h2 {
   margin-top: 2.2rem;
 }
 
-// Session metadata strip used at the top of every session page
-.session-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1.25rem;
-  padding: 0.75rem 1rem;
-  margin-bottom: 1.5rem;
-  background: $light;
-  border-left: 4px solid $primary;
-  border-radius: 0 4px 4px 0;
-  font-size: 0.9rem;
-
-  .meta-item { white-space: nowrap; }
-  .meta-label {
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    font-size: 0.72rem;
-    color: $secondary;
-    display: block;
-  }
-  .meta-value { font-weight: 600; }
-}
-
-// Faculty ownership badges
-.badge-faculty {
-  display: inline-block;
-  padding: 0.1rem 0.55rem;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  background: rgba(44, 62, 112, 0.1);
-  color: $primary;
-}
-
 // Two organisers, shown side by side under the site title
 .organisers {
   display: flex;
@@ -91,17 +57,6 @@ h2 {
     display: block;
   }
   .org-name { font-weight: 600; }
-}
-
-// Schedule table
-table.schedule {
-  font-size: 0.92rem;
-  width: 100%;
-
-  th { background: $primary; color: #fff; font-weight: 600; }
-  tr.break td { background: #fdf6e3; font-style: italic; color: #6b5b2a; }
-  tr.handson td { background: rgba(45, 106, 79, 0.07); }
-  td.time { white-space: nowrap; font-variant-numeric: tabular-nums; font-weight: 600; }
 }
 
 // Landing page cards
@@ -167,7 +122,9 @@ kbd {
   color: $dark;
 }
 
-// Placeholders the organisers still have to fill in. Deliberately loud.
+// Placeholders. Unused today - every TBD has been resolved - but kept, because
+// CLAUDE.md and docs/PLACEHOLDERS.md tell future authors to mark new unknowns
+// with [TBD: ...]{.tbd} so they ship visibly instead of quietly.
 .tbd {
   background: #fff3cd;
   border-bottom: 1px dashed #b8860b;

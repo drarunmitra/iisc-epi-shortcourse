@@ -3,7 +3,6 @@ title: "Additional resources"
 subtitle: "Step 5 of 5"
 ---
 
-**Time:** browse. There is nothing to complete here.
 **Before you start:** nothing.
 **When you finish:** you know what is here, so you can come back to it during
 the course.
@@ -39,7 +38,7 @@ Books, papers and free courses, with a note on who each one suits.
 ## Getting help
 
 1. Read [Troubleshooting](troubleshooting.qmd) first.
-2. Email [office.msicph@iisc.ac.in](mailto:office.msicph@iisc.ac.in).
+2. Then email [office.msicph@iisc.ac.in](mailto:office.msicph@iisc.ac.in).
 
 When you ask, include 3 things:
 
@@ -49,11 +48,11 @@ When you ask, include 3 things:
 
 Those 3 things turn a question we cannot answer into one we can.
 
-## After the course
+## Step 5 is done
 
-This site stays online. The materials are licensed
+That is the whole prelude. See you at IISc on Monday 21 September.
+
+The materials are licensed
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) and the code is MIT,
-so you may reuse and adapt them with attribution.
-
-Corrections are welcome. Use the **Report an issue** link at the top right of
-any page.
+so you may reuse and adapt them with attribution. Corrections are welcome: use
+the **Report an issue** link at the top right of any page.

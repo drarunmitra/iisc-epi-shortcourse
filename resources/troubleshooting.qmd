@@ -12,7 +12,7 @@ stuck?](#still-stuck) at the bottom.
 
 You do not have administrator rights on this laptop.
 
-**Do this:** ask your IT department to install R, RStudio and Quarto. Send them
+**Do this:** ask your IT department to install R and RStudio. Send them
 [Step 1](../prelude/install.qmd). Do it this week.
 
 ### RStudio says R is not installed, but it is
@@ -26,20 +26,6 @@ RStudio looks for R when it starts, and it was probably installed before R was.
 3. Install RStudio again.
 4. If it still fails, open RStudio and click **Tools → Global Options →
    General**, then **Change**, and choose your R by hand.
-
-### `quarto: command not found`, or Quarto is missing after you installed it
-
-Quarto adds itself to your system PATH. Programs already running cannot see
-that change.
-
-**Do this:** restart the whole computer, not only RStudio. Then run
-`quarto::quarto_version()` in the Console.
-
-### The check says Quarto is installed but the `quarto` R package is not
-
-These are 2 separate things with the same name.
-
-**Do this:** run `install.packages("quarto")` in the Console.
 
 ## Installing packages
 
@@ -67,7 +53,7 @@ Your network is blocking CRAN, or you are behind a proxy.
 1. Try a phone hotspot.
 2. If that works, the problem is your institutional network. Tell your IT
    department that CRAN is blocked.
-3. If nothing works, you can still do all 9 primers, because they need only a
+3. If nothing works, you can still do all 7 primers, because they need only a
    web browser. Tell us and we will pair you with someone on the first day.
 
 ### `there is no package called 'xyz'`
@@ -95,9 +81,10 @@ This is a warning, not an error. Your R is older than the package expects.
 
 ## Paths and folders
 
-### `cannot open file 'something.csv': No such file or directory`
+### `cannot open file '…': No such file or directory`
 
-R is looking somewhere other than where you think.
+This course distributes no data files, so you will only meet this with your own
+work. R is looking somewhere other than where you think.
 
 **Do this:**
 
@@ -122,8 +109,8 @@ Your R was installed into a path containing spaces or non-English characters.
 
 ### The cells never become ready
 
-Wait 2 or 3 minutes first. The page downloads about 17 MB before anything runs,
-and Primer 5 downloads about 37 MB.
+Wait 2 or 3 minutes first. Each page downloads between 17 MB and 37 MB before
+anything runs. Primer 5, which draws plots, is the heaviest.
 
 **If it still does not work:**
 
@@ -139,39 +126,32 @@ There is no Stop button.
 **Do this:** reload the page. Everything on that page starts again from the
 top.
 
-### My answer looks right but the checker says no
-
-Read the message under the cell. It names what is wrong.
-
-Common causes:
-
-- the wrong number of decimal places
-- a count where a proportion was asked for
-- the right value reached the wrong way, when the method was the point
-
 ### My work disappeared when I moved to the next page
 
 Each page runs its own R from scratch. Nothing carries between pages.
 
 **Do this:** finish a page before you leave it.
 
-## Rendering
+## The setup check
 
-### The render test in `check_setup.R` fails
+### The check says `epitools` did not return the expected risk ratio
 
-R and Quarto are both installed but are not co-operating.
+`epitools` is installed but is not working. This is the one check that runs a
+real calculation rather than looking for a file.
 
 **Do this:**
 
-1. Restart your computer.
-2. Run `quarto::quarto_version()` in the Console. If it errors, run
-   `install.packages("quarto")`.
+1. Restart R with <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F10</kbd>.
+2. Run `install.packages("epitools")` again.
 3. Run the check again.
+4. If it still fails, email us the output. Do not try to fix it on the day.
 
-### The render works but produces no output file
+### The check says the working folder is not writable
 
-Check that you are not rendering into a folder you cannot write to. Run
-`getwd()` and confirm.
+R cannot create a file where it is running.
+
+**Do this:** move your work out of a restricted folder, and out of OneDrive,
+Dropbox or Google Drive.
 
 ## Reading an error message
 

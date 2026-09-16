@@ -7,9 +7,9 @@ toc: false
 A hands-on short course for researchers, public health professionals and
 students. Lectures alternate with practical work.
 
-By the end you will be able to choose a study design, compute the measures that
-design gives you, read them correctly, tell a real effect from a biased one,
-and do all of it in R.
+By the end you will be able to choose a study design and compute the measures
+it gives you. You will be able to read those measures correctly, and tell a real
+effect from a biased one. You will do all of it in R.
 
 ::: {.organisers}
 ::: {.org}
@@ -28,10 +28,11 @@ and do all of it in R.
 
 ::: {.callout-important}
 ## Before you arrive
-There are 5 steps to work through before Monday 21 September. They take about
-3 hours. Spread them over a few evenings.
+There are 5 steps to work through before Monday 21 September. Spread them over
+a few evenings.
 
-Installing the software is the only step we cannot fix for you on the day.
+Install the software first. It is the one step we cannot fix for you on the
+day.
 
 → [**Start here: the 5 steps**](prelude/index.qmd)
 :::
@@ -42,13 +43,13 @@ The programme is being finalised and will be circulated separately.
 
 ## Who this is for
 
-Researchers, public health professionals, programme managers and students.
+Researchers, public health professionals and students.
 
 No programming is assumed. If you have used SPSS, Excel or Stata, you already
 know most of the statistical ideas. This course changes the tools and sharpens
 the reasoning.
 
-You need a laptop you can install software on, and about 3 hours before the
+You need a laptop you can install software on, and a few evenings before the
 course for the [5 steps](prelude/index.qmd).
 
 ## Faculty
@@ -64,8 +65,8 @@ Manikandanesan Sakthivel · Uttara Partap
 - **[Resources](resources/index.qmd)**. Cheatsheet, troubleshooting, glossary
   and further reading. Use these during the course and after it.
 
-The site is built from a public repository, so corrections are welcome as
-issues or pull requests.
+Corrections are welcome. Use the **Report an issue** link at the top right of
+any page.
 
 Questions about travel, accommodation or logistics go to
 [office.msicph@iisc.ac.in](mailto:office.msicph@iisc.ac.in).

@@ -28,7 +28,8 @@ webr:
 
 ::: {.callout-important title="If the cells below never become ready"}
 This page runs R inside your browser. It needs about 22 MB on first load (the R
-engine, the marking machinery, and **dplyr**) and a minute or two on a slow
+engine, the machinery that runs your code, and **dplyr** and **tibble**) and a
+minute or two on a slow
 connection. If nothing happens after that, your network is probably blocking
 it. Work through [the R primer](r-primer.qmd) in RStudio instead.
 
@@ -70,9 +71,12 @@ cohort <- tibble(
 cohort
 ```
 
-`years_fu` is how long each person was followed. Note that it is shorter for
-some people — they had the event, or they were lost. That column is what makes
-this a real cohort rather than a spreadsheet, and Primer 6 is about it.
+`years_fu` is how long each person was followed. It is shorter for some people,
+because they had the event or were lost to follow-up.
+
+Add those years up and you have **person-time**: the total time the group was
+actually watched. It is what you divide by when people were followed for
+different lengths. Primer 6 is about that.
 
 ## `filter()`: keep rows
 
@@ -267,173 +271,6 @@ cohort |>
 
 Two risks: one for smokers, one for non-smokers, among people aged 40 and over.
 Divide one by the other and you have a risk ratio. That is Primer 7.
-
-## Exercises
-
-::: {.callout-note title="Exercise 1: filter and count"}
-**Time:** 5 minutes
-
-How many people in `cohort` are **smokers aged 50 or more**? Return a single
-number.
-
-```{webr}
-#| setup: true
-#| exercise:
-#|   - ex_filter
-#|   - ex_group
-#|   - ex_rate
-library(dplyr)
-
-cohort <- tibble(
-  id = sprintf("P%02d", 1:12),
-  district = c("Kolar","Kolar","Kolar","Tumkur","Tumkur","Tumkur","Hassan","Hassan","Hassan","Kolar","Tumkur","Hassan"),
-  sex = c("F","M","F","M","F","M","F","M","F","M","F","M"),
-  age = c(34,51,62,45,38,71,29,55,48,66,41,59),
-  smoker = c(FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE),
-  years_fu = c(5.0,4.2,5.0,3.1,5.0,2.4,5.0,4.8,5.0,1.9,5.0,3.6),
-  event = c(FALSE,TRUE,FALSE,FALSE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,FALSE)
-)
-```
-
-```{webr}
-#| exercise: ex_filter
-cohort |>
-  filter(______) |>
-  nrow()
-```
-
-```{webr}
-#| exercise: ex_filter
-#| solution: true
-cohort |>
-  filter(smoker, age >= 50) |>
-  nrow()
-```
-
-```{webr}
-#| exercise: ex_filter
-#| check: true
-# Smokers are P02(51), P04(45), P06(71), P08(55), P10(66), P12(59).
-# Aged 50+: 51, 71, 55, 66, 59 = 5.  Aged >50 strictly: the same 5.
-# Aged 50+ ignoring smoking: 51,62,71,55,66,59 = 6.
-if (identical(as.numeric(.result), 5)) {
-  list(correct = TRUE, message = "Correct — 5 smokers are aged 50 or over.")
-} else if (identical(as.numeric(.result), 6)) {
-  list(correct = FALSE, message = "That is everyone aged 50 or over, smoker or not. Add the smoker condition too, separated by a comma.")
-} else if (identical(as.numeric(.result), 3)) {
-  list(correct = FALSE, message = "That is everyone aged 60 or over. The threshold is 50, and you also need the smoker condition.")
-} else if (identical(as.numeric(.result), 12)) {
-  list(correct = FALSE, message = "Nothing was filtered out. Put both conditions inside filter().")
-} else {
-  list(correct = FALSE, message = "Two conditions inside one filter(), separated by a comma: smoker, and age >= 50.")
-}
-```
-
-::: {.hint exercise="ex_filter"}
-Commas inside `filter()` mean "and". `smoker` is already `TRUE`/`FALSE` so it
-needs no comparison of its own.
-:::
-:::
-
-::: {.callout-note title="Exercise 2: risk by sex"}
-**Time:** 8 minutes
-
-Produce a table with one row per `sex` and 3 columns:
-
-- `n`, how many people
-- `events`, how many had the event
-- `risk`, the proportion who did, rounded to 3 places
-
-```{webr}
-#| exercise: ex_group
-cohort |>
-  group_by(______) |>
-  summarise(
-    n      = ______,
-    events = ______,
-    risk   = ______
-  )
-```
-
-```{webr}
-#| exercise: ex_group
-#| solution: true
-cohort |>
-  group_by(sex) |>
-  summarise(
-    n      = n(),
-    events = sum(event),
-    risk   = round(mean(event), 3)
-  )
-```
-
-```{webr}
-#| exercise: ex_group
-#| check: true
-# F: 6 people, 0 events, risk 0.  M: 6 people, 4 events, risk 0.667.
-if (!is.data.frame(.result)) {
-  list(correct = FALSE, message = "That is not a table. If there is a red error above, read that first. Otherwise start with cohort |> group_by(sex) |> summarise(...).")
-} else if (nrow(.result) != 2) {
-  list(correct = FALSE, message = sprintf("You got %d row(s); grouping by sex should give 2. Check what you passed to group_by().", nrow(.result)))
-} else if (!all(c("n", "events", "risk") %in% names(.result))) {
-  list(correct = FALSE, message = "The three columns must be named exactly n, events and risk.")
-} else if (!isTRUE(all.equal(sort(as.numeric(.result$events)), c(0, 4)))) {
-  list(correct = FALSE, message = "The event counts are wrong. sum(event) counts the TRUEs, because TRUE counts as 1.")
-} else if (!isTRUE(all.equal(sort(as.numeric(.result$risk)), c(0, 0.667)))) {
-  list(correct = FALSE, message = "The risks are wrong. Risk is mean(event), the proportion who had the event, rounded to 3 places.")
-} else {
-  list(correct = TRUE, message = "Correct. 0 of 6 women and 4 of 6 men, a risk of 0 and 0.667. Before you believe that difference, ask what else differs between the men and the women here. That question is confounding, and we cover it in the room.")
-}
-```
-
-::: {.hint exercise="ex_group"}
-`n()` counts rows and takes no arguments. `sum(event)` counts the `TRUE`s.
-`mean(event)` is the proportion, and you wrap it in `round(..., 3)`.
-:::
-:::
-
-::: {.callout-note title="Exercise 3: a rate, not a risk"}
-**Time:** 8 minutes
-
-Risk ignores how long each person was followed. A **rate** does not: it divides
-events by total person-time.
-
-Compute the overall event rate per 100 person-years: total events divided by
-total `years_fu`, times 100, rounded to 1 decimal place. Return a single number.
-
-```{webr}
-#| exercise: ex_rate
-______
-```
-
-```{webr}
-#| exercise: ex_rate
-#| solution: true
-round(sum(cohort$event) / sum(cohort$years_fu) * 100, 1)
-```
-
-```{webr}
-#| exercise: ex_rate
-#| check: true
-# 4 events over 50.0 person-years = 8.0 per 100 person-years.
-if (isTRUE(all.equal(as.numeric(.result), 8))) {
-  list(correct = TRUE, message = "Correct — 4 events in 50.0 person-years, so 8.0 per 100 person-years. Compare that with the risk, 4/12 = 0.333: same events, different denominator, different meaning.")
-} else if (isTRUE(all.equal(as.numeric(.result), 33.3, tolerance = 1e-2))) {
-  list(correct = FALSE, message = "You divided by the number of people, not by person-time. That is the risk as a percentage. A rate uses sum(years_fu) as the denominator.")
-} else if (isTRUE(all.equal(as.numeric(.result), 0.1, tolerance = 1e-2))) {
-  list(correct = FALSE, message = "You are close but have not multiplied by 100. The question asks per 100 person-years.")
-} else if (is.numeric(.result) && length(.result) == 1) {
-  list(correct = FALSE, message = "Right shape, wrong number. Total events divided by total years_fu, times 100, rounded to 1.")
-} else {
-  list(correct = FALSE, message = "You want one number: sum(cohort$event) / sum(cohort$years_fu) * 100, rounded to 1 place.")
-}
-```
-
-::: {.hint exercise="ex_rate"}
-`sum(cohort$event)` is the numerator. `sum(cohort$years_fu)` is the denominator.
-Multiply by 100 and round.
-:::
-:::
 
 ## What you should now be able to do
 

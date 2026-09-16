@@ -24,8 +24,8 @@ format:
 
 ::: {.callout-important title="If the cells below never become ready"}
 This page runs R inside your browser. The first load downloads about 17 MB: R
-itself, plus the machinery that marks your answers. On a slow connection that
-takes a minute or two.
+itself, plus the machinery that runs your code. On a slow connection that takes
+a minute or two.
 
 If nothing happens after that, your network is blocking it. Work through
 [the R primer](r-primer.qmd) in RStudio instead. It teaches the same material.
@@ -168,7 +168,8 @@ sum(age >= 45)     # how many
 mean(age >= 45)    # what proportion
 ```
 
-That second line is prevalence in miniature. Hold on to it.
+That second line is prevalence in miniature: the share of a group who have
+something. Primer 6 does it properly.
 
 ## Missing values
 
@@ -201,133 +202,6 @@ mean of the 5 you measured.
 Sometimes that is fine. Sometimes the 2 missing people are missing *because*
 they were the sickest. Then it is not fine. Ask why the values are missing
 before you drop them.
-:::
-
-## Exercises
-
-::: {.callout-note title="Exercise 1: your first vector"}
-**Time:** 4 minutes
-
-A screening camp measured fasting blood glucose in five people: 96, 110, 142,
-88 and 125 mg/dL. Put those into a vector called `glucose`.
-
-```{webr}
-#| exercise: ex_vector
-glucose <- ______
-```
-
-```{webr}
-#| exercise: ex_vector
-#| solution: true
-glucose <- c(96, 110, 142, 88, 125)
-```
-
-```{webr}
-#| exercise: ex_vector
-#| check: true
-if (identical(as.numeric(.result), c(96, 110, 142, 88, 125))) {
-  list(correct = TRUE, message = "Correct — a numeric vector of five readings.")
-} else if (is.character(.result)) {
-  list(correct = FALSE, message = "Those are text, not numbers. Drop the quotation marks.")
-} else if (length(.result) != 5) {
-  list(correct = FALSE, message = "You need all five readings, in the order given.")
-} else {
-  list(correct = FALSE, message = "Use c() to combine the five values: c(96, 110, ...).")
-}
-```
-
-::: {.hint exercise="ex_vector"}
-`c()` combines values. They go inside the brackets, separated by commas, with
-no quotation marks because they are numbers.
-:::
-:::
-
-::: {.callout-note title="Exercise 2: count the raised readings"}
-**Time:** 5 minutes
-
-Using the same five readings, count how many are **126 mg/dL or above** — the
-usual fasting threshold for diabetes. Note that 126 itself would count.
-
-Compare the whole vector at once, then sum the result.
-
-```{webr}
-#| exercise: ex_count
-glucose <- c(96, 110, 142, 88, 125)
-
-______
-```
-
-```{webr}
-#| exercise: ex_count
-#| solution: true
-glucose <- c(96, 110, 142, 88, 125)
-
-sum(glucose >= 126)
-```
-
-```{webr}
-#| exercise: ex_count
-#| check: true
-if (identical(as.numeric(.result), 1)) {
-  list(correct = TRUE, message = "Correct — one reading, 142, is 126 or above.")
-} else if (is.logical(.result) && length(.result) == 5) {
-  list(correct = FALSE, message = "That is the comparison itself: five TRUE/FALSE answers. Wrap it in sum() to count them.")
-} else if (identical(as.numeric(.result), 0.2)) {
-  list(correct = FALSE, message = "That is the proportion. mean() gives a proportion; sum() gives a count. Here we want the count.")
-} else {
-  list(correct = FALSE, message = "Compare the whole vector at once with glucose >= 126, then pass that to sum().")
-}
-```
-
-::: {.hint exercise="ex_count"}
-`glucose >= 126` gives you five `TRUE`/`FALSE` answers. `sum()` of those counts
-the `TRUE`s, because `TRUE` counts as 1.
-:::
-:::
-
-::: {.callout-note title="Exercise 3: a mean with a hole in it"}
-**Time:** 5 minutes
-
-Haemoglobin was measured in six women, but two results were lost:
-11.2, NA, 9.8, 12.6, NA, 10.4 g/dL.
-
-Find the mean of the four values you do have, rounded to one decimal place.
-
-```{webr}
-#| exercise: ex_namean
-hb <- c(11.2, NA, 9.8, 12.6, NA, 10.4)
-
-______
-```
-
-```{webr}
-#| exercise: ex_namean
-#| solution: true
-hb <- c(11.2, NA, 9.8, 12.6, NA, 10.4)
-
-round(mean(hb, na.rm = TRUE), 1)
-```
-
-```{webr}
-#| exercise: ex_namean
-#| check: true
-if (isTRUE(all.equal(as.numeric(.result), 11))) {
-  list(correct = TRUE, message = "Correct — 11.0 g/dL across the four women measured. Note what that number is NOT: the mean for all six.")
-} else if (length(.result) == 1 && is.na(.result)) {
-  list(correct = FALSE, message = "You got NA. R will not average numbers it does not know. Add na.rm = TRUE inside mean().")
-} else if (isTRUE(all.equal(as.numeric(.result), 7.333333, tolerance = 1e-4))) {
-  list(correct = FALSE, message = "You divided by six. mean(hb, na.rm = TRUE) divides by the four values that exist, not by all six slots.")
-} else if (is.numeric(.result) && length(.result) == 1) {
-  list(correct = FALSE, message = "Right shape, wrong number. Take mean(hb, na.rm = TRUE) and then round it to 1 decimal place.")
-} else {
-  list(correct = FALSE, message = "You want a single number: mean() with na.rm = TRUE, wrapped in round(..., 1).")
-}
-```
-
-::: {.hint exercise="ex_namean"}
-Two steps. `mean(hb, na.rm = TRUE)` gets the average of what is there. Then
-`round(that, 1)` trims it to one decimal place.
-:::
 :::
 
 ## What you should now be able to do

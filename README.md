@@ -22,6 +22,9 @@ Tropical Medicine, University of London.
 7 pages that run R **inside the reader's browser** through WebR. Nothing to
 install. 5 teach R (Step 3); 2 teach epidemiological measures (Step 4).
 
+There are **no graded exercises and no quizzes**. The cells are there to be run
+and edited; nothing is marked.
+
 Each page declares its own packages, so each downloads only what it needs: about
 17 MB for a base-R page, 21 MB with tibble, 22 MB with dplyr, 37 MB with
 ggplot2. Browsers cache that for 7 days, which is why the site tells
@@ -47,7 +50,7 @@ Participant-facing instructions follow `.claude/skills/playbook-instructions`.
 Before committing any prose change:
 
 ```bash
-bash .claude/skills/playbook-instructions/check.sh index.qmd schedule.qmd prelude/*.qmd resources/*.qmd
+bash .claude/skills/playbook-instructions/check.sh index.qmd prelude/*.qmd resources/*.qmd
 ```
 
 ## Licence

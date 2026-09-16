@@ -1,13 +1,14 @@
 ---
 title: "R primer (reference)"
-subtitle: "The same material as Primers 1 to 5, for RStudio"
+subtitle: "The same material as the browser primers, for RStudio"
 ---
 
 Use this page if the browser primers will not run on your network, or if you
 prefer to work in RStudio.
 
-Everything taught in Primers 1 to 5 is taught here. The difference is that you
-run the code in your own R, so you also have to load packages yourself.
+Everything taught in the browser primers is taught here, including the 2×2
+table from Primer 7. The difference is that you run the code in your own R, so
+you also have to load packages yourself.
 
 ::: {.callout-note}
 ## Run this first
@@ -331,7 +332,7 @@ risk_unexposed <- cc / (cc + d)        # 0.03
 
 risk_exposed / risk_unexposed          # risk ratio   3.00
 risk_exposed - risk_unexposed          # risk difference 0.06
-1 / abs(risk_exposed - risk_unexposed) # NNT  16.7
+1 / abs(risk_exposed - risk_unexposed) # NNH  16.7 (harmful exposure)
 (a * d) / (b * cc)                     # odds ratio  3.20
 ```
 

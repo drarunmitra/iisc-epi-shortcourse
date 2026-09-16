@@ -27,7 +27,7 @@ webr:
 
 ::: {.callout-important title="If the cells below never become ready"}
 This page runs R inside your browser. It needs about 22 MB on first load (the R
-engine, the marking machinery, and **dplyr**) and a minute or two on a slow
+engine, the machinery that runs your code, and **dplyr**) and a minute or two on a slow
 connection. If nothing happens after that, your network is probably blocking
 it. Work through [the R primer](r-primer.qmd) in RStudio instead.
 
@@ -144,107 +144,6 @@ If a function needs the piped value somewhere other than first, the pipe cannot
 help you, and you write the call normally. That is uncommon in the tidyverse,
 because tidyverse functions are designed to take the data first for exactly
 this reason.
-
-## Exercises
-
-::: {.callout-note title="Exercise 1: rewrite with a pipe"}
-**Time:** 5 minutes
-
-Seven monthly case counts: 12, 19, 7, 25, 14, 31, 9.
-
-Compute the square root of their mean, rounded to 2 decimal places — and write
-it as a **pipeline**, not as nested brackets.
-
-```{webr}
-#| exercise: ex_pipe
-cases <- c(12, 19, 7, 25, 14, 31, 9)
-
-______
-```
-
-```{webr}
-#| exercise: ex_pipe
-#| solution: true
-cases <- c(12, 19, 7, 25, 14, 31, 9)
-
-cases |>
-  mean() |>
-  sqrt() |>
-  round(2)
-```
-
-```{webr}
-#| exercise: ex_pipe
-#| check: true
-# The pipe IS the lesson here: the value 4.09 is obtainable without one, so the
-# value alone cannot show the lesson was learnt. This is the one check on this
-# page that reads your code rather than your answer.
-# fixed = TRUE is load-bearing: as a regex, "|>" means "empty string or >",
-# and empty string matches everything, so the check would always pass.
-used_pipe    <- grepl("|>", .user_code, fixed = TRUE)
-used_magrittr <- grepl("%>%", .user_code, fixed = TRUE)
-right_answer <- isTRUE(all.equal(as.numeric(.result), 4.09))
-
-if (right_answer && used_pipe) {
-  list(correct = TRUE, message = "Correct — 4.09, and it reads left to right.")
-} else if (right_answer && used_magrittr) {
-  list(correct = FALSE, message = "Right answer, but that is the magrittr pipe %>%. Use the native |>, which we use throughout this course.")
-} else if (right_answer) {
-  list(correct = FALSE, message = "Right answer, but rewrite it with |> so it reads in the order the work happens.")
-} else if (is.numeric(.result) && length(.result) == 1) {
-  list(correct = FALSE, message = "Wrong number. Three steps in this order: mean of the cases, then sqrt of that, then round to 2.")
-} else {
-  list(correct = FALSE, message = "Start with cases, then pipe into mean(), then sqrt(), then round(2).")
-}
-```
-
-::: {.hint exercise="ex_pipe"}
-Start with `cases`, then `|> mean()`, then `|> sqrt()`, then `|> round(2)`. Put
-each step on its own line; the pipe at the end of a line tells R to keep
-reading.
-:::
-:::
-
-::: {.callout-note title="Exercise 2: install or load?"}
-**Time:** 2 minutes
-
-You open RStudio on Monday morning. You installed `ggplot2` last week. You now
-want to use it in today's script.
-
-Which single line belongs at the top of that script?
-
-```{webr}
-#| exercise: ex_load
-# Replace the blank with the answer, as a piece of text in quotation marks:
-# either "install.packages(\"ggplot2\")" or "library(ggplot2)"
-
-answer <- ______
-```
-
-```{webr}
-#| exercise: ex_load
-#| solution: true
-answer <- "library(ggplot2)"
-```
-
-```{webr}
-#| exercise: ex_load
-#| check: true
-given <- if (is.character(.result) && length(.result) == 1) .result else ""
-if (grepl("library", given, fixed = TRUE) && !grepl("install", given, fixed = TRUE)) {
-  list(correct = TRUE, message = "Correct. It is already on disk; you just need it off the shelf. library() belongs in the script, every time.")
-} else if (grepl("install", given, fixed = TRUE)) {
-  list(correct = FALSE, message = "Installing is a once-ever job and belongs in the console, not the script. A script that reinstalls every run is slow, and fails with no internet.")
-} else {
-  list(correct = FALSE, message = "Put one of the two lines in quotation marks, as text. For example: answer <- \"library(ggplot2)\"")
-}
-```
-
-::: {.hint exercise="ex_load"}
-You bought the book last week. What do you do this morning — buy it again, or
-take it off the shelf?
-:::
-:::
 
 ## What you should now be able to do
 

@@ -11,7 +11,8 @@ that is due to the exposure: `(RR - 1) / RR`.
 **Bias** — a systematic error that does not shrink when you collect more data.
 
 **Case-control study** — a study that starts from people with the disease and
-looks back at their exposure. It yields an odds ratio and nothing else.
+looks back at their exposure. Its usual output is an odds ratio. What that odds
+ratio estimates depends on how the controls were sampled.
 
 **Cohort study** — a study that starts from exposure and follows people forward
 to see who develops the disease.
@@ -50,7 +51,9 @@ for it removes part of the effect you are measuring.
 category.
 
 **Non-differential misclassification** — measurement error equally likely in
-both groups. On average it pushes the estimate towards 1.
+both groups. For a yes/no exposure it pushes the estimate towards 1 on average.
+With more than two exposure categories it can push the other way, so do not
+treat it as a rule.
 
 **NNT, number needed to treat** — how many people must be treated for one to
 benefit: `1 / abs(RD)`. Always report the time period with it.
@@ -91,16 +94,18 @@ period. A proportion between 0 and 1.
 association.
 
 **Selection bias** — the people in the study differ from the people you meant
-to study, in a way related to both exposure and outcome. It cannot be fixed in
-the analysis.
+to study, in a way related to both exposure and outcome. Ordinary adjustment
+does not fix it. Only a method that models how people were selected can, and
+only if you know enough about that selection.
 
 **Simpson's paradox** — a crude association that reverses when you stratify.
-Strong confounding.
+Usually strong confounding, but a mediator or a collider can do the same thing,
+so find out which before you act on it.
 
 **Stratification** — splitting the analysis by levels of a third variable, to
 see the association within each level.
 
-## R and Quarto
+## R
 
 **Argument** — a value you pass to a function, inside its brackets.
 
@@ -131,9 +136,6 @@ function on its right.
 **Package** — a bundle of functions someone published. Install once, load every
 session.
 
-**Quarto** — the publishing system that turns a `.qmd` file into HTML, Word,
-PDF or slides.
-
 **Script** — a file of R code you save and rerun. `install.packages()` does not
 belong in one.
 
@@ -148,6 +150,6 @@ and others.
 **Vectorisation** — applying an operation to a whole vector at once, with no
 loop.
 
-**WebR** — R compiled to run inside a web browser. It powers the 9 primers.
+**WebR** — R compiled to run inside a web browser. It powers the 7 primers.
 
 **Working directory** — the folder R treats as "here". Find it with `getwd()`.

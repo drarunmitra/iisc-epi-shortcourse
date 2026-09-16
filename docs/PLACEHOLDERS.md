@@ -46,5 +46,7 @@ grep -rn "TBD" --include="*.qmd" .
   recreate `schedule.qmd` or put day-by-day themes back on the home page, and
   keep new prose free of "on Day 3" claims.
 - **No slides, and no day-by-day session pages.**
+- **No graded exercises or quizzes**, and **no time estimates** anywhere. Both
+  removed 2026-09-16.
 - **No Quarto in the install step**, and no primers on study design or on bias
   and confounding. Both removed 2026-09-16; those topics are taught in the room.

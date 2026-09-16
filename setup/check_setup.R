@@ -51,10 +51,13 @@ if (!requireNamespace("rstudioapi", quietly = TRUE)) {
 }
 
 # 4. Packages -----------------------------------------------------------------
+# Kept in step with install_packages.R. rstudioapi is here because check 3
+# above calls it; leaving it out meant the script could warn about a package it
+# never verified.
 required <- c(
-  "tidyverse", "dplyr", "ggplot2", "readr", "tidyr",
-  "here", "janitor", "gtsummary", "gt", "broom",
-  "epitools", "scales"
+  "tidyverse", "dplyr", "ggplot2", "readr", "tidyr", "stringr", "forcats",
+  "here", "janitor", "gtsummary", "gt", "broom", "broom.helpers",
+  "epitools", "scales", "rstudioapi"
 )
 installed <- required[required %in% rownames(installed.packages())]
 missing   <- setdiff(required, installed)

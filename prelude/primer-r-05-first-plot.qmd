@@ -147,7 +147,7 @@ ggplot(survey, aes(x = district, y = sbp)) +
 ```
 
 ::: {.callout-note}
-## A boxplot of 7 points looks as confident as one of 700
+## A boxplot of 7 points looks as confident as one of 600
 Each box here rests on 6 or 7 observations. A box drawn over that few points
 looks as authoritative as one drawn over 600. Add the points on top so the
 reader can see how thin the evidence is:
@@ -177,6 +177,56 @@ ggplot(survey, aes(x = district, fill = smoker)) +
 
 If you already have the counts in a column, use `geom_col()` instead, which
 draws the number you give it rather than counting rows.
+
+## Summarise first, then plot
+
+Most real plots are not drawn from the raw rows. You summarise with the Primer 4
+verbs, then pipe the result into `ggplot()`.
+
+Note the join in the middle: `|>` between the dplyr steps, then `+` between the
+ggplot layers. That switch is the whole trick.
+
+```{webr}
+library(dplyr)
+library(ggplot2)
+library(tibble)
+
+survey <- tibble(
+  district = c("Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur",
+               "Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar",
+               "Tumkur","Hassan","Kolar","Tumkur"),
+  smoker   = c(FALSE,TRUE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,
+               TRUE,FALSE,TRUE,FALSE,TRUE,TRUE,FALSE,TRUE,TRUE,FALSE)
+)
+
+survey |>
+  group_by(district) |>
+  summarise(
+    n           = n(),
+    n_smokers   = sum(smoker),
+    pct_smokers = round(mean(smoker) * 100, 1)
+  ) |>
+  ggplot(aes(x = district, y = pct_smokers)) +
+  geom_col() +
+  labs(x = "District", y = "Smokers (%)")
+```
+
+`geom_col()` here, not `geom_bar()`: you have already worked out the number, so
+you want it drawn, not counted again.
+
+Add `filter(n >= 7)` as a line after `summarise()` and run it again. Hassan
+disappears, because only 6 people there were surveyed. The pipeline is a list of
+steps, so you can insert one anywhere.
+
+It has to go **after** `summarise()`, because that is the step that creates the
+`n` column. Put it before and R will tell you `n` does not exist.
+
+::: {.callout-note}
+## Why summarise before plotting
+A bar chart of raw rows can only ever show counts. The moment you want a
+percentage, a mean, a rate or a risk on the y axis, you have to compute it
+first. That is why `dplyr` and `ggplot2` are taught together.
+:::
 
 ## Labels are not decoration
 
@@ -211,124 +261,6 @@ Two habits worth copying from that cell:
    "Systolic blood pressure rises with age" beats "Scatter plot of SBP by age".
 2. The caption says the data is simulated. If your data is real, the caption is
    where the source goes.
-
-## Exercises
-
-::: {.callout-note title="Exercise 1: a histogram of age"}
-**Time:** 6 minutes
-
-Draw a histogram of `age` from `survey`, with a binwidth of 10.
-
-```{webr}
-#| setup: true
-#| exercise:
-#|   - ex_hist
-#|   - ex_labs
-library(ggplot2)
-library(tibble)
-
-survey <- tibble(
-  id       = sprintf("S%02d", 1:20),
-  age      = c(23,45,67,34,56,29,71,38,52,41,60,33,48,25,63,55,30,44,58,36),
-  sbp      = c(112,138,162,124,145,118,171,129,150,133,158,121,142,115,160,148,120,136,155,127),
-  district = c("Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur",
-               "Hassan","Kolar","Tumkur","Hassan","Kolar","Tumkur","Hassan","Kolar",
-               "Tumkur","Hassan","Kolar","Tumkur"),
-  smoker   = c(FALSE,TRUE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,
-               TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,TRUE,
-               FALSE,TRUE,TRUE,FALSE)
-)
-```
-
-```{webr}
-#| exercise: ex_hist
-ggplot(survey, aes(______)) +
-  ______
-```
-
-```{webr}
-#| exercise: ex_hist
-#| solution: true
-ggplot(survey, aes(x = age)) +
-  geom_histogram(binwidth = 10)
-```
-
-```{webr}
-#| exercise: ex_hist
-#| check: true
-if (!inherits(.result, "ggplot")) {
-  list(correct = FALSE, message = "That did not produce a plot. If there is a red error above, read that first — a geom you were not asked for, such as geom_point(), needs a y as well as an x. Otherwise start with ggplot(survey, aes(x = age)).")
-} else if (!identical(rlang::as_label(.result$mapping$x), "age")) {
-  list(correct = FALSE, message = "Map age to x inside aes(): aes(x = age).")
-} else if (length(.result$layers) == 0) {
-  list(correct = FALSE, message = "You have the mapping but nothing to draw. Add + geom_histogram() on the next line.")
-} else if (!any(vapply(.result$layers, function(l) inherits(l$geom, "GeomBar"), logical(1)))) {
-  list(correct = FALSE, message = "That geom is not a histogram. Use geom_histogram().")
-} else {
-  list(correct = TRUE, message = "Correct. Now change binwidth to 5, then to 25, and watch the shape of the distribution change without the data changing at all.")
-}
-```
-
-::: {.hint exercise="ex_hist"}
-A histogram takes only `x`. The layer goes on the next line after a `+`, and
-`binwidth` is a setting, so it goes inside `geom_histogram()`, not inside
-`aes()`.
-:::
-:::
-
-::: {.callout-note title="Exercise 2: finish the plot"}
-**Time:** 8 minutes
-
-Draw a scatter plot of `sbp` against `age`, coloured by `district`, and give it
-a title with `labs()`.
-
-Three things must be true: `age` on x, `district` mapped to colour, and a title
-that is not empty.
-
-```{webr}
-#| exercise: ex_labs
-ggplot(survey, aes(x = ______, y = ______, colour = ______)) +
-  geom_point(size = 3) +
-  labs(______)
-```
-
-```{webr}
-#| exercise: ex_labs
-#| solution: true
-ggplot(survey, aes(x = age, y = sbp, colour = district)) +
-  geom_point(size = 3) +
-  labs(
-    title = "Systolic blood pressure by age and district",
-    x     = "Age (years)",
-    y     = "Systolic BP (mmHg)"
-  )
-```
-
-```{webr}
-#| exercise: ex_labs
-#| check: true
-if (!inherits(.result, "ggplot")) {
-  list(correct = FALSE, message = "That did not produce a plot. If there is a red error above, read that first. Otherwise start with ggplot(survey, aes(x = age, y = sbp, colour = district)).")
-} else if (!identical(rlang::as_label(.result$mapping$x), "age")) {
-  list(correct = FALSE, message = "Map age to x inside aes().")
-} else if (!identical(rlang::as_label(.result$mapping$y), "sbp")) {
-  list(correct = FALSE, message = "Map sbp to y inside aes().")
-} else if (is.null(.result$mapping$colour)) {
-  list(correct = FALSE, message = "Nothing is mapped to colour. Add colour = district INSIDE aes() — a colour that comes from a column always goes inside aes().")
-} else if (!identical(rlang::as_label(.result$mapping$colour), "district")) {
-  list(correct = FALSE, message = "Colour is mapped, but not to district.")
-} else if (is.null(.result$labels$title) || !nzchar(.result$labels$title)) {
-  list(correct = FALSE, message = "Nearly. Add labs(title = \"...\") so the plot explains itself without you standing next to it.")
-} else {
-  list(correct = TRUE, message = "Correct. Now read your own title: does it state a finding, or just name the axes? A title that states the finding is worth writing.")
-}
-```
-
-::: {.hint exercise="ex_labs"}
-All three mappings go inside the one `aes()`. `labs()` needs at least
-`title = "something"`, in quotation marks.
-:::
-:::
 
 ## What you should now be able to do
 

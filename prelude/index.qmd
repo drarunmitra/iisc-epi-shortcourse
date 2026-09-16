@@ -3,21 +3,20 @@ title: "Before you arrive"
 subtitle: "Do this before Monday 21 September"
 ---
 
-**Time:** about 3 hours in total. Spread it over a few evenings.
 **Before you start:** the laptop you will bring to IISc.
 **When you finish:** your laptop runs R, and you have already written R code.
 
 ## The 5 steps
 
-| | Step | Time | Go here |
-|---|---|---|---|
-| ☐ | 1. Install R and RStudio | 25 min | [Step 1](install.qmd) |
-| ☐ | 2. Install the packages | 20 min | [Step 2](check-setup.qmd) |
-| ☐ | 3. R primers | 1 h 50 min | [Step 3](primers-r.qmd) |
-| ☐ | 4. Epidemiology primers | 45 min | [Step 4](primers-epi.qmd) |
-| ☐ | 5. Additional resources | browse | [Step 5](../resources/index.qmd) |
+| | Step | Go here |
+|---|---|---|
+| ☐ | 1. Install R and RStudio | [Step 1](install.qmd) |
+| ☐ | 2. Install the packages | [Step 2](check-setup.qmd) |
+| ☐ | 3. R primers | [Step 3](primers-r.qmd) |
+| ☐ | 4. Epidemiology primers | [Step 4](primers-epi.qmd) |
+| ☐ | 5. Additional resources | [Step 5](../resources/index.qmd) |
 
-Do Step 1 first. It is the only step that can fail on Monday morning.
+Do Step 1 first. It is the one step we cannot fix for you on Monday morning.
 
 ## Short of time?
 

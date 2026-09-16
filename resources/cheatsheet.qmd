@@ -19,35 +19,38 @@ The 4 cells of a 2×2 table. The third is named `cc` because `c()` is a function
 
 | Measure | Formula | Range | Units |
 |---|---|---|---|
-| Prevalence | cases / population | 0 to 1 | none |
+| Prevalence | cases / population at one point in time | 0 to 1 | none |
 | Risk (cumulative incidence) | new cases / at risk at start | 0 to 1 | needs a time period |
 | Incidence rate | new cases / person-time | 0 upward | per person-time |
 | Risk ratio | `(a/(a+b)) / (cc/(cc+d))` | 0 upward | none |
 | Risk difference | `a/(a+b) - cc/(cc+d)` | −1 to 1 | none |
 | Odds ratio | `(a*d) / (b*cc)` | 0 upward | none |
 | NNT or NNH | `1 / abs(RD)` | 1 upward | needs a time period |
-| Attributable fraction, exposed | `(RR - 1) / RR` | | none |
-| Population attributable fraction | `(risk_total - risk_unexposed) / risk_total` | | none |
+| Attributable fraction, exposed | `(RR - 1) / RR` | up to 1; negative if protective | none |
+| Population attributable fraction | `(risk_total - risk_unexposed) / risk_total` | up to 1; negative if protective | none |
 
 ```r
-a  <- 90; b <- 910; cc <- 30; d <- 970
+a  <- 90; b <- 910; cc <- 30; dd <- 970
 
 risk_exposed   <- a / (a + b)
-risk_unexposed <- cc / (cc + d)
+risk_unexposed <- cc / (cc + dd)
 
 risk_exposed / risk_unexposed            # RR  3.00
 risk_exposed - risk_unexposed            # RD  0.06
-1 / abs(risk_exposed - risk_unexposed)   # NNH 16.7
-(a * d) / (b * cc)                       # OR  3.20
+1 / abs(risk_exposed - risk_unexposed)   # NNH 16.7 (harmful exposure)
+(a * dd) / (b * cc)                      # OR  3.20
 ```
+
+The fourth cell is `dd`, not `d`, because `d` is used below for a dataset.
 
 With confidence intervals:
 
 ```r
 library(epitools)
 
-# epitools wants the unexposed row first and the non-case column first
-tab <- matrix(c(d, cc, b, a), nrow = 2, byrow = TRUE)
+# epitools wants the unexposed row first and the non-case column first.
+# It does NOT reorder for you; pass rev= if your table is the other way round.
+tab <- matrix(c(dd, cc, b, a), nrow = 2, byrow = TRUE)
 
 riskratio(tab, method = "wald")
 oddsratio(tab, method = "wald")
@@ -61,26 +64,29 @@ Read the table `epitools` prints back before you trust the number.
 | Design | You may compute |
 |---|---|
 | Cohort | risk, rate, RR, RD, OR |
-| Case-control | OR only |
+| Case-control | OR (what it estimates depends on how controls were sampled) |
 | Cross-sectional | prevalence, prevalence ratio, prevalence OR |
 | Trial | risk, rate, RR, RD, NNT |
 
 ## R basics
 
 ```r
-x <- 5                     # assign
-c(1, 2, 3)                 # vector
+x <- c(34, 51, 22, 67, 45, 19, 58, NA)   # a vector, with one value missing
+
 length(x); class(x)        # how many, what type
 
-sum(x); mean(x); median(x); sd(x); min(x); max(x); range(x)
-round(x, 2)
-sqrt(x)
+sum(x, na.rm = TRUE)       # 296
+mean(x, na.rm = TRUE)      # 42.3
+median(x, na.rm = TRUE); sd(x, na.rm = TRUE)
+min(x, na.rm = TRUE); max(x, na.rm = TRUE); range(x, na.rm = TRUE)
 
-mean(x, na.rm = TRUE)      # ignore missing values
-sum(is.na(x))              # how many are missing
+mean(x)                    # NA - one value is unknown, so the mean is unknown
+sum(is.na(x))              # 1
 
-sum(x >= 45)               # count
-mean(x >= 45)              # proportion
+sum(x >= 45, na.rm = TRUE)   # 4  - a count
+mean(x >= 45, na.rm = TRUE)  # 0.571 - a proportion
+
+round(mean(x, na.rm = TRUE), 1)
 ```
 
 ## Looking at a dataset
@@ -190,7 +196,6 @@ not an OR.
 |---|---|
 | <kbd>Ctrl</kbd>+<kbd>Enter</kbd> | run the current line |
 | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>M</kbd> | insert the pipe |
-| <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>K</kbd> | render the document |
 | <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F10</kbd> | restart R |
 | <kbd>Tab</kbd> | complete a name |
 | <kbd>F1</kbd> on a function | open its help |

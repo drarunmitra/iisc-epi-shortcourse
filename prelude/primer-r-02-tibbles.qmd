@@ -27,7 +27,7 @@ webr:
 
 ::: {.callout-important title="If the cells below never become ready"}
 This page runs R inside your browser. The first load downloads about 21 MB: R
-itself, the marking machinery, and the **tibble** package.
+itself, the machinery that runs your code, and the **tibble** package.
 
 If nothing happens after 2 or 3 minutes, your network is blocking it. Work
 through [the R primer](r-primer.qmd) in RStudio instead.
@@ -189,122 +189,6 @@ table(participants$smoker, participants$sbp >= 140)
 By default `table()` does not count `NA`s and does not tell you it left them
 out. Your percentages then quietly refer to a smaller denominator than you
 think. Use `table(x, useNA = "ifany")` whenever the column might have holes.
-:::
-
-## Exercises
-
-::: {.callout-note title="Exercise 1: build a tibble"}
-**Time:** 5 minutes
-
-Three villages were surveyed for anaemia. Kolar screened 120 women and found
-44 anaemic; Tumkur screened 95 and found 28; Hassan screened 140 and found 61.
-
-Put this into a tibble called `survey` with three columns: `village`,
-`screened` and `anaemic`, in that order.
-
-```{webr}
-#| exercise: ex_tibble
-survey <- tibble(
-  village  = ______,
-  screened = ______,
-  anaemic  = ______
-)
-
-survey
-```
-
-```{webr}
-#| exercise: ex_tibble
-#| solution: true
-survey <- tibble(
-  village  = c("Kolar", "Tumkur", "Hassan"),
-  screened = c(120, 95, 140),
-  anaemic  = c(44, 28, 61)
-)
-
-survey
-```
-
-```{webr}
-#| exercise: ex_tibble
-#| check: true
-expected <- tibble::tibble(
-  village  = c("Kolar", "Tumkur", "Hassan"),
-  screened = c(120, 95, 140),
-  anaemic  = c(44, 28, 61)
-)
-# A data.frame answer is just as correct as a tibble one, so normalise first.
-if (isTRUE(all.equal(as.data.frame(.result), as.data.frame(expected),
-                     check.attributes = FALSE))) {
-  list(correct = TRUE, message = "Correct: three rows, three columns, one row per village.")
-} else if (!is.data.frame(.result)) {
-  list(correct = FALSE, message = "That is not a table yet. Use tibble() with three named columns.")
-} else if (ncol(.result) != 3) {
-  list(correct = FALSE, message = "You need exactly three columns: village, screened and anaemic.")
-} else if (nrow(.result) != 3) {
-  list(correct = FALSE, message = "You need one row per village, so three rows.")
-} else {
-  list(correct = FALSE, message = "Check the spelling and the order. Kolar first, then Tumkur, then Hassan, with each village's own two numbers.")
-}
-```
-
-::: {.hint exercise="ex_tibble"}
-Each column is its own vector, so each needs its own `c()`. The village names
-are text and need quotation marks; the counts are numbers and do not.
-:::
-:::
-
-::: {.callout-note title="Exercise 2: prevalence from a column"}
-**Time:** 5 minutes
-
-Using `survey`, compute the **overall** prevalence of anaemia across all three
-villages: total anaemic divided by total screened, as a proportion rounded to
-three decimal places.
-
-```{webr}
-#| exercise: ex_prev
-survey <- tibble(
-  village  = c("Kolar", "Tumkur", "Hassan"),
-  screened = c(120, 95, 140),
-  anaemic  = c(44, 28, 61)
-)
-
-______
-```
-
-```{webr}
-#| exercise: ex_prev
-#| solution: true
-survey <- tibble(
-  village  = c("Kolar", "Tumkur", "Hassan"),
-  screened = c(120, 95, 140),
-  anaemic  = c(44, 28, 61)
-)
-
-round(sum(survey$anaemic) / sum(survey$screened), 3)
-```
-
-```{webr}
-#| exercise: ex_prev
-#| check: true
-# 133 anaemic out of 355 screened = 0.3746...
-if (isTRUE(all.equal(as.numeric(.result), 0.375))) {
-  list(correct = TRUE, message = "Correct — 133 of 355, so 37.5%. Note this is NOT the average of the three village prevalences; the villages are different sizes.")
-} else if (length(.result) == 3) {
-  list(correct = FALSE, message = "Those are the three village prevalences. The overall figure needs the totals: sum the numerators and sum the denominators first.")
-} else if (isTRUE(all.equal(as.numeric(.result), 0.366, tolerance = 2e-3))) {
-  list(correct = FALSE, message = "That is the unweighted mean of the three village prevalences. It gives Tumkur's 95 women the same weight as Hassan's 140. Divide total anaemic by total screened instead.")
-} else if (is.numeric(.result) && length(.result) == 1) {
-  list(correct = FALSE, message = "Right shape, wrong number. You want sum(survey$anaemic) / sum(survey$screened), rounded to 3 places.")
-} else {
-  list(correct = FALSE, message = "Pull each column out with $, sum it, divide one total by the other, then round to 3.")
-}
-```
-
-::: {.hint exercise="ex_prev"}
-`survey$anaemic` gives you the three counts. `sum()` adds them. Do the same for
-`screened`, divide, then `round(..., 3)`.
-:::
 :::
 
 ## What you should now be able to do

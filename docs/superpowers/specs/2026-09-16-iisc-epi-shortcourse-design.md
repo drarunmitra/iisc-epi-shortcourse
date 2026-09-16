@@ -1,5 +1,18 @@
 # IISc Epidemiology Short Course — website design
 
+> [!WARNING]
+> **SUPERSEDED — historical record only. Do not build from this document.**
+>
+> This was the design approved on 2026-09-16, before the course lead cut the
+> site down. Everything below describing a schedule page, downloadable
+> datasets, an `R/` folder, Moodle, nine primers or Quarto is **no longer
+> true**. The site now has 5 steps, 7 primers, no datasets, no schedule, no
+> Quarto and no graded exercises.
+>
+> It is kept because it records *why* the site was built this way — the WebR
+> payload budgeting and the primer design still explain decisions in the code.
+> For what is actually true, read `CLAUDE.md` and `docs/PLACEHOLDERS.md`.
+
 Date: 2026-09-16
 Status: approved by Arun Mitra, 2026-09-16
 

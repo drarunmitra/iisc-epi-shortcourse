@@ -41,7 +41,7 @@ really mistakes about which cell is which.
 <table class="twobytwo">
 <tr><th></th><th>Disease</th><th>No disease</th><th>Total</th></tr>
 <tr><th>Exposed</th><td>a</td><td>b</td><td>a + b</td></tr>
-<tr><th>Unexposed</th><td>c</td><td>d</td><td>c + d</td></tr>
+<tr><th>Unexposed</th><td>cc</td><td>d</td><td>cc + d</td></tr>
 </table>
 
 Exposure down the side, outcome across the top. Always.
@@ -156,7 +156,7 @@ Always round NNT **up** when you report it, and always state the time period.
 Odds is not risk. Odds compares those with the disease to those **without**,
 rather than to the total.
 
-$$\text{odds} = \frac{a}{b} \qquad \text{OR} = \frac{a/b}{c/d} = \frac{a \times d}{b \times c}$$
+$$\text{odds} = \frac{a}{b} \qquad \text{OR} = \frac{a/b}{cc/d} = \frac{a \times d}{b \times cc}$$
 
 ```{webr}
 a <- 90; b <- 910; cc <- 30; d <- 970
@@ -166,7 +166,7 @@ round(or, 2)
 ```
 
 **OR = 3.20**, against an RR of 3.00. The odds ratio is further from 1 than the
-risk ratio. It always is, when the exposure is harmful.
+risk ratio. It always is: above 1 the OR is larger, below 1 it is smaller.
 
 ::: {.callout-note}
 ## Then why use the odds ratio at all?
@@ -182,12 +182,12 @@ on disease. That is why case-control studies work at all.
 
 ::: {.callout-warning}
 ## The rare disease assumption
-When the disease is rare, `b` is close to `a + b` and `d` is close to `c + d`, so
+When the disease is rare, `b` is close to `a + b` and `d` is close to `cc + d`, so
 OR ≈ RR. When the disease is common, they diverge sharply, and an OR read aloud
 as "three times more likely" overstates the effect.
 
-Our example has a 9% risk — not rare — and the OR is already 7% higher than the
-RR. At 30% risk the gap would be much wider. **Never describe an odds ratio in
+Our example has a 9% risk, which is not rare, and the OR is already 6.6% higher
+than the RR. At 30% risk the gap would be much wider. **Never describe an odds ratio in
 the words of a risk ratio unless the outcome is genuinely uncommon.**
 :::
 
@@ -270,152 +270,12 @@ round(rr, 2)
 ::: {.callout-important}
 ## Index by name, not by position
 `tab[2, 2]` will silently become the wrong cell the moment your data has a
-different set of levels, or a level with no observations in it. `tab["TRUE",
-"TRUE"]` either gives the right cell or fails loudly. On the course we use
-`epitools`, which handles the ordering for you — but you still have to know
-which way round the table is before you trust what it returns.
-:::
+different set of levels, or a level with no observations in it.
+`tab["TRUE", "TRUE"]` either gives the right cell or fails loudly.
 
-## Exercises
-
-::: {.callout-note title="Exercise 1: risk ratio"}
-**Time:** 5 minutes
-
-A cohort study of a water-borne outbreak:
-
-<table class="twobytwo">
-<tr><th></th><th>Ill</th><th>Not ill</th><th>Total</th></tr>
-<tr><th>Drank tank water</th><td>56</td><td>144</td><td>200</td></tr>
-<tr><th>Did not</th><td>18</td><td>282</td><td>300</td></tr>
-</table>
-
-Compute the risk ratio, rounded to 2 decimal places.
-
-```{webr}
-#| setup: true
-#| exercise:
-#|   - ex_rr
-#|   - ex_rd
-#|   - ex_or
-a <- 56    # exposed,   ill
-b <- 144   # exposed,   not ill
-cc <- 18   # unexposed, ill
-d <- 282   # unexposed, not ill
-```
-
-```{webr}
-#| exercise: ex_rr
-______
-```
-
-```{webr}
-#| exercise: ex_rr
-#| solution: true
-round((a / (a + b)) / (cc / (cc + d)), 2)
-```
-
-```{webr}
-#| exercise: ex_rr
-#| check: true
-# Risk exposed 56/200 = 0.28.  Risk unexposed 18/300 = 0.06.  RR = 4.6667.
-if (isTRUE(all.equal(as.numeric(.result), 4.67))) {
-  list(correct = TRUE, message = "Correct — RR 4.67. People who drank tank water were about 4.7 times as likely to fall ill.")
-} else if (isTRUE(all.equal(as.numeric(.result), 3.11, tolerance = 1e-2))) {
-  list(correct = FALSE, message = "You divided 56 by 18: that compares the case counts, not the risks. Each group has a different total, so you must turn each into a risk first.")
-} else if (isTRUE(all.equal(as.numeric(.result), 0.21, tolerance = 1e-2))) {
-  list(correct = FALSE, message = "That is upside down: you divided the unexposed risk by the exposed risk. Exposed goes on top.")
-} else if (isTRUE(all.equal(as.numeric(.result), 6.09, tolerance = 1e-2))) {
-  list(correct = FALSE, message = "That is the odds ratio. A risk uses the group total as its denominator (a + b), not the non-cases (b).")
-} else if (is.numeric(.result) && length(.result) == 1) {
-  list(correct = FALSE, message = "Right shape, wrong number. Risk in the exposed is a/(a+b); risk in the unexposed is cc/(cc+d); divide the first by the second.")
-} else {
-  list(correct = FALSE, message = "One number. Work out each group's risk, then divide exposed by unexposed, then round to 2.")
-}
-```
-
-::: {.hint exercise="ex_rr"}
-Two risks first: 56 out of 200, and 18 out of 300. Then divide the exposed risk
-by the unexposed risk.
-:::
-:::
-
-::: {.callout-note title="Exercise 2: risk difference and NNT"}
-**Time:** 6 minutes
-
-Same outbreak table. Compute the **risk difference**, rounded to 3 decimal
-places.
-
-```{webr}
-#| exercise: ex_rd
-______
-```
-
-```{webr}
-#| exercise: ex_rd
-#| solution: true
-round(a / (a + b) - cc / (cc + d), 3)
-```
-
-```{webr}
-#| exercise: ex_rd
-#| check: true
-# 0.28 - 0.06 = 0.22
-if (isTRUE(all.equal(as.numeric(.result), 0.22))) {
-  list(correct = TRUE, message = "Correct — 0.22, so 22 extra illnesses per 100 people who drank the water. The reciprocal, 1/0.22, is about 4.5: roughly 5 people had to drink it for one extra illness.")
-} else if (isTRUE(all.equal(as.numeric(.result), -0.22))) {
-  list(correct = FALSE, message = "Right size, wrong sign. Exposed minus unexposed, in that order.")
-} else if (isTRUE(all.equal(as.numeric(.result), 4.667, tolerance = 1e-2))) {
-  list(correct = FALSE, message = "That is the risk ratio. A difference subtracts; a ratio divides.")
-} else if (is.numeric(.result) && length(.result) == 1) {
-  list(correct = FALSE, message = "Right shape, wrong number. Subtract the unexposed risk from the exposed risk.")
-} else {
-  list(correct = FALSE, message = "One number: a/(a+b) minus cc/(cc+d), rounded to 3 places.")
-}
-```
-
-::: {.hint exercise="ex_rd"}
-Same two risks as the last exercise. This time subtract instead of dividing.
-:::
-:::
-
-::: {.callout-note title="Exercise 3: odds ratio"}
-**Time:** 5 minutes
-
-Same table again. Compute the **odds ratio**, rounded to 2 decimal places, then
-compare it with the risk ratio of 4.67.
-
-```{webr}
-#| exercise: ex_or
-______
-```
-
-```{webr}
-#| exercise: ex_or
-#| solution: true
-round((a * d) / (b * cc), 2)
-```
-
-```{webr}
-#| exercise: ex_or
-#| check: true
-# (56*282) / (144*18) = 15792 / 2592 = 6.0926
-if (isTRUE(all.equal(as.numeric(.result), 6.09))) {
-  list(correct = TRUE, message = "Correct — OR 6.09 against an RR of 4.67. The outcome here is common (28% in the exposed), so the odds ratio badly overstates the risk ratio. Do not read this one aloud as 'six times more likely'.")
-} else if (isTRUE(all.equal(as.numeric(.result), 4.67, tolerance = 1e-2))) {
-  list(correct = FALSE, message = "That is the risk ratio again. Odds uses b and d as denominators, not the group totals.")
-} else if (isTRUE(all.equal(as.numeric(.result), 0.16, tolerance = 1e-2))) {
-  list(correct = FALSE, message = "That is the reciprocal: you have b*cc on top. The cross product is a*d over b*cc.")
-} else if (is.numeric(.result) && length(.result) == 1) {
-  list(correct = FALSE, message = "Right shape, wrong number. The cross product is (a * d) / (b * cc).")
-} else {
-  list(correct = FALSE, message = "One number: (a * d) / (b * cc), rounded to 2 places.")
-}
-```
-
-::: {.hint exercise="ex_or"}
-The odds ratio is the cross product: multiply the two diagonal cells that
-contain `a` and `d`, and divide by the product of the other two.
-:::
+On the course we use `epitools`. It does **not** reorder the table for you: it
+reads the first row as unexposed and the first column as non-case, and you pass
+`rev=` to change that. So the ordering above is not a detail you can hand off.
 :::
 
 ## What you should now be able to do

@@ -3,19 +3,18 @@ title: "Step 2: Install the packages"
 subtitle: "Step 2 of 5"
 ---
 
-**Time:** 20 minutes, mostly waiting.
 **Before you start:** [Step 1](install.qmd) finished, and RStudio open.
-**When you finish:** 12 packages installed, and a check that says your laptop
+**When you finish:** the packages installed, and a check that says your laptop
 is ready.
 
 There are no files to download. Both lines below run straight from this site.
 
-There are 3 things to do on this page. Finish them and you have done Step 2.
+There are 2 things to do on this page, and a third only if something fails.
 
 ## 1. Install the packages
 
 1. Open RStudio.
-2. Click once inside the **Console** pane, at the bottom left.
+2. Click once inside the **Console** pane, on the left.
 3. Copy the line below. Paste it into the Console. Press **Enter**.
 
 ```r
@@ -25,8 +24,9 @@ source("https://drarunmitra.github.io/iisc-epi-shortcourse/setup/install_package
 4. Leave the computer alone until it finishes.
 
 **You should see:** lines of text scrolling past, naming each package as it
-installs. This takes 10 to 25 minutes the first time. You are finished when the
-`>` prompt comes back and stops moving.
+installs. You are finished when the `>` prompt comes back and stops moving.
+
+On a first run this takes a while. Start it and go and do something else.
 
 **If it does not work:** if R asks
 `Do you want to install from sources the package which needs compilation?`,
@@ -50,14 +50,14 @@ Red text in R is not always an error. Most of it is ordinary progress output.
 source("https://drarunmitra.github.io/iisc-epi-shortcourse/setup/check_setup.R")
 ```
 
-**You should see:** about 8 lines, then this:
+**You should see:** a line for each check, then this:
 
 ```
 You are ready for 21 September. See you at IISc.
 ```
 
-**If it does not work:** read the line that starts with a cross. It names the
-fix. Then read [Troubleshooting](../resources/troubleshooting.qmd).
+**If it does not work:** read [Troubleshooting](../resources/troubleshooting.qmd)
+first. Then read the line that starts with a cross; it names the fix.
 
 | Symbol | Means |
 |---|---|
@@ -72,7 +72,8 @@ Only if you saw a cross.
 1. Select the whole check output in the Console and copy it.
 2. Email it to
    [office.msicph@iisc.ac.in](mailto:office.msicph@iisc.ac.in).
-3. Say which operating system you use, and its version.
+3. Say which operating system you use, and its version, and paste the output
+   of `sessionInfo()`.
 
 **You should see:** the email in your Sent folder.
 
@@ -81,8 +82,8 @@ cannot search a picture.
 
 ::: {.callout-note}
 ## Why this matters
-R on its own does very little. Packages do the work. This course uses 12 of
-them.
+R on its own does very little. Packages do the work. The script installs 16 of
+them, plus everything they depend on.
 
 The check tests behaviour, not only what sits on disk. It runs `epitools` on a
 2×2 table with a known answer. A broken install fails now, not in front of the

@@ -47,8 +47,14 @@ is the source of the WebR primer machinery and the house writing style.
   exercises rather than the numbered-step shape. The ban list and the digit rule
   still apply to their prose. `check.sh` never scans inside a ```` ```{webr} ````
   fence, by design.
-- Exercises use quarto-live's native hint and solution buttons, never a
-  collapsed `callout-tip` holding a duplicate answer.
+- **No graded exercises, no quizzes, no checkers.** Removed 2026-09-16 at the
+  course lead's instruction. The primers keep their worked `{webr}` cells and
+  the inline "change this and run it again" invitations, and nothing is marked.
+  Do not add `#| exercise:`, `#| solution:` or `#| check:` blocks back.
+- **No Quarto.** Removed from Step 1, from both setup scripts, and from
+  Troubleshooting and the cheatsheet. `check_setup.R` has no render test.
+- **No time estimates anywhere.** No `**Time:**` lines, no per-primer minutes,
+  no total for the prelude. They kept going stale.
 
 ## The 7 primers
 
@@ -95,7 +101,7 @@ quarto render
 
 **CI needs R, and this is not obvious.** No R on this site is ever *evaluated*:
 every block is either static ```` ```r ```` or a ```` ```{webr} ```` cell that
-runs in the reader browser. But the 9 primers declare `engine: knitr`, and
+runs in the reader browser. But the 7 primers declare `engine: knitr`, and
 quarto-live's `_knitr.qmd` include registers a passthrough knitr engine that
 rewrites each `{webr}` block into the page, so knitr must run the document.
 Drop the setup-r step and the render dies at the first primer with
@@ -153,17 +159,17 @@ Rules learned the hard way; full version in
    at the course lead's instruction on 2026-09-16; do not recreate it, and do
    not put day-by-day themes back on the home page. The site promises no
    specific day for any topic, so keep new prose free of "on Day 3" claims.
-3. **`site-url` and `repo-url` in `_quarto.yml` are guesses**
+2. **`site-url` and `repo-url` in `_quarto.yml` are guesses**
    (`drarunmitra/iisc-epi-shortcourse`). The `source()` URLs in
    `prelude/check-setup.qmd` and `resources/troubleshooting.qmd` depend on
    `site-url` being right. Fix all of them together.
-4. **The primers are unverified in a browser.** A successful `quarto render`
+3. **The primers are unverified in a browser.** A successful `quarto render`
    proves only that Quarto parsed the syntax. Serve over HTTP and load at least
-   Primer 1, Primer 5 and Primer 9 before the course.
-5. `setup/check_setup.R` is the single definition of the package list.
+   Primer 1, Primer 5 and Primer 7 before the course.
+4. `setup/check_setup.R` is the single definition of the package list.
    `prelude/check-setup.qmd` mirrors its count (12). If you add a package,
    change `check_setup.R` first, then `install_packages.R`, then the digit in
    the page prose.
-6. Applications closed on 25 July 2026 and the site is written for **selected
+5. Applications closed on 25 July 2026 and the site is written for **selected
    participants**, not applicants. If it is ever reused for a later cohort, the
    admissions section of `index.qmd` needs rewriting first.

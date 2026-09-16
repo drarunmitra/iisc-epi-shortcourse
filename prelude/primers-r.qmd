@@ -3,7 +3,6 @@ title: "Step 3: R primers"
 subtitle: "Step 3 of 5"
 ---
 
-**Time:** about 1 hour 50 minutes. Do 2 primers an evening.
 **Before you start:** a web browser. Nothing to install.
 **When you finish:** you have written R code and drawn a plot.
 
@@ -26,30 +25,30 @@ week and you pay nothing again at IISc.
 
 ::: {.card-tile}
 ### [1 · Objects, functions, vectors](primer-r-01-objects.qmd)
-The 3 ideas the rest of R is built on. 20 min · ~17 MB
+The 3 ideas the rest of R is built on. ~17 MB
 :::
 
 ::: {.card-tile}
 ### [2 · Tibbles](primer-r-02-tibbles.qmd)
 The rectangle you analyse: one row per person, one column per variable.
-20 min · ~21 MB
+~21 MB
 :::
 
 ::: {.card-tile}
 ### [3 · Packages and the pipe](primer-r-03-packages-pipe.qmd)
 `library()`, and the `|>` that makes code read left to right.
-15 min · ~22 MB
+~22 MB
 :::
 
 ::: {.card-tile}
 ### [4 · The dplyr verbs](primer-r-04-dplyr-verbs.qmd)
 `filter`, `select`, `mutate`, `group_by`, `summarise`. Most analysis is these
-5. 30 min · ~22 MB
+5. ~22 MB
 :::
 
 ::: {.card-tile}
 ### [5 · Your first plot](primer-r-05-first-plot.qmd)
-`ggplot2`, layer by layer. **The heavy page: about 37 MB.** 25 min
+`ggplot2`, layer by layer. **The heavy page: about 37 MB.**
 :::
 
 :::
@@ -61,19 +60,22 @@ Primer 5 is the heavy one. Do it on a connection you trust.
 1. Open the page. Wait for the cells to become ready.
 2. Press **Run** on every cell, from the top down.
 3. Change a number in a cell and press **Run** again.
-4. Do each exercise. Press **Hint** before you press **Solution**.
+4. Read what changed, and why.
 
-**You should see:** output under each cell after you press Run, and a green
-tick when an exercise is correct.
+**You should see:** output appear under each cell after you press Run.
 
 **If it does not work:** see the next section.
 
 ::: {.callout-note}
 ## Why this matters
-Reading code teaches you very little. The cells exist so that you type, get an
-error, and fix it, before Monday rather than during a session.
+Reading code teaches you very little. The cells are there so that you type, get
+an error, and fix it, before Monday rather than during a session.
 
-Nothing carries from one page to the next. Each page starts R from scratch.
+Nothing is marked and nothing is recorded. Change whatever you like; you cannot
+break anything.
+
+Nothing carries from one page to the next either. Each page starts R from
+scratch.
 :::
 
 ## If the cells never become ready

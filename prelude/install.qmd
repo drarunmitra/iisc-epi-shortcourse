@@ -3,7 +3,6 @@ title: "Step 1: Install R and RStudio"
 subtitle: "Step 1 of 5"
 ---
 
-**Time:** 25 minutes, plus download time.
 **Before you start:** the laptop you will bring to IISc, and administrator
 rights on it.
 **When you finish:** R and RStudio are installed and working together.
@@ -11,7 +10,8 @@ rights on it.
 You are installing 2 programs. **R** does the work. **RStudio** is the window
 you look at it through. Install R first.
 
-There are 5 things to do on this page. Finish all 5 and you have done Step 1.
+There are 5 things to do on this page. You can skip the fourth if you have
+never used R on this laptop.
 
 ::: {.callout-warning}
 ## Check your administrator rights now
@@ -58,8 +58,9 @@ opens.
 2. Download the installer the page offers you.
 3. Run it. Accept the defaults.
 
-**You should see:** RStudio open with 4 panes. The console at the left shows
-the same R version you read in 2 above.
+**You should see:** RStudio open, with the **Console** filling the left-hand
+side. It shows the same R version you read in 2 above. (You will see 3 panes
+until you open a file, and 4 after that.)
 
 **If it does not work:** if the console says R is missing, close RStudio. Check
 that R itself opens. Then install RStudio again.
@@ -86,7 +87,7 @@ RStudio.
 
 ## 5. Test the pipe
 
-1. Click once inside the **Console** pane, at the bottom left.
+1. Click once inside the **Console** pane, on the left.
 2. Type `c(1, 2, 3) |> sum()` and press **Enter**.
 
 **You should see:** `[1] 6`.
