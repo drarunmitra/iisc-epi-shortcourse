@@ -16,7 +16,6 @@ to find them all.
 
 | What | File | Note |
 |---|---|---|
-| Poppy's full name | `index.qmd` | The other 5 faculty are spelled out from the course announcement. Poppy was given as a first name only. |
 
 ## Confirmed from the course announcement — do not change without a source
 
@@ -27,7 +26,11 @@ to find them all.
 - Venue: IISc, Bengaluru
 - Applications closed: 25 July 2026; participants already shortlisted
 - Contact: office.msicph@iisc.ac.in
-- Faculty: Neil, Prabhdeep, Poppy, Arun, Nesan (Manikandanesan Sakthivel), Uttara
+- Faculty, all 6 names confirmed: Neil Pearce, Prabhdeep Kaur, Poppy Mallinson,
+  Arun Mitra, Manikandanesan Sakthivel ("Nesan"), Uttara Partap.
+  Affiliations known so far: Poppy Mallinson is LSHTM; Uttara Partap is
+  Assistant Professor at IISc, **not** LSHTM as first assumed. The site lists
+  names without affiliations, so nothing on the page depends on this.
 
 ## Deliberately absent
 

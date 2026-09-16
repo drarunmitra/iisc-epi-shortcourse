@@ -93,7 +93,7 @@ course to work through the [prelude](prelude/index.qmd).
 
 ## Faculty
 
-Neil Pearce · Prabhdeep Kaur · [Poppy]{.tbd} · Arun Mitra ·
+Neil Pearce · Prabhdeep Kaur · Poppy Mallinson · Arun Mitra ·
 Manikandanesan Sakthivel · Uttara Partap
 
 ## How to use this site
