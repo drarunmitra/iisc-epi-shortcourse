@@ -40,48 +40,6 @@ Installing the software is the only step we cannot fix for you on the day.
 The programme is being finalised and will be circulated separately.
 :::
 
-## What you will be able to do
-
-::: {.card-grid}
-
-::: {.card-tile}
-### Measure disease
-Turn counts into prevalence, risk, rate and person-time. Say which one a
-question needs.
-:::
-
-::: {.card-tile}
-### Measure association
-Build a 2×2 table. Read a risk ratio, an odds ratio, a risk difference and a
-number needed to treat off it.
-:::
-
-::: {.card-tile}
-### Choose a design
-Match a question to a cohort, case-control, cross-sectional or trial design.
-Know what each one can and cannot tell you.
-:::
-
-::: {.card-tile}
-### Spot bias
-Name the bias in front of you: selection, information, confounding. Tell
-confounding from interaction.
-:::
-
-::: {.card-tile}
-### Analyse in R
-Import, clean, summarise and plot data with the tidyverse, instead of clicking
-through a menu you cannot document.
-:::
-
-::: {.card-tile}
-### Work reproducibly
-Organise an analysis so that a colleague, a reviewer, or you in six months can
-rerun every number from the raw data.
-:::
-
-:::
-
 ## Who this is for
 
 Researchers, public health professionals, programme managers and students.
@@ -106,10 +64,10 @@ Manikandanesan Sakthivel · Uttara Partap
 - **[Resources](resources/index.qmd)**. Cheatsheet, troubleshooting, glossary
   and further reading. Use these during the course and after it.
 
-All materials stay online after the course. The site is built from a public
-repository, so corrections are welcome as issues or pull requests.
+The site is built from a public repository, so corrections are welcome as
+issues or pull requests.
 
-For registration, travel or accommodation, email
+Questions about travel, accommodation or logistics go to
 [office.msicph@iisc.ac.in](mailto:office.msicph@iisc.ac.in).
 
 ::: {.callout-note appearance="simple"}
