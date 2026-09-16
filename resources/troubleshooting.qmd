@@ -68,7 +68,7 @@ Your network is blocking CRAN, or you are behind a proxy.
 2. If that works, the problem is your institutional network. Tell your IT
    department that CRAN is blocked.
 3. If nothing works, you can still do all 9 primers, because they need only a
-   web browser. Tell us and we will pair you with someone on Day 1.
+   web browser. Tell us and we will pair you with someone on the first day.
 
 ### `there is no package called 'xyz'`
 

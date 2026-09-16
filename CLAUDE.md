@@ -21,6 +21,9 @@ is the source of the WebR primer machinery and the house writing style.
 - **No Moodle.** The only participant channels are email
   (office.msicph@iisc.ac.in) and a WhatsApp group whose link is still a
   placeholder.
+- **No schedule, no admissions or fees section.** Participants are already
+  shortlisted, and the programme goes out separately. The site carries only:
+  before you arrive, the primers, and resources.
 - **All participant-facing instructions follow
   `.claude/skills/playbook-instructions`**: numbered steps, one action per step,
   an explicit **You should see:**, and, where it can fail, an **If it does not
@@ -115,10 +118,11 @@ Rules learned the hard way; full version in
 
 ## Known gaps flagged to the course lead
 
-1. **Session titles and faculty assignments in `schedule.qmd` are a working
-   draft.** The dates, the venue and the faculty list are confirmed from the
-   course announcement; who teaches what is not. Replace before the site is
-   circulated.
+1. **There is no schedule page, deliberately.** The programme is circulated
+   separately by the course office. `schedule.qmd` was written and then deleted
+   at the course lead's instruction on 2026-09-16; do not recreate it, and do
+   not put day-by-day themes back on the home page. The site promises no
+   specific day for any topic, so keep new prose free of "on Day 3" claims.
 2. **The WhatsApp group link is a placeholder** in `prelude/index.qmd`,
    `prelude/send-result.qmd`, `resources/index.qmd` and
    `resources/troubleshooting.qmd`.

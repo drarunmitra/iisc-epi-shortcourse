@@ -27,7 +27,7 @@ Do them in this order. Stop when you run out of evening.
 1. **Steps 1, 2 and 3.** Without these you cannot do the hands-on work at all.
 2. **Epidemiology primers 6 to 9.** These carry the concepts the lectures build
    on. Start with Primer 9, on bias and confounding.
-3. **R primers 1 to 5.** We re-teach the basics on Day 1, so these can wait.
+3. **R primers 1 to 5.** We re-teach the basics in the room, so these can wait.
 4. **Step 5,** the reading. 25 minutes. Do it on the train.
 
 ## Open the primers at home, not at IISc
@@ -54,7 +54,7 @@ only one we cannot fix for you in the room.
 
 Step 4 is the long one. The 9 primers teach the R and the epidemiological
 arithmetic that every hands-on block assumes you already have. Participants who
-skip them spend Day 1 catching up.
+skip them spend the first sessions catching up.
 :::
 
 ## Stuck?

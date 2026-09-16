@@ -28,11 +28,15 @@ else can rerun.
 
 ::: {.callout-important}
 ## Before you arrive
-Selected participants: there are 5 things to do before Monday 21 September.
-They take about 4 hours in total. Spread them over several evenings. Installing
-the software is the only one we cannot fix for you on the day.
+There are 5 things to do before Monday 21 September. They take about 4 hours in
+total. Spread them over several evenings. Installing the software is the only
+one we cannot fix for you on the day.
 
 → [**Start here: the 5 steps**](prelude/index.qmd)
+:::
+
+::: {.callout-note appearance="simple"}
+The programme is being finalised and will be circulated separately.
 :::
 
 ## What you will be able to do
@@ -77,28 +81,6 @@ rerun every number in your paper from the raw data.
 
 :::
 
-## Structure
-
-Five days, Monday to Friday. Each teaching block is followed by a hands-on
-block of about the same length, so roughly two-thirds of your time is spent
-with your hands on a keyboard or a pencil.
-
-| Day | Theme |
-|---|---|
-| **Mon 21 Sep** | Measuring disease: prevalence, risk, rate, person-time |
-| **Tue 22 Sep** | Measuring association, and comparing groups fairly |
-| **Wed 23 Sep** | Study designs: cohort, case-control, cross-sectional, trial |
-| **Thu 24 Sep** | Bias, confounding, interaction, and what to do about them |
-| **Fri 25 Sep** | Putting it together: analysis, reporting, group projects |
-
-→ [Full schedule with timings and faculty](schedule.qmd)
-
-::: {.callout-note appearance="simple"}
-The day themes above are the shape of the course as announced. Confirm each
-session title and its faculty against the final programme before you rely on
-this table.
-:::
-
 ## Who this is for
 
 Researchers, public health professionals, programme managers and students. No
@@ -111,42 +93,22 @@ course to work through the [prelude](prelude/index.qmd).
 
 ## Faculty
 
-| Faculty | Affiliation |
-|---|---|
-| **Neil Pearce** | LSHTM, University of London |
-| **Uttara Partap** | LSHTM, University of London |
-| **Prabhdeep Kaur** | Isaac Centre for Public Health, IISc |
-| **Arun Mitra** | Isaac Centre for Public Health, IISc |
-| **Manikandanesan Sakthivel** | Isaac Centre for Public Health, IISc |
-
-::: {.callout-note appearance="simple"}
-Affiliations and the session each person teaches are provisional. Fix them in
-`index.qmd` and `schedule.qmd` once the final programme is out.
-:::
-
-## Admissions and fees
-
-Applications closed on **25 July 2026**. Selected participants have been
-notified.
-
-| | Fee |
-|---|---|
-| Students | ₹5,000 |
-| Professionals | ₹10,000 |
-
-Questions about registration, payment, travel or accommodation go to
-[office.msicph@iisc.ac.in](mailto:office.msicph@iisc.ac.in).
+Neil Pearce · Prabhdeep Kaur · [Poppy]{.tbd} · Arun Mitra ·
+Manikandanesan Sakthivel · Uttara Partap
 
 ## How to use this site
 
-- **[Before you arrive](prelude/index.qmd)**. The 5 steps, including 9 primers
-  that run R inside your web browser with nothing to install. Start here.
-- **[Schedule](schedule.qmd)** — timings, sessions and faculty.
-- **[Resources](resources/index.qmd)** — cheatsheet, troubleshooting, glossary,
-  further reading. Use these during and after the course.
+- **[Before you arrive](prelude/index.qmd)**. The 5 steps: install R and the
+  packages, run the check, send it to us, work through the 9 primers, and do
+  the reading. Start here.
+- **[Resources](resources/index.qmd)**. Cheatsheet, troubleshooting, glossary
+  and further reading. Use these during the course and after it.
 
 All materials stay online after the course. The site is built from a public
 repository; corrections are welcome as issues or pull requests.
+
+Questions about registration, travel or accommodation go to
+[office.msicph@iisc.ac.in](mailto:office.msicph@iisc.ac.in).
 
 ::: {.callout-note appearance="simple"}
 Materials are licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/);

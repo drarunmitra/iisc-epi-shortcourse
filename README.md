@@ -10,7 +10,6 @@ Tropical Medicine, University of London.
 | Path | What |
 |---|---|
 | `index.qmd` | Home page |
-| `schedule.qmd` | 5-day schedule (session titles still provisional) |
 | `prelude/` | The 5 pre-course steps, and the 9 browser primers |
 | `resources/` | Cheatsheet, troubleshooting, glossary, further reading |
 | `setup/` | `install_packages.R` and `check_setup.R`, run by participants |

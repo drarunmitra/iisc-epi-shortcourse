@@ -8,8 +8,8 @@ subtitle: "Step 5 of 5"
 **When you finish:** you have read one short paper and written 3 sentences about
 it.
 
-This is the last step. It is short, and it shapes the Day 4 critical appraisal
-session.
+This is the last step. It is short, and it feeds the critical appraisal session
+later in the week.
 
 ## Step 1 of 2 — Read one paper
 
@@ -20,7 +20,7 @@ session.
 you can find in the text.
 
 **If it does not work:** if you cannot tell which design it is, that is a useful
-finding. Bring the paper and we will work it out on Day 3.
+finding. Bring the paper and we will work it out together.
 
 | Paper | Why this one |
 |---|---|
@@ -44,7 +44,7 @@ recruited and how the exposure was measured. [Primer
 
 ## Optional background reading
 
-Read these only if you have time. None of them is assumed on Day 1.
+Read these only if you have time. None of them is assumed on the first day.
 
 | Topic | Source |
 |---|---|
@@ -55,9 +55,9 @@ Read these only if you have time. None of them is assumed on Day 1.
 
 ::: {.callout-note}
 ## Why this matters
-Day 4 ends with a critical appraisal exercise in groups. That session works only
-if everybody arrives having read at least one paper closely enough to argue
-about it.
+One session later in the week is a critical appraisal exercise in groups. It
+works only if everybody arrives having read at least one paper closely enough to
+argue about it.
 
 The 3 questions are the same 3 we ask of every paper on the course.
 :::
@@ -67,6 +67,6 @@ The 3 questions are the same 3 we ask of every paper on the course.
 All 5 steps are done. Your laptop works, you have run R, and you have read a
 paper closely enough to argue about it.
 
-See you at IISc on Monday 21 September, 09:00.
+See you at IISc on Monday 21 September.
 
-→ [The schedule](../schedule.qmd)
+The programme will be circulated separately.

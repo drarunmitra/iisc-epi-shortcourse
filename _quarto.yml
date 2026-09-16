@@ -4,7 +4,6 @@ project:
   execute-dir: project
   render:
     - "index.qmd"
-    - "schedule.qmd"
     - "prelude/*.qmd"
     - "resources/*.qmd"
   resources:
@@ -29,8 +28,6 @@ website:
         href: index.qmd
       - text: "Before you arrive"
         href: prelude/index.qmd
-      - text: "Schedule"
-        href: schedule.qmd
       - text: "Resources"
         href: resources/index.qmd
     right:
