@@ -143,8 +143,13 @@ before the first cell runs. See
     webr::install(pkg, repos = repos)
     library(pkg, character.only = TRUE)
 
-So `library(dplyr)` inside a cell is a no-op in the browser. Every primer also
-sets `persist: true`, so objects made in one cell are still there in the next.
+So `library(dplyr)` inside a cell is a no-op in the browser.
+
+Cells also share one R session. quarto-live starts **one webR worker per page**,
+so every cell on a page writes into the same global environment and cell N sees
+what cell 1 made. This is **not** what `persist: true` does - that option saves
+the learner's editor text to localStorage so a reload does not destroy their
+typing. Do not cite it as the reason.
 
 Each page therefore builds its data **once**, in its first cell, and the later
 cells use it. A `callout-note` near the top tells the reader to run the cells
