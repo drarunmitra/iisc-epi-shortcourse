@@ -75,9 +75,13 @@ until you ask.
 
 ::: {.callout-note}
 ## Know what one row represents
-Many "how do I do X in R" problems turn out to be data in the wrong shape. If a person appears on 3 rows because they had 3 visits, the observation
-is a *visit*, not a person. That is fine, as long as you know it and say it.
-Confusion starts when you cannot say what one row is.
+Many "how do I do X in R" problems turn out to be data in the wrong shape.
+
+Say a person appears on 3 rows because they had 3 visits. One row is now a
+*visit*, not a person. That is fine, as long as you know it. But if you then
+count the rows and call it "patients", you have tripled your sample size without
+noticing. Before you analyse anything, finish this sentence: "one row is one
+____".
 :::
 
 ## Looking at one

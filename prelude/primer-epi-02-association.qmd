@@ -128,8 +128,12 @@ The ratio tells you about **cause**: how strongly is this exposure related to
 this disease? The difference tells you about **impact**: how much disease would
 go away if the exposure did?
 
-A good results section reports both. A paper reporting only the ratio is often
-hiding a small absolute effect.
+A good results section reports both.
+
+Watch for a paper that says "three times the risk" and never prints the 6 per
+100. Three times sounds alarming. 6 per 100 over five years is something a
+patient can weigh against the cost of a tablet. Reporting only the first is how
+a small effect is made to sound large.
 
 ## Number needed to treat, and to harm
 

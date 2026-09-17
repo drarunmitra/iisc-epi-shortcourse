@@ -43,8 +43,11 @@ You cannot compare those. Kolar might be 3 times the size. A bare count
 answers "how much work is there", which matters for planning drugs and beds. It
 does not answer "how bad is it here", which needs a denominator.
 
-Every measure below is a count divided by something. Which something you choose
-is the lesson.
+Every measure below is the same count divided by something different. Choosing
+that something is the whole job. Divide 312 cases by everyone, and you get
+prevalence. Divide the same 312 by only those who could fall ill, and you get a
+risk. Divide them by time instead of people, and you get a rate. Three different
+answers from one numerator.
 
 ## Prevalence: how many have it now
 
@@ -80,8 +83,13 @@ hypertension at some point."
 Period prevalence counts people who recovered in March and people who fell ill
 in November. It is always at least as large as point prevalence.
 
-Say which one you mean. Papers that do not are a common cause of numbers that
-will not reconcile.
+**Say which one you mean.** Look at the 2 examples above. Same 2,400 people,
+same year, same disease. One gives 13%. The other gives 17%.
+
+So if one paper reports "17%" and another reports "13%", and neither says which
+it measured, you cannot compare them. You may spend an afternoon hunting for a
+difference between the two populations when the only difference is the
+definition.
 :::
 
 ## Risk: what fraction fell ill over a period

@@ -100,7 +100,9 @@ back to 1 above.
 RStudio looks for R when it starts. Install them the other way round and
 RStudio reports that R is missing, even when it is not.
 
-`|>` is the pipe. We use it in every session, so the last test is a real one.
+`|>` is the pipe, and it only exists in R 4.1.0 and newer. So typing it is a
+better version check than reading a version number: if `[1] 6` comes back, your
+R is new enough for everything on this course.
 :::
 
 ## Step 1 is done
